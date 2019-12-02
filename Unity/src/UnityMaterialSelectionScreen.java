@@ -17,6 +17,7 @@ public class UnityMaterialSelectionScreen extends JFrame {
 	
 	//Main method for testing GUI
 	public static void main(String[] args) {
+		//Test
 		new UnityMaterialSelectionScreen();
 	}
 	
