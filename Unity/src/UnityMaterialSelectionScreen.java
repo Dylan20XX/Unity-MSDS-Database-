@@ -73,7 +73,7 @@ public class UnityMaterialSelectionScreen extends JFrame {
 		materialQuantityPanel.setBackground(Color.DARK_GRAY);
 		materialButtonPanel.add(materialQuantityPanel);
 				
-		//Add the scroll pane
+		//Add the scroll pane 
 		materialButtonScrollPane = new JScrollPane(materialButtonPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		materialButtonScrollPane.setBounds(125,200,1000,400);
 		materialPanel.add(materialButtonScrollPane);
