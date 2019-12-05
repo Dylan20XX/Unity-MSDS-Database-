@@ -29,7 +29,7 @@ public class UnityMaterialInfoScreen extends JFrame {
 	//Constructor method
 	public UnityMaterialInfoScreen() {
 		panelSetup();
-		//scrollPaneSetup();
+		infoSetup();
 		frameSetup();
 	}
 
