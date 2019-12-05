@@ -168,19 +168,28 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		
 		Font newFont = new Font("Serif", Font.BOLD, 24);
 		userText.setFont(newFont);
-		userText.setBounds(600, 275, 250, 30);
+		userText.setBounds(375, 175, 250, 30);
 		userText.setEditable(true);
-		userText.setText("Type Username here");
+		userText.setText("Type Username here:");
 		userText.setBackground(Color.red);
 
 		Font newFont2 = new Font("Serif", Font.BOLD, 24);
 		passText.setFont(newFont2);
-		passText.setBounds(600, 325, 250, 30);
+		passText.setBounds(375, 225, 250, 30);
 		passText.setEditable(true);
-		passText.setText("Type Password here");
+		passText.setText("Type Password here:");
 		passText.setBackground(Color.red);
 		loginPanel.add(userText);
 		loginPanel.add(passText);
+		
+		// This sets the location and image of the enter button
+		enterb.setIcon(new ImageIcon("./M/images/exit.png"));
+		enterp.setBounds(500, 300, 70, 10);
+		enterb.setBounds(500, 300, 95, 35);
+		enterp.add(enterb);
+		enterb.addActionListener(this);
+		loginPanel.add(enterb);
+		loginPanel.add(enterp);
 		
 		// This sets up the border color and boundaries
 		loginPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
@@ -229,21 +238,9 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(true);
 
-		// This sets the location and image of the enter button
-		enterb.setIcon(new ImageIcon("./M/images/exit.png"));
-		enterp.setBounds(600, 500, 70, 10);
-		enterb.setBounds(600, 500, 95, 35);
-		enterp.add(enterb);
-		enterb.addActionListener(this);
-
 		// This adds in the gamePanel
 		add(loginPanel);
-		add(enterp);
-		add(enterb);
-		add(enterp);
 		add(inputPanel);
-		add(userText);
-		add(passText);
 		setVisible(true);
 
 	}
