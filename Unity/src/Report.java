@@ -52,7 +52,7 @@ public class Report extends JPanel {
         JMenuItem exit___saveItem = new JMenuItem ("Exit & Save");
         exitMenu.add (exit___saveItem);
 
-        //construct components
+        //construct components//
         textbox1 = new JTextArea (5, 5);
         textbox2 = new JTextArea (5, 5);
         menubar = new JMenuBar();
