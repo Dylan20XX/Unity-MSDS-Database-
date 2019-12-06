@@ -8,7 +8,7 @@ import javax.swing.*;
 
 @SuppressWarnings({ "serial", "unused" })
 public class UnityProjectListScreen extends JFrame implements ActionListener{
-		
+
 	JPanel projectlist = new JPanel();
 	JMenuBar menu = new JMenuBar();
 	JMenu file = new JMenu("file");
@@ -24,10 +24,12 @@ public class UnityProjectListScreen extends JFrame implements ActionListener{
 	int numproj = 0;
 	JPanel scrollpanel = new JPanel();
 	JPanel labelscrollpanel = new JPanel();
+	JPanel Buttonscrollpanel = new JPanel();
+
 
 	public UnityProjectListScreen(){
-			PanelSetup();
-			frameSetup(); 
+		PanelSetup();
+		frameSetup(); 
 	}
 
 	private void frameSetup() {
@@ -48,54 +50,65 @@ public class UnityProjectListScreen extends JFrame implements ActionListener{
 		file.add(SAVE);
 		file.add(BACK);
 		menu.add(file);
-		
-		title.setBounds(425, 0, 750, 100);
+
+		title.setBounds(450, 0, 750, 100);
 		title.setFont(new Font("Serif", Font.PLAIN, 48));
-		//projectlist.add(title);
-		
+		projectlist.add(title);
+
 		create.setBounds(235,475,200,100);
 		create.addActionListener(this);
 		projectlist.add(create); 
-		
+
 		delete.setBounds(857,475,200,100);
 		delete.addActionListener(this);
 		projectlist.add(delete);
-		
+
 		scrollpanel.setBounds(0, 0, 750, 250);
-//		labelscrollpanel.setBounds(350, 0, 350, 250);
-//		scrollpanel.add(labelscrollpanel);
+		Buttonscrollpanel.setLayout(new BoxLayout(Buttonscrollpanel, BoxLayout.Y_AXIS));
+		scrollpanel.add(Buttonscrollpanel);
+		labelscrollpanel.setLayout(new BoxLayout(labelscrollpanel, BoxLayout.Y_AXIS));
+		scrollpanel.add(labelscrollpanel);
+
 
 		projects = new JScrollPane(scrollpanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollpanel.setLayout(new BoxLayout(scrollpanel, BoxLayout.Y_AXIS));
+		scrollpanel.setLayout(new BoxLayout(scrollpanel, BoxLayout.X_AXIS));
 		projects.setBounds(280,100,750,250);
 		scrollpanel.setBackground(Color.black);
 		projectlist.add(projects);
 	}
-		
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == create){
 			list.add(new JButton());
-			list.get(numproj).setSize(200, 100);
+			list.get(numproj).setSize(100, 70);
 			list.get(numproj).setMaximumSize(list.get(numproj).getSize());
 			list.get(numproj).setMinimumSize(list.get(numproj).getSize());
 			list.get(numproj).setPreferredSize(list.get(numproj).getSize());
 			list.get(numproj).setText("edit");
-			scrollpanel.add(list.get(numproj));	
-			
-//			namelist.add(new JLabel());
-//			namelist.get(numproj).setSize(200, 100);
-//			namelist.get(numproj).setMaximumSize(namelist.get(numproj).getSize());
-//			namelist.get(numproj).setMinimumSize(namelist.get(numproj).getSize());
-//			namelist.get(numproj).setPreferredSize(namelist.get(numproj).getSize());
-//			namelist.get(numproj).setText("edit");
-//			labelscrollpanel.add(namelist.get(numproj));
-			
+			list.get(numproj).setBounds(0, 0, 200, 100);
+			Buttonscrollpanel.add(list.get(numproj));	
+
+			namelist.add(new JLabel());
+			namelist.get(numproj).setSize(650, 70);
+			namelist.get(numproj).setMaximumSize(namelist.get(numproj).getSize());
+			namelist.get(numproj).setMinimumSize(namelist.get(numproj).getSize());
+			namelist.get(numproj).setPreferredSize(namelist.get(numproj).getSize());
+			namelist.get(numproj).setText("Project #" + (numproj+1));
+			namelist.get(numproj).setBounds(200, 0, 200, 100);
+			labelscrollpanel.add(namelist.get(numproj));
+
 			scrollpanel.revalidate();
 			scrollpanel.repaint();
-			
+
 			numproj++;
+		}
+		if(e.getSource() == delete){
+
+
+
 		}
 	}
 }
+
