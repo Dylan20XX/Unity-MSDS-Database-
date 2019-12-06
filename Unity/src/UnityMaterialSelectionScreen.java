@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -13,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-public class UnityMaterialSelectionScreen extends JFrame {
+public class UnityMaterialSelectionScreen extends JFrame implements ActionListener{
 	
 	private JPanel materialPanel = new JPanel();
 	
@@ -32,6 +34,9 @@ public class UnityMaterialSelectionScreen extends JFrame {
 	private JPanel materialQuantityPanel = new JPanel();
 	private JScrollPane materialButtonScrollPane = new JScrollPane();
 	
+	private JButton addButton = new JButton("Add Test");
+	private JButton infoButton = new JButton("Info Test");
+	
 	//Main method for testing GUI
 	public static void main(String[] args) {
 		new UnityMaterialSelectionScreen();
@@ -40,6 +45,7 @@ public class UnityMaterialSelectionScreen extends JFrame {
 	//Constructor method
 	public UnityMaterialSelectionScreen() {
 		panelSetup();
+		addScreenTestButtons();
 		scrollPaneSetup();
 		frameSetup();
 	}
@@ -99,10 +105,12 @@ public class UnityMaterialSelectionScreen extends JFrame {
 		//Setup the submit and back buttons
 		submitButton.setBounds(940, 620, 200, 50);
 		submitButton.setFont(new Font("Arial", Font.BOLD, 24));
+		submitButton.addActionListener(this);
 		materialPanel.add(submitButton);
 		
 		backButton.setBounds(140, 620, 200, 50);
 		backButton.setFont(new Font("Arial", Font.BOLD, 24));
+		backButton.addActionListener(this);
 		materialPanel.add(backButton);
 		
 	}
@@ -146,6 +154,53 @@ public class UnityMaterialSelectionScreen extends JFrame {
 		for(int i = 0; i < 10; i++) {
 			addTestButtons();
 		}
+		
+	}
+	
+	//This method adds testing materials to the scroll pane panels
+	private void addScreenTestButtons() {
+		
+		//Test Buttons
+		addButton.addActionListener(this);
+		addButton.setSize(100, 50);
+		addButton.setMaximumSize(addButton.getSize());
+		addButton.setMinimumSize(addButton.getSize());
+		addButton.setPreferredSize(addButton.getSize());
+		addButton.setFont(new Font("Arial", Font.BOLD, 24));
+		addButtonPanel.add(addButton);
+		
+		infoButton.addActionListener(this);
+		infoButton.setSize(100, 50);
+		infoButton.setMaximumSize(infoButton.getSize());
+		infoButton.setMinimumSize(infoButton.getSize());
+		infoButton.setPreferredSize(infoButton.getSize());
+		infoButton.setFont(new Font("Arial", Font.BOLD, 24));
+		infoButtonPanel.add(infoButton);
+		
+		JLabel nameLabel = new JLabel("Material Name");
+		//savedGames.addActionListener(this);
+		//nameLabel.setBackground(Color.WHITE);
+		//nameLabel.setEditable(false);
+		
+		nameLabel.setSize(600, 50);
+		nameLabel.setMaximumSize(nameLabel.getSize());
+		nameLabel.setMinimumSize(nameLabel.getSize());
+		nameLabel.setPreferredSize(nameLabel.getSize());
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 36));
+		materialNamePanel.add(nameLabel);
+		
+		JLabel quantityLabel = new JLabel("Quantity: 0");
+		//savedGames.addActionListener(this);
+		//quantityLabel.setBackground(Color.LIGHT_GRAY);
+		//quantityLabel.setEditable(false);
+		quantityLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		quantityLabel.setSize(200, 50);
+		quantityLabel.setMaximumSize(quantityLabel.getSize());
+		quantityLabel.setMinimumSize(quantityLabel.getSize());
+		quantityLabel.setPreferredSize(quantityLabel.getSize());
+		quantityLabel.setFont(new Font("Arial", Font.BOLD, 24));
+		materialQuantityPanel.add(quantityLabel);
 		
 	}
 	
@@ -214,6 +269,24 @@ public class UnityMaterialSelectionScreen extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == submitButton) {
+			Report.main(null);
+			this.dispose();
+		} else if(e.getSource() == backButton) {
+			new UnityProjectListScreen();
+			this.dispose();
+		} else if(e.getSource() == addButton) {
+			System.out.println("add");
+		} else if(e.getSource() == infoButton) {
+			new UnityMaterialInfoScreen();
+			this.dispose();
+		}
 		
 	}
 	

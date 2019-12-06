@@ -95,10 +95,12 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		//Setup the add material and back buttons
 		addButton.setBounds(940, 620, 200, 50);
 		addButton.setFont(new Font("Arial", Font.BOLD, 24));
+		addButton.addActionListener(this);
 		materialPanel.add(addButton);
 		
 		backButton.setBounds(140, 620, 200, 50);
 		backButton.setFont(new Font("Arial", Font.BOLD, 24));
+		backButton.addActionListener(this);
 		materialPanel.add(backButton);
 		
 	}
@@ -135,30 +137,30 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		materialPanel.add(precautionsTextArea);
 		
 		//Toxic
-		toxicLabel.setBounds(820, 150, 400, 50);
+		toxicLabel.setBounds(400, 450, 400, 50);
 		materialPanel.add(toxicLabel);
-		toxicTextArea.setBounds(820, 200, 400, 50);
+		toxicTextArea.setBounds(400, 500, 400, 50);
 		//toxicTextArea.setText(material.getToxic());
 		materialPanel.add(toxicTextArea);
 		
 		//Stability and Reactivity
-		stabilityLabel.setBounds(820, 250, 400, 50);
+		stabilityLabel.setBounds(820, 150, 400, 50);
 		materialPanel.add(stabilityLabel);
-		stabilityTextArea.setBounds(820, 300, 400, 50);
+		stabilityTextArea.setBounds(820, 200, 400, 50);
 		//stabilityTextArea.setText(material.getStability());
 		materialPanel.add(stabilityTextArea);
 		
 		//First aid measures
-		firstAidLabel.setBounds(820, 350, 400, 50);
+		firstAidLabel.setBounds(820, 250, 400, 50);
 		materialPanel.add(firstAidLabel);
-		firstAidTextArea.setBounds(820, 400, 400, 50);
+		firstAidTextArea.setBounds(820, 300, 400, 50);
 		//firstAidTextArea.setText(material.getFirstAid());
 		materialPanel.add(firstAidTextArea);
 		
 		//Dangers
-		dangersLabel.setBounds(820, 450, 400, 50);
+		dangersLabel.setBounds(820, 350, 400, 50);
 		materialPanel.add(dangersLabel);
-		dangersTextArea.setBounds(820, 500, 400, 50);
+		dangersTextArea.setBounds(820, 400, 400, 50);
 		//dangersTextArea.setText(material.getDangers());
 		materialPanel.add(dangersTextArea);
 		
@@ -208,10 +210,13 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		
 		if(e.getSource() == hyperlinkButton) {
 			openWebBrowser(material.getHyperlink());
-		}
-		
-		if(e.getSource() == msdsButton) {
+		} else if(e.getSource() == msdsButton) {
 			openWebBrowser(material.getMsdsLink());
+		} else if(e.getSource() == backButton) {
+			new UnityMaterialSelectionScreen();
+			this.dispose();
+		} else if(e.getSource() == addButton) {
+			
 		}
 		
 	}

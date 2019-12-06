@@ -24,9 +24,16 @@ public class Material {
 	private String dangers;
 	private String msdsLink;
 	
+	private int quantity = 0;
+	
+	//Set Quantity Button
+	//Set Quantity
+	//Info Button
+	//Name Label
+	//Quantity Label
+	
 	//Constructors
 	public Material() {
-		
 	}
 
 	public Material(String name, String brand, String hyperlink, String storageArea, String precautions, String toxic,
@@ -125,6 +132,14 @@ public class Material {
 		this.msdsLink = msdsLink;
 	}
 	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	//toString method
 	@Override
 	public String toString() {
@@ -132,7 +147,5 @@ public class Material {
 				+ storageArea + ", precautions=" + precautions + ", toxic=" + toxic + ", stability=" + stability
 				+ ", firstAid=" + firstAid + ", dangers=" + dangers + ", msdsLink=" + msdsLink + "]";
 	}
-	
-	
 	
 }
