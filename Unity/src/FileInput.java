@@ -31,6 +31,8 @@ public class FileInput {
 				//Dangers
 				//Link to MSDS
 				
+				//input.next(); //Material type
+				
 				material.setName(input.next());
 				material.setBrand(input.next());
 				material.setHyperlink(input.next());
@@ -48,7 +50,7 @@ public class FileInput {
 			
 			input.close(); //Close the scanner
 			
-		}catch(FileNotFoundException error) {
+		} catch(FileNotFoundException error) {
 			//Display a message if the file is not found
 			System.out.println("Wrong file");
 		}
