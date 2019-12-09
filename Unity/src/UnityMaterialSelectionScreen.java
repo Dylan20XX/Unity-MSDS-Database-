@@ -12,8 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
+import javax.swing.JTextField;
 
 public class UnityMaterialSelectionScreen extends JFrame implements ActionListener{
 	
@@ -21,31 +20,31 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	
 	private JLabel titleLabel = new JLabel("Select Materials");
 	private JLabel searchBarLabel = new JLabel("Search");
-	private JTextArea searchBar = new JTextArea();
+	private JTextField searchBar = new JTextField();
 	private JLabel sortComboBoxLabel = new JLabel("Sort By:");
 	private JComboBox<String> sortComboBox = new JComboBox<String>();
 	private JButton backButton = new JButton("Back");
 	private JButton submitButton = new JButton("Submit");
+	private JButton viewAllButton = new JButton("View All Materials");
 	
 	private JPanel materialButtonPanel = new JPanel();
-	private JPanel addButtonPanel = new JPanel();
+	private JPanel quantityButtonPanel = new JPanel();
 	private JPanel infoButtonPanel = new JPanel();
 	private JPanel materialNamePanel = new JPanel();
 	private JPanel materialQuantityPanel = new JPanel();
 	private JScrollPane materialButtonScrollPane = new JScrollPane();
 	
-	private JButton addButton = new JButton("Add Test");
-	private JButton infoButton = new JButton("Info Test");
-	
 	//Main method for testing GUI
 	public static void main(String[] args) {
+		FileInput.readMaterials();
 		new UnityMaterialSelectionScreen();
 	}
 	
 	//Constructor method
 	public UnityMaterialSelectionScreen() {
 		panelSetup();
-		addScreenTestButtons();
+		//addScreenTestButtons();
+		addMaterialButtons();
 		scrollPaneSetup();
 		frameSetup();
 	}
@@ -71,26 +70,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		
 		searchBar.setBounds(140, 140, 270, 30);
 		searchBar.setFont(new Font("Arial", Font.PLAIN, 24));
-		searchBar.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyPressed(KeyEvent key) {
-				if(key.getKeyCode() == KeyEvent.VK_ENTER) {
-					System.out.println("x");
-				}
-			}
-
-			@Override
-			public void keyReleased(KeyEvent key) {
-				
-			}
-
-			@Override
-			public void keyTyped(KeyEvent key) {
-				
-			}
-			
-		});
+		searchBar.addActionListener(this);
 		materialPanel.add(searchBar);
 		
 		//Setup the combo box
@@ -113,6 +93,12 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		backButton.addActionListener(this);
 		materialPanel.add(backButton);
 		
+		//Setup button to view full material list after a search
+		viewAllButton.setBounds(500, 620, 280, 50);
+		viewAllButton.setFont(new Font("Arial", Font.BOLD, 24));
+		viewAllButton.addActionListener(this);
+		materialPanel.add(viewAllButton);
+		
 	}
 	
 	//This method sets up the scroll pane used 
@@ -129,127 +115,56 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		//Setup the button panel
 		//materialButtonPanel.setLayout(new BoxLayout(materialButtonPanel, BoxLayout.Y_AXIS));
 		materialButtonPanel.setLayout(new BoxLayout(materialButtonPanel, BoxLayout.X_AXIS));
-		//savedGameButtonPanel.setBounds(220, 100 ,250, 550);
 		materialButtonPanel.setBackground(Color.DARK_GRAY);
 		
 		//Panels within the material button panel
-		addButtonPanel.setLayout(new BoxLayout(addButtonPanel, BoxLayout.Y_AXIS));
-		addButtonPanel.setBackground(Color.DARK_GRAY);
-		materialButtonPanel.add(addButtonPanel);
+		quantityButtonPanel.setLayout(new BoxLayout(quantityButtonPanel, BoxLayout.Y_AXIS));
+		quantityButtonPanel.setBackground(Color.DARK_GRAY);
+		materialButtonPanel.add(quantityButtonPanel);
+		materialQuantityPanel.setLayout(new BoxLayout(materialQuantityPanel, BoxLayout.Y_AXIS));
+		materialQuantityPanel.setBackground(Color.LIGHT_GRAY);
+		materialButtonPanel.add(materialQuantityPanel);
 		infoButtonPanel.setLayout(new BoxLayout(infoButtonPanel, BoxLayout.Y_AXIS));
 		infoButtonPanel.setBackground(Color.DARK_GRAY);
 		materialButtonPanel.add(infoButtonPanel);
 		materialNamePanel.setLayout(new BoxLayout(materialNamePanel, BoxLayout.Y_AXIS));
 		materialNamePanel.setBackground(Color.WHITE);
 		materialButtonPanel.add(materialNamePanel);
-		materialQuantityPanel.setLayout(new BoxLayout(materialQuantityPanel, BoxLayout.Y_AXIS));
-		materialQuantityPanel.setBackground(Color.LIGHT_GRAY);
-		materialButtonPanel.add(materialQuantityPanel);
 				
 		//Add the scroll pane 
 		materialButtonScrollPane = new JScrollPane(materialButtonPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		materialButtonScrollPane.setBounds(140,200,1000,400);
 		materialPanel.add(materialButtonScrollPane);
 		
-		for(int i = 0; i < 10; i++) {
-			addTestButtons();
+	}
+	
+	private void addMaterialButtons() {
+		
+		quantityButtonPanel.removeAll();
+		infoButtonPanel.removeAll();
+		materialNamePanel.removeAll();
+		materialQuantityPanel.removeAll();
+		
+		removeActionListeners();
+		
+		for(Material currentMaterial: Database.materials) {
+			
+			currentMaterial.setupComponents();
+			
+			currentMaterial.getQuantityButton().addActionListener(this);
+			quantityButtonPanel.add(currentMaterial.getQuantityButton());
+			
+			currentMaterial.getInfoButton().addActionListener(this);
+			infoButtonPanel.add(currentMaterial.getInfoButton());
+			
+			materialNamePanel.add(currentMaterial.getNameLabel());
+			
+			materialQuantityPanel.add(currentMaterial.getQuantityField());
+			
 		}
 		
-	}
-	
-	//This method adds testing materials to the scroll pane panels
-	private void addScreenTestButtons() {
-		
-		//Test Buttons
-		addButton.addActionListener(this);
-		addButton.setSize(100, 50);
-		addButton.setMaximumSize(addButton.getSize());
-		addButton.setMinimumSize(addButton.getSize());
-		addButton.setPreferredSize(addButton.getSize());
-		addButton.setFont(new Font("Arial", Font.BOLD, 24));
-		addButtonPanel.add(addButton);
-		
-		infoButton.addActionListener(this);
-		infoButton.setSize(100, 50);
-		infoButton.setMaximumSize(infoButton.getSize());
-		infoButton.setMinimumSize(infoButton.getSize());
-		infoButton.setPreferredSize(infoButton.getSize());
-		infoButton.setFont(new Font("Arial", Font.BOLD, 24));
-		infoButtonPanel.add(infoButton);
-		
-		JLabel nameLabel = new JLabel("Material Name");
-		//savedGames.addActionListener(this);
-		//nameLabel.setBackground(Color.WHITE);
-		//nameLabel.setEditable(false);
-		
-		nameLabel.setSize(600, 50);
-		nameLabel.setMaximumSize(nameLabel.getSize());
-		nameLabel.setMinimumSize(nameLabel.getSize());
-		nameLabel.setPreferredSize(nameLabel.getSize());
-		nameLabel.setFont(new Font("Arial", Font.BOLD, 36));
-		materialNamePanel.add(nameLabel);
-		
-		JLabel quantityLabel = new JLabel("Quantity: 0");
-		//savedGames.addActionListener(this);
-		//quantityLabel.setBackground(Color.LIGHT_GRAY);
-		//quantityLabel.setEditable(false);
-		quantityLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		quantityLabel.setSize(200, 50);
-		quantityLabel.setMaximumSize(quantityLabel.getSize());
-		quantityLabel.setMinimumSize(quantityLabel.getSize());
-		quantityLabel.setPreferredSize(quantityLabel.getSize());
-		quantityLabel.setFont(new Font("Arial", Font.BOLD, 24));
-		materialQuantityPanel.add(quantityLabel);
-		
-	}
-	
-	//This method adds testing materials to the scroll pane panels
-	private void addTestButtons() {
-		
-		//Test Buttons
-		JButton addButton = new JButton("Add");
-		//savedGames.addActionListener(this);
-		addButton.setSize(100, 50);
-		addButton.setMaximumSize(addButton.getSize());
-		addButton.setMinimumSize(addButton.getSize());
-		addButton.setPreferredSize(addButton.getSize());
-		addButton.setFont(new Font("Arial", Font.BOLD, 24));
-		addButtonPanel.add(addButton);
-		
-		JButton infoButton = new JButton("Info");
-		//savedGames.addActionListener(this);
-		infoButton.setSize(100, 50);
-		infoButton.setMaximumSize(infoButton.getSize());
-		infoButton.setMinimumSize(infoButton.getSize());
-		infoButton.setPreferredSize(infoButton.getSize());
-		infoButton.setFont(new Font("Arial", Font.BOLD, 24));
-		infoButtonPanel.add(infoButton);
-		
-		JLabel nameLabel = new JLabel("Material Name");
-		//savedGames.addActionListener(this);
-		//nameLabel.setBackground(Color.WHITE);
-		//nameLabel.setEditable(false);
-		
-		nameLabel.setSize(600, 50);
-		nameLabel.setMaximumSize(nameLabel.getSize());
-		nameLabel.setMinimumSize(nameLabel.getSize());
-		nameLabel.setPreferredSize(nameLabel.getSize());
-		nameLabel.setFont(new Font("Arial", Font.BOLD, 36));
-		materialNamePanel.add(nameLabel);
-		
-		JLabel quantityLabel = new JLabel("Quantity: 0");
-		//savedGames.addActionListener(this);
-		//quantityLabel.setBackground(Color.LIGHT_GRAY);
-		//quantityLabel.setEditable(false);
-		quantityLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		quantityLabel.setSize(200, 50);
-		quantityLabel.setMaximumSize(quantityLabel.getSize());
-		quantityLabel.setMinimumSize(quantityLabel.getSize());
-		quantityLabel.setPreferredSize(quantityLabel.getSize());
-		quantityLabel.setFont(new Font("Arial", Font.BOLD, 24));
-		materialQuantityPanel.add(quantityLabel);
+		repaint();
+		revalidate();
 		
 	}
 	
@@ -275,19 +190,93 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		for(Material currentMaterial: Database.materials) {
+			
+			if(e.getSource() == currentMaterial.getQuantityButton()) {
+				currentMaterial.setQuantity(Integer.parseInt(currentMaterial.getQuantityField().getText()));
+				return;
+			} else if (e.getSource() == currentMaterial.getInfoButton()) {
+				removeActionListeners();
+				new UnityMaterialInfoScreen(currentMaterial, 0);
+				this.dispose();
+				return;
+			}
+			
+		}
+		
 		if(e.getSource() == submitButton) {
-			Report.main(null);
+			
+			removeActionListeners();
+			
+			Database.currentProject.getMaterialList().clear();
+			
+			for(Material currentMaterial: Database.materials) {
+				if(currentMaterial.getQuantity() != 0) {
+					
+					Material m = new Material();
+					m.copyMaterial(currentMaterial);
+					Database.currentProject.getMaterialList().add(currentMaterial);
+					
+				}
+			}
+			
+			new UnityReportScreen();
 			this.dispose();
+			
 		} else if(e.getSource() == backButton) {
+			removeActionListeners();
 			new UnityProjectListScreen();
 			this.dispose();
-		} else if(e.getSource() == addButton) {
-			System.out.println("add");
-		} else if(e.getSource() == infoButton) {
-			new UnityMaterialInfoScreen();
-			this.dispose();
+		} else if(e.getSource() == viewAllButton) {
+			addMaterialButtons();
+		}else if(e.getSource() == searchBar) {
+			System.out.println("search");
+			
+			quantityButtonPanel.removeAll();
+			infoButtonPanel.removeAll();
+			materialNamePanel.removeAll();
+			materialQuantityPanel.removeAll();
+			
+			removeActionListeners();
+			
+			for(Material currentMaterial: Database.materials) {
+				
+				if(currentMaterial.getName().toLowerCase().contains(searchBar.getText().toLowerCase())) {
+					
+					System.out.println(currentMaterial.getName() + " " + searchBar.getText());
+					
+					currentMaterial.setupComponents();
+					
+					currentMaterial.getQuantityButton().addActionListener(this);
+					quantityButtonPanel.add(currentMaterial.getQuantityButton());
+					
+					currentMaterial.getInfoButton().addActionListener(this);
+					infoButtonPanel.add(currentMaterial.getInfoButton());
+					
+					materialNamePanel.add(currentMaterial.getNameLabel());
+					
+					materialQuantityPanel.add(currentMaterial.getQuantityField());
+					
+				}
+				
+			}
+			
+			repaint();
+			revalidate();
+			
 		}
 		
 	}
 	
+	//This method removes the action listers from material buttons
+	//Use this method before changing screens
+	private void removeActionListeners() {
+		
+		for(Material currentMaterial: Database.materials) {
+			currentMaterial.getQuantityButton().removeActionListener(this);
+			currentMaterial.getInfoButton().removeActionListener(this);
+		}
+		
+	}
+
 }

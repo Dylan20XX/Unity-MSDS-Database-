@@ -1,16 +1,29 @@
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 public class Project {
 	
 	private String name;
 	private String projectDescription;
+	private String sources;
 	private ArrayList<Material> materialList = new ArrayList<Material>();
+
+	//Components to be used in project list screen
+	private JButton selectButton = new JButton("Select");
+	private JLabel nameLabel = new JLabel();
 	
 	//Constructor methods
 	public Project() {
 	}
-	
+
 	//Getters and setters
+	public Project(String name) {
+		this.name = name;
+		componentSetup();
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -27,12 +40,54 @@ public class Project {
 		this.projectDescription = projectDescription;
 	}
 
+	public String getSources() {
+		return sources;
+	}
+
+	public void setSources(String sources) {
+		this.sources = sources;
+	}
+
 	public ArrayList<Material> getMaterialList() {
 		return materialList;
 	}
 
 	public void setMaterialList(ArrayList<Material> materialList) {
 		this.materialList = materialList;
+	}
+	
+	public JButton getSelectButton() {
+		return selectButton;
+	}
+
+	public void setSelectButton(JButton selectButton) {
+		this.selectButton = selectButton;
+	}
+
+	public JLabel getNameLabel() {
+		return nameLabel;
+	}
+
+	public void setNameLabel(JLabel nameLabel) {
+		this.nameLabel = nameLabel;
+	}
+
+	//This method sets up the components to be used in the 
+	public void componentSetup() {
+		
+		//Set up the button
+		selectButton.setSize(100, 70);
+		selectButton.setMaximumSize(selectButton.getSize());
+		selectButton.setMinimumSize(selectButton.getSize());
+		selectButton.setPreferredSize(selectButton.getSize());
+		
+		//Set up the label
+		nameLabel.setSize(650, 70);
+		nameLabel.setMaximumSize(nameLabel.getSize());
+		nameLabel.setMinimumSize(nameLabel.getSize());
+		nameLabel.setPreferredSize(nameLabel.getSize());
+		nameLabel.setText(name);
+		
 	}
 	
 	//This method adds a specific quantity of a material to a project

@@ -155,12 +155,6 @@ public class Report extends JPanel {
         cbox5.setBounds (1145, 490, 50, 50);
         cbox5.setBackground(Color.GREEN);
         cbox5.setOpaque(true);
-        
-        
-        
-        
-        
-        
        
     }
 
@@ -172,10 +166,5 @@ public class Report extends JPanel {
         frame.pack();
         frame.setBackground(Color.CYAN);
         frame.setVisible (true);
-       
-        
-        
-        
- 
     }
 }

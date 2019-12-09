@@ -15,11 +15,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.sound.sampled.AudioInputStream;
@@ -35,6 +38,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 /*
  * Name: Momin Naeem
  * Date: Dec 2, 2019
@@ -47,7 +51,17 @@ import javax.swing.JTextArea;
  */
 
 public class UnityLoginScreen extends JFrame implements ActionListener {
-
+	
+	//Main method for testing GUI
+	public static void main(String[] args) {
+		FileInput.readUsers();
+		FileInput.readMaterials();
+		new UnityLoginScreen();
+	}
+	
+	//Title Label
+	JLabel titleLabel = new JLabel("Unity");
+	
 	// Game panel as well as the menu bar
 	JPanel inputPanel = new JPanel();
 	JPanel loginPanel = new JPanel();
@@ -67,13 +81,11 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 	// JLabels for the images in the menu screen
 	// JLabel title, background
 
-	// Panel + Button of the Game 1 Image
-	JPanel enterp = new JPanel();
-	JButton enterb = new JButton();
-
 	// The text area
-	JTextArea userText = new JTextArea();
-	JTextArea passText = new JTextArea();
+	JLabel userPrompt = new JLabel("Username:");
+	JLabel passPrompt = new JLabel("Password:");
+	JTextField userText = new JTextField();
+	JPasswordField passText = new JPasswordField(8);
 
 	// Clip variable for the music method
 	static Clip clip;
@@ -137,89 +149,45 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		inputPanel.setBounds(0, 0, 1280, 720);
 		inputPanel.setLayout(null);
 		// This is the background color of the panel
-		inputPanel.setBackground(Color.CYAN);
+		inputPanel.setBackground(new Color(191,231,247));
 		inputPanel.setVisible(true);
 		
-		inputPanel.add(userText);
-		inputPanel.add(passText);
-		// This sets up the font, and implements the label's boundaries in the
-		// panel
-		// titleLabel.setFont(new Font(null));
-		// titleLabel.setBounds(100, 25, 200, 25);
-		// inputPanel.add(titleLabel);
+		//Add title label
+		titleLabel.setBounds(580, 30, 160, 50);
+		titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
+		inputPanel.add(titleLabel);
 
-		// This makes the questions and the drop boxes implemented in the panel
-		// setupWeightings();
-
-		// report button with its dimensions as well as its action listener so
-		// it can react when its clicked
-		// reportButton.setBounds(575, 575, 200, 50);
-		// add(reportButton);
-		// reportButton.addActionListener(this);
-
-		// This is the font of the report button as well as its border with its
-		// thickness.
-		// reportButton.setFont(new Font("impact", Font.PLAIN, 18));
-		// reportButton.setBorder(BorderFactory.createLineBorder(Color.yellow,
-		// 2));
 	}
 
 	private void loginPanel() {
 		
-		Font newFont = new Font("Serif", Font.BOLD, 24);
-		userText.setFont(newFont);
+		Font serifFont = new Font("Serif", Font.BOLD, 24);
+		userText.setFont(serifFont);
 		userText.setBounds(375, 175, 250, 30);
-		userText.setEditable(true);
-		userText.setText("Type Username here:");
-		userText.setBackground(Color.red);
+		userText.addActionListener(this);
 
-		Font newFont2 = new Font("Serif", Font.BOLD, 24);
-		passText.setFont(newFont2);
+		passText.setFont(serifFont);
 		passText.setBounds(375, 225, 250, 30);
-		passText.setEditable(true);
-		passText.setText("Type Password here:");
-		passText.setBackground(Color.red);
+		passText.addActionListener(this);
+		
+		userPrompt.setFont(serifFont);
+		userPrompt.setBounds(250, 175, 250, 30);
+		
+		passPrompt.setFont(serifFont);
+		passPrompt.setBounds(250, 225, 250, 30);
+		
+		loginPanel.add(userPrompt);
+		loginPanel.add(passPrompt);
 		loginPanel.add(userText);
 		loginPanel.add(passText);
-		
-		// This sets the location and image of the enter button
-		enterb.setIcon(new ImageIcon("./M/images/exit.png"));
-		enterp.setBounds(500, 300, 70, 10);
-		enterb.setBounds(500, 300, 95, 35);
-		enterp.add(enterb);
-		enterb.addActionListener(this);
-		loginPanel.add(enterb);
-		loginPanel.add(enterp);
 		
 		// This sets up the border color and boundaries
 		loginPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
 		loginPanel.setBounds(200, 100, 850, 500);
 		loginPanel.setLayout(null);
 		loginPanel.setVisible(true);
-		// This is the background color of the panel
-		//loginPanel.setBackground(Color.black);
-
 		
-		// This sets up the font, and implements the label's boundaries in the
-		// panel
-		// titleLabel.setFont(new Font(null));
-		// titleLabel.setBounds(100, 25, 200, 25);
-		// inputPanel.add(titleLabel);
-
-		// This makes the questions and the drop boxes implemented in the panel
-		// setupWeightings();
-
-		// report button with its dimensions as well as its action listener so
-		// it can react when its clicked
-		// reportButton.setBounds(575, 575, 200, 50);
-		// add(reportButton);
-		// reportButton.addActionListener(this);
-
-		// This is the font of the report button as well as its border with its
-		// thickness.
-		// reportButton.setFont(new Font("impact", Font.PLAIN, 18));
-		// reportButton.setBorder(BorderFactory.createLineBorder(Color.yellow,
-		// 2));
+		inputPanel.add(loginPanel);
 	}
 
 	// The frame setup method where it sets up the frame
@@ -239,26 +207,10 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		setResizable(true);
 
 		// This adds in the gamePanel
-		add(loginPanel);
+		//add(loginPanel);
 		add(inputPanel);
 		setVisible(true);
-
-	}
-
-	// This is the music method where it allows music to be played from anywhere
-	// in
-	// this class.
-	public static void music(String musicLocation) {
-
-		try {
-			File Sound = new File(musicLocation);
-			AudioInputStream audioInput = AudioSystem.getAudioInputStream(Sound);
-			clip = AudioSystem.getClip();
-			clip.open(audioInput);
-			clip.start();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		
 	}
 
 	// This contains the menu bar method where it states each MenuItem
@@ -325,29 +277,48 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 
 			// new Theme
 		}
-
-		if (e.getSource() == enterb) {
-
-			System.out.println("Submit");
-			access = 0;
-
-			for (int i = 0; i < userArray.length; i++) {
-
-				do {
-
-					if ((userText.getText()).equals(userArray[i].getUser())
-							&& passText.getText().contentEquals(userArray[i].getPass())) {
-						System.out.println("EQUALS");
-						access = 1;
-					}
-					break;
-
-				} while ((userText.getText()) != userArray[i].getUser()
-						&& passText.getText() != (userArray[i].getPass()));
-
-			}
-			if (access == 0)
-				System.out.println("INVALID USER");
+		
+		if(e.getSource() == userText || e.getSource() == passText) {
+			login();
 		}
+		
 	}
+	
+	private String readPassword() {
+		
+		char[] passArray = passText.getPassword();
+		String password;
+		
+		if(passArray.length >= 1)
+			password = Arrays.toString(passArray).substring(1, 3* passArray.length - 1).replace(", ", "");
+		else
+			password = "";
+		
+		return password;
+		
+	}
+	
+	private void login() {
+		
+		for(User currentUser: Database.users) {
+			
+			if ((userText.getText()).equals(currentUser.getUser())
+					&& readPassword().equals(currentUser.getPass())) {
+				
+				System.out.println("Access granted");
+				
+				Database.currentUser = currentUser.getUser();
+				
+				new UnityProjectListScreen();
+				this.dispose();
+				return;
+				
+			}
+			
+		}
+		
+		System.out.println("Incorrect Username or password");
+		
+	}
+	
 }

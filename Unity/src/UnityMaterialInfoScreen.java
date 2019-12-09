@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	
 	private Material material; //Material that is having its info viewed
+	private int previousScreen;
 	
 	private JPanel materialPanel = new JPanel();
 	
@@ -66,13 +67,14 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	//Constructor method
 	public UnityMaterialInfoScreen() {
 		panelSetup();
-		infoSetup();
+		infoSetupTest();
 		frameSetup();
 	}
 	
 	//Constructor method
-	public UnityMaterialInfoScreen(Material material) {
+	public UnityMaterialInfoScreen(Material material, int previousScreen) {
 		this.material = material;
+		this.previousScreen = previousScreen;
 		panelSetup();
 		infoSetup();
 		frameSetup();
@@ -90,6 +92,7 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		//Setup the title label
 		titleLabel.setBounds(480, 30, 400, 50);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
+		titleLabel.setText(material.getName());
 		materialPanel.add(titleLabel);
 		
 		//Setup the add material and back buttons
@@ -107,6 +110,93 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	
 	//This method sets up the scroll pane used 
 	private void infoSetup() {
+		
+		//titleLabel.setText(material.getName());
+		
+		//Brand
+		brandLabel.setBounds(400, 100, 400, 50);
+		materialPanel.add(brandLabel);
+		brandTextArea.setBounds(400, 150, 400, 75);
+		brandTextArea.setText(material.getBrand());
+		brandTextArea.setEditable(false);
+		brandTextArea.setLineWrap(true);
+		brandTextArea.setWrapStyleWord(true);
+		materialPanel.add(brandTextArea);
+		
+		//Hyperlink
+		hyperlinkButton.setBounds(140, 300, 200, 100);
+		hyperlinkButton.addActionListener(this);
+		materialPanel.add(hyperlinkButton);
+		
+		//StorageArea
+		storageAreaLabel.setBounds(400, 225, 400, 50);
+		materialPanel.add(storageAreaLabel);
+		storageAreaTextArea.setBounds(400, 275, 400, 75);
+		storageAreaTextArea.setText(material.getStorageArea());
+		storageAreaTextArea.setEditable(false);
+		storageAreaTextArea.setLineWrap(true);
+		storageAreaTextArea.setWrapStyleWord(true);
+		materialPanel.add(storageAreaTextArea);
+		
+		//Precautions
+		precautionsLabel.setBounds(400, 350, 400, 50);
+		materialPanel.add(precautionsLabel);
+		precautionsTextArea.setBounds(400, 400, 400, 75);
+		precautionsTextArea.setText(material.getPrecautions());
+		precautionsTextArea.setEditable(false);
+		precautionsTextArea.setLineWrap(true);
+		precautionsTextArea.setWrapStyleWord(true);
+		materialPanel.add(precautionsTextArea);
+		
+		//Toxic
+		toxicLabel.setBounds(400, 475, 400, 50);
+		materialPanel.add(toxicLabel);
+		toxicTextArea.setBounds(400, 525, 400, 75);
+		toxicTextArea.setText(material.getToxic());
+		toxicTextArea.setEditable(false);
+		toxicTextArea.setLineWrap(true);
+		toxicTextArea.setWrapStyleWord(true);
+		materialPanel.add(toxicTextArea);
+		
+		//Stability and Reactivity
+		stabilityLabel.setBounds(820, 100, 400, 50);
+		materialPanel.add(stabilityLabel);
+		stabilityTextArea.setBounds(820, 150, 400, 75);
+		stabilityTextArea.setText(material.getStability());
+		stabilityTextArea.setEditable(false);
+		stabilityTextArea.setLineWrap(true);
+		stabilityTextArea.setWrapStyleWord(true);
+		materialPanel.add(stabilityTextArea);
+		
+		//First aid measures
+		firstAidLabel.setBounds(820, 225, 400, 50);
+		materialPanel.add(firstAidLabel);
+		firstAidTextArea.setBounds(820, 275, 400, 75);
+		firstAidTextArea.setText(material.getFirstAid());
+		firstAidTextArea.setEditable(false);
+		firstAidTextArea.setLineWrap(true);
+		firstAidTextArea.setWrapStyleWord(true);
+		materialPanel.add(firstAidTextArea);
+		
+		//Dangers
+		dangersLabel.setBounds(820, 350, 400, 50);
+		materialPanel.add(dangersLabel);
+		dangersTextArea.setBounds(820, 400, 400, 75);
+		dangersTextArea.setText(material.getDangers());
+		dangersTextArea.setEditable(false);
+		dangersTextArea.setLineWrap(true);
+		dangersTextArea.setWrapStyleWord(true);
+		materialPanel.add(dangersTextArea);
+		
+		//Link to MSDS
+		msdsButton.setBounds(140, 450, 200, 100);
+		msdsButton.addActionListener(this);
+		materialPanel.add(msdsButton);
+		
+	}
+	
+	//This method sets up the scroll pane used 
+	private void infoSetupTest() {
 		
 		//titleLabel.setText(material.getName());
 		
@@ -191,11 +281,14 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	}
 	
 	//This method opens the links a web browser
-	private void openWebBrowser(String hyperLink) {
-
+	private void openWebBrowser(String hyperlink) {
+		
+		if(hyperlink.equals(""))
+			return;
+		
 		if(Desktop.isDesktopSupported()) {
 			try {
-				Desktop.getDesktop().browse(new URI(hyperLink));
+				Desktop.getDesktop().browse(new URI(hyperlink));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			} catch (URISyntaxException e1) {
@@ -213,8 +306,14 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		} else if(e.getSource() == msdsButton) {
 			openWebBrowser(material.getMsdsLink());
 		} else if(e.getSource() == backButton) {
-			new UnityMaterialSelectionScreen();
+			
+			if(previousScreen == 0)
+				new UnityMaterialSelectionScreen();
+			else if(previousScreen == 1)
+				new UnityReportScreen();
+			
 			this.dispose();
+			
 		} else if(e.getSource() == addButton) {
 			
 		}
