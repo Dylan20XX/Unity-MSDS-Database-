@@ -297,6 +297,7 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 			// music("./sounds/exit.wav");
 
 			new UnityNewUserScreen();
+			this.dispose();
 		}
 		
 		if(e.getSource() == userText || e.getSource() == passText) {

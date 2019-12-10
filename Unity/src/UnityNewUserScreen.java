@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -302,7 +303,11 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		if (e.getSource() == createUserButton) {
 			
 			if(checkUserInfo()) {
-				System.out.println("hi");
+				rewriteLoginFile();
+				createUser();
+				Database.currentUser = userText.getText();
+				new UnityProjectListScreen();
+				this.dispose();
 			}
 			
 			repaint();
@@ -385,11 +390,16 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		String fileContents = "";
 		
 		try {
+			
 			Scanner input = new Scanner(new File("Login.csv"));
+			
+			fileContents = input.nextLine();
 			
 			while(input.hasNextLine()) {
 				fileContents += "\n" + input.nextLine();
 			}
+			
+			input.close();
 			
 		} catch(FileNotFoundException error) {
 			//Display a message if the file is not found
@@ -399,9 +409,38 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		return fileContents;
 		
 	}
+	
+	private void rewriteLoginFile() {
+		
+		String fileContents = copyFileContents();
+		
+		String file = String.format("Login.csv");
+		File filepath = new File(file);
 
-	private void createUser(String username) {
-		File file = new File(String.format("Users/%s", username));
+		//if(!filepath.exists() && !filepath.isDirectory()) {
+		if(!filepath.isDirectory()) {
+			
+			try {
+
+				//Write data to a file
+				PrintWriter pr = new PrintWriter(file);
+				
+				pr.print(fileContents + "\n");
+				pr.print(userText.getText() + "," + readPassword(passText) + ",");
+				
+				pr.close();
+
+			} catch (FileNotFoundException e) {
+				System.out.println("Save Failed");
+			}
+			
+		}
+		
+	}
+
+	private void createUser() {
+		
+		File file = new File(String.format("Users/%s", userText.getText()));
 	    boolean directoryCreated = file.mkdir();
 	    
 	    if(directoryCreated) {
@@ -409,6 +448,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	    } else {
 	    	System.out.println("User folder was not created");
 	    }
+	    
 	}
 	
 }
