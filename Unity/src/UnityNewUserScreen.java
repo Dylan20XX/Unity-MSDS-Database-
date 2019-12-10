@@ -12,37 +12,15 @@
  */
 
 import java.awt.Color;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -50,10 +28,17 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class UnityNewUserScreen extends JFrame implements ActionListener {
-
+	
+	public static void main(String [] args) {
+		FileInput.readUsers();
+		new UnityNewUserScreen();
+	}
+	
 	// Game panel as well as the menu bar
 	JPanel inputPanel = new JPanel();
 	JPanel loginPanel = new JPanel();
@@ -74,22 +59,26 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	// JLabel title, background
 
 	// Panel + Button of the Game 1 Image
-	JPanel enterp = new JPanel();
-	JButton enterb = new JButton();
+	JButton createUserButton = new JButton("Create User");
 
 	// Panel + Button of the Game 1 Image
-	JPanel savep = new JPanel();
-	JButton saveb = new JButton();
-
+	JButton backButton = new JButton("Back");
+	
+	// Prompts
+	JLabel userPrompt = new JLabel("Type NEW Username here:");
+	JLabel passPrompt = new JLabel("Type NEW Password here:");
+	JLabel userPrompt2 = new JLabel("Retype NEW Username here:");
+	JLabel passPrompt2 = new JLabel("Retype NEW Password here:");
+	
 	// The text area
-	JTextArea userText = new JTextArea();
-	JTextArea passText = new JTextArea();
-	JTextArea passText2 = new JTextArea();
-	JTextArea userText2 = new JTextArea();
-
-	// Clip variable for the music method
-	static Clip clip;
-
+	JTextField userText = new JTextField();
+	JPasswordField passText = new JPasswordField();
+	JTextField userText2 = new JTextField();
+	JPasswordField passText2 = new JPasswordField();
+	
+	JLabel titleLabel = new JLabel("<html><center>Create A New User</centre></html>");
+	JLabel errorLabel = new JLabel("error label");
+	
 	User[] userArray = new User[2];
 	int access = 0;
 
@@ -144,116 +133,82 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 
 	private void inputPanel() {
 
-		// This sets the location and image of the save button
-		saveb.setIcon(new ImageIcon("./M/images/exit.png"));
-		savep.setBounds(1100, 575, 70, 10);
-		saveb.setBounds(1100, 575, 95, 35);
-		savep.add(saveb);
-		saveb.addActionListener(this);
-		inputPanel.add(saveb);
-		inputPanel.add(savep);
-
 		// This sets up the border color and boundaries
 		inputPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
 		inputPanel.setBounds(0, 0, 1280, 720);
 		inputPanel.setLayout(null);
 		// This is the background color of the panel
-		inputPanel.setBackground(Color.CYAN);
+		inputPanel.setBackground(new Color(191,231,247));
 		inputPanel.setVisible(true);
-
-		// inputPanel.add(userText);
-		// inputPanel.add(passText);
-		// This sets up the font, and implements the label's boundaries in the
-		// panel
-		// titleLabel.setFont(new Font(null));
-		// titleLabel.setBounds(100, 25, 200, 25);
-		// inputPanel.add(titleLabel);
-
-		// This makes the questions and the drop boxes implemented in the panel
-		// setupWeightings();
-
-		// report button with its dimensions as well as its action listener so
-		// it can react when its clicked
-		// reportButton.setBounds(575, 575, 200, 50);
-		// add(reportButton);
-		// reportButton.addActionListener(this);
-
-		// This is the font of the report button as well as its border with its
-		// thickness.
-		// reportButton.setFont(new Font("impact", Font.PLAIN, 18));
-		// reportButton.setBorder(BorderFactory.createLineBorder(Color.yellow,
-		// 2));
+		
 	}
 
 	private void loginPanel() {
 
 		Font newFont = new Font("Serif", Font.BOLD, 22);
 		userText.setFont(newFont);
-		userText.setBounds(300, 100, 300, 30);
+		userText.setBounds(600, 200, 300, 30);
 		userText.setEditable(true);
-		userText.setText("Type NEW Username here:");
-		userText.setBackground(Color.red);
+		//userText.setText("Type NEW Username here:");
 
 		userText2.setFont(newFont);
-		userText2.setBounds(300, 150, 300, 30);
+		userText2.setBounds(600, 250, 300, 30);
 		userText2.setEditable(true);
-		userText2.setText("Retype NEW Username here:");
-		userText2.setBackground(Color.red);
+		//userText2.setText("Retype NEW Username here:");
 
 		passText2.setFont(newFont);
-		passText2.setBounds(300, 250, 300, 30);
+		passText2.setBounds(600, 350, 300, 30);
 		passText2.setEditable(true);
-		passText2.setText("Type NEW Password here:");
-		passText2.setBackground(Color.red);
+		//passText2.setText("Type NEW Password here:");
 
-		Font newFont2 = new Font("Serif", Font.BOLD, 22);
-		passText.setFont(newFont2);
-		passText.setBounds(300, 300, 300, 30);
+		passText.setFont(newFont);
+		passText.setBounds(600, 400, 300, 30);
 		passText.setEditable(true);
-		passText.setText("Retype NEW Password here:");
-		passText.setBackground(Color.red);
+		//passText.setText("Retype NEW Password here:");
+		
 		loginPanel.add(userText);
 		loginPanel.add(passText);
 		loginPanel.add(userText2);
 		loginPanel.add(passText2);
+		
+		userPrompt.setFont(newFont);
+		userPrompt.setBounds(300, 200, 300, 30);
+		userPrompt2.setFont(newFont);
+		userPrompt2.setBounds(300, 250, 300, 30);
+		passPrompt.setFont(newFont);
+		passPrompt.setBounds(300, 350, 300, 30);
+		passPrompt2.setFont(newFont);
+		passPrompt2.setBounds(300, 400, 300, 30);
+		
+		loginPanel.add(userPrompt);
+		loginPanel.add(userPrompt2);
+		loginPanel.add(passPrompt);
+		loginPanel.add(passPrompt2);
 
-		// This sets the location and image of the enter button
-		enterb.setIcon(new ImageIcon("./M/images/exit.png"));
-		enterp.setBounds(450, 450, 70, 10);
-		enterb.setBounds(450, 450, 95, 35);
-		enterp.add(enterb);
-		enterb.addActionListener(this);
-		loginPanel.add(enterb);
-		loginPanel.add(enterp);
+		// This sets the location and image of the create user and back buttons
+		backButton.setBounds(100, 550, 120, 35);
+		backButton.addActionListener(this);
+		loginPanel.add(backButton);
+		createUserButton.setBounds(990, 550, 120, 35);
+		createUserButton.addActionListener(this);
+		loginPanel.add(createUserButton);
 
+		// This sets up the title and error labels
+		titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
+		titleLabel.setBounds(455, 25, 300, 50);
+		loginPanel.add(titleLabel);
+		
+		//errorLabel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
+		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		errorLabel.setFont(newFont);
+		errorLabel.setBounds(405, 450, 400, 70);
+		loginPanel.add(errorLabel);
+		
 		// This sets up the border color and boundaries
 		loginPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
-		loginPanel.setBounds(25, 25, 1025, 600);
+		loginPanel.setBounds(25, 25, 1210, 600);
 		loginPanel.setLayout(null);
 		loginPanel.setVisible(true);
-		// This is the background color of the panel
-		// loginPanel.setBackground(Color.black);
-
-		// This sets up the font, and implements the label's boundaries in the
-		// panel
-		// titleLabel.setFont(new Font(null));
-		// titleLabel.setBounds(100, 25, 200, 25);
-		// inputPanel.add(titleLabel);
-
-		// This makes the questions and the drop boxes implemented in the panel
-		// setupWeightings();
-
-		// report button with its dimensions as well as its action listener so
-		// it can react when its clicked
-		// reportButton.setBounds(575, 575, 200, 50);
-		// add(reportButton);
-		// reportButton.addActionListener(this);
-
-		// This is the font of the report button as well as its border with its
-		// thickness.
-		// reportButton.setFont(new Font("impact", Font.PLAIN, 18));
-		// reportButton.setBorder(BorderFactory.createLineBorder(Color.yellow,
-		// 2));
 	}
 
 	// The frame setup method where it sets up the frame
@@ -276,25 +231,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		add(loginPanel);
 		add(inputPanel);
 		setVisible(true);
-		add(saveb);
-		add(savep);
 
-	}
-
-	// This is the music method where it allows music to be played from anywhere
-	// in
-	// this class.
-	public static void music(String musicLocation) {
-
-		try {
-			File Sound = new File(musicLocation);
-			AudioInputStream audioInput = AudioSystem.getAudioInputStream(Sound);
-			clip = AudioSystem.getClip();
-			clip.open(audioInput);
-			clip.start();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
 
 	// This contains the menu bar method where it states each MenuItem
@@ -362,40 +299,85 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 			// new Theme
 		}
 
-		if (e.getSource() == enterb) {
+		if (e.getSource() == createUserButton) {
+			
+			if(checkUserInfo()) {
+				System.out.println("hi");
+			}
+			
+			repaint();
+			revalidate();
 			
 		}
-		if (e.getSource() == saveb) {
-
-			String fileContent = userText.getText();
-
-			BufferedWriter writer = null;
-
-			try {
-				writer = new BufferedWriter(new FileWriter("LoginUP.csv"));
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
-
-				writer.write(UnityLoginScreen.userinfo);
-				writer.write(fileContent);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
-				writer.close();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch blockhvjjj
-				e1.printStackTrace();
-			}
-
-			System.out.println("Save User");
-
+		if (e.getSource() == backButton) {
+			
 		}
 
+	}
+	
+	private boolean checkUserInfo() {
+		
+		//If any check is failed, give error message in a label and return from the method
+		
+		//Check if usernames in both text fields match
+		if(!userText.getText().equals(userText2.getText())) {
+			errorLabel.setText("<html><center>Make sure that usernames match</centre></html>");
+			return false;
+		}
+		
+		//Check if username is taken
+		for(User currentUser: Database.users) {
+			if(userText.getText().equals(currentUser.getUser())) {
+				errorLabel.setText("<html><center>Usernames is taken</centre></html>");
+				return false;
+			}
+		}
+		
+		//Check if passwords match
+		if(!readPassword(passText).equals(readPassword(passText2))) {
+			errorLabel.setText("<html><center>Make sure that passwords match</centre></html>");
+			return false;
+		}
+		
+		//Check if username or password contains commas
+		if(readPassword(passText).contains(",") || userText.getText().contains(",")) {
+			errorLabel.setText("<html><center>Usernames or passwords can't contain commas</centre></html>");
+			return false;
+		}
+		
+		//Check if username or password contains spaces
+		if(readPassword(passText).contains(" ") || userText.getText().contains(" ")) {
+			errorLabel.setText("<html><center>Usernames or passwords can't contain spaces</centre></html>");
+			return false;
+		}
+		
+		//Check if a username has been entered
+		if(userText.getText().isEmpty()) {
+			errorLabel.setText("<html><center>Enter a username</centre></html>");
+			return false;
+		}
+		
+		//Check if a password has been entered
+		if(readPassword(passText).equals("")) {
+			errorLabel.setText("<html><center>Enter a password</centre></html>");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private String readPassword(JPasswordField passText) {
+		
+		char[] passArray = passText.getPassword();
+		String password;
+		
+		if(passArray.length >= 1)
+			password = Arrays.toString(passArray).substring(1, 3* passArray.length - 1).replace(", ", "");
+		else
+			password = "";
+		
+		return password;
+		
 	}
 
 }
