@@ -379,7 +379,38 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		return password;
 		
 	}
+	
+	private String copyFileContents() {
+		
+		String fileContents = "";
+		
+		try {
+			Scanner input = new Scanner(new File("Login.csv"));
+			
+			while(input.hasNextLine()) {
+				fileContents += "\n" + input.nextLine();
+			}
+			
+		} catch(FileNotFoundException error) {
+			//Display a message if the file is not found
+			System.out.println("Wrong file");
+		}
+		
+		return fileContents;
+		
+	}
 
+	private void createUser(String username) {
+		File file = new File(String.format("Users/%s", username));
+	    boolean directoryCreated = file.mkdir();
+	    
+	    if(directoryCreated) {
+	    	System.out.println("User folder created");
+	    } else {
+	    	System.out.println("User folder was not created");
+	    }
+	}
+	
 }
 
 
