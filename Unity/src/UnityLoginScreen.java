@@ -87,6 +87,11 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 	JTextField userText = new JTextField();
 	JPasswordField passText = new JPasswordField(8);
 
+	
+	// New USER BUTTON
+	JButton newb = new JButton();
+		
+		
 	// Clip variable for the music method
 	static Clip clip;
 
@@ -144,6 +149,14 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 
 	private void inputPanel() {
 
+		// This sets the location and image of the new button
+		//newb.setIcon(new ImageIcon("./M/images/new.png"));
+		newb.setFont(new Font("Arial", Font.BOLD, 24));
+		newb.setText("New User");
+		newb.setBounds(1100, 575, 160, 45);
+		newb.addActionListener(this);
+		inputPanel.add(newb);
+		
 		// This sets up the border color and boundaries
 		inputPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
 		inputPanel.setBounds(0, 0, 1280, 720);
@@ -276,6 +289,14 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 			// music("./sounds/exit.wav");
 
 			// new Theme
+		}
+		
+		if (e.getSource() == newb) {
+			
+			// Play sound effect
+			// music("./sounds/exit.wav");
+
+			new UnityNewUserScreen();
 		}
 		
 		if(e.getSource() == userText || e.getSource() == passText) {
