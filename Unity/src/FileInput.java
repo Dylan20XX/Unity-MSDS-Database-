@@ -72,6 +72,8 @@ public class FileInput {
 		
 		try {
 			
+			Database.users.clear();
+			
 			Scanner input = new Scanner(new File("Login.csv")); //Take input from the .csv file
 			input.useDelimiter(","); //Use commas to separate each piece of data
 			

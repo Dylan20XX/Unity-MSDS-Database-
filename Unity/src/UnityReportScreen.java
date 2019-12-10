@@ -53,6 +53,7 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	private JPanel materialNamePanel = new JPanel();
 	
 	private JButton saveButton = new JButton("Save Project");
+	private JButton exitButton = new JButton("<html><center>Exit Without<br>Saving</center></html>");
 	private JButton materialSelectButton = new JButton("<html><center>Return to<br>Material Selection</center></html>");
 	
 	public UnityReportScreen() {
@@ -163,14 +164,18 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		
 		materialSelectButton.addActionListener(this);
 		materialSelectButton.setFont(new Font( "Arial", Font.PLAIN, 24));
-		materialSelectButton.setBounds (450, 550, 300, 105);
+		materialSelectButton.setBounds (450, 550, 200, 105);
 		add(materialSelectButton);
+		
+		exitButton.addActionListener(this);
+		exitButton.setFont(new Font( "Arial", Font.PLAIN, 24));
+		exitButton.setBounds (670, 550, 200, 105);
+		add(exitButton);
 		
 		saveButton.addActionListener(this);
 		saveButton.setFont(new Font( "Arial", Font.PLAIN, 24));
 		saveButton.setBounds (950, 550, 300, 105);
 		add(saveButton);
-		
 		
 	}
 	
@@ -265,6 +270,9 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 			Database.currentProject.setProjectDescription(descriptionTextArea.getText());
 			Database.currentProject.setSources(sourcesTextArea.getText());
 			new UnityMaterialSelectionScreen();
+			this.dispose();
+		} else if (e.getSource() == exitButton) {
+			new UnityProjectListScreen();
 			this.dispose();
 		}
 		
