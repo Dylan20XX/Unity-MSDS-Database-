@@ -109,41 +109,6 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		inputPanel();
 		loginPanel();
 		MenuBar();
-		// music("./sounds/game.wav");
-
-		Scanner input;
-		try {
-
-			// Reads in the csv file and sets the delimiter to commas
-			input = new Scanner(new File("LoginUP.csv"));
-			input.useDelimiter(",");
-			// input.nextLine(); //Get rid of header row
-			int i = 0; // Tracks the index
-
-			// Reads in data from the csv file.
-			while (input.hasNextLine()) {
-
-				// Creates a new user
-				userArray[i] = new User();
-
-				// smartphone information fields
-				userArray[i].setUser(input.next().replace("\"", "").replace("\n", ""));
-				userArray[i].setPass(input.next());
-
-				System.out.println(userArray[i]);
-				i++;
-
-				if (i == 2) {
-					break;
-				}
-			}
-
-			input.close();
-
-		} catch (FileNotFoundException error) {
-
-			System.out.println("Error! File not found.");
-		}
 
 	}
 

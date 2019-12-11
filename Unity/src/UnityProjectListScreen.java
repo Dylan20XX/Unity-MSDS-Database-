@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 import java.awt.*;
 
@@ -30,9 +32,6 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 	JPanel scrollPanel = new JPanel();
 	JPanel labelScrollPanel = new JPanel();
 	JPanel buttonScrollPanel = new JPanel();
-
-	// String for name deleted
-	String deletename;
 
 	public UnityProjectListScreen() {
 		panelSetup();
@@ -199,22 +198,32 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() == deleteUser) {
+			
 			String confirm = null;
+			User currentUser = new User();
 			
-			for(User currentUser: Database.users) {
+			for(User user: Database.users) {
 				
-			System.out.println("Request to delete user");
-			
-			// OptionPane that pops up to enter the name of the user wanting to be deleted
-			deletename = JOptionPane.showInputDialog("Enter your passowrd:");
-			System.out.println(deletename);
-			System.out.println(Database.currentUser);
-			
-			if (deletename == currentUser.getPass())
-				confirm = JOptionPane.showInputDialog("Type Yes to confirm deleting:" + Database.currentUser);
+				if(user.getUser().equals(Database.currentUser)) {
+					currentUser = user;
+				}
+				
 			}
-		}
+			
+			System.out.println("Request to delete user");
 
+			// OptionPane that pops up to enter the name of the user wanting to be deleted
+			String pass = JOptionPane.showInputDialog("Deleting your account will delete all of your projects\nEnter your passowrd to confirm:");
+			System.out.println(pass + " " + currentUser.getPass());
+			System.out.println(Database.currentUser);
+
+			if (pass.equals(currentUser.getPass())) {
+				System.out.println("deleting");
+				deleteCurrentUser();
+			}
+			
+			
+		}
 		
 	}
 
@@ -255,6 +264,62 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		} else {
 			System.out.println("Couldn't delete project");
 		}
+		
+	}
+	
+	private void deleteCurrentUser() {
+		
+		//Remove the deleted user from the user list
+		for(int i = 0; i < Database.users.size(); i++) {
+			
+			if(Database.users.get(i).getUser().equals(Database.currentUser)) {
+				Database.users.remove(i);
+				break;
+			}
+			
+		}
+		
+		//Re-write the login file
+		String file = "Login.csv";
+		File filepath = new File(file);
+			
+		try {
+
+			//Write data to a file
+			PrintWriter pr = new PrintWriter(file);
+
+			pr.print("Username,Password,");
+
+			for(User currentUser: Database.users) {	
+				pr.print("\n");
+				pr.print(currentUser.getUser() + "," + currentUser.getPass() + ",");
+			}
+
+			pr.close();
+
+		} catch (FileNotFoundException e) {
+			System.out.println("Save Failed");
+		}
+		
+		//Delete the user's folder
+		String userFolder = String.format("Users/%s", Database.currentUser);
+		File userFolderFilepath = new File(userFolder);
+		
+		String[] fileList = userFolderFilepath.list();
+		
+		for(String projectFile: fileList){
+			
+		    File currentFile = new File(userFolderFilepath.getPath(), projectFile);
+		    currentFile.delete();
+		    
+		}
+		
+		userFolderFilepath.delete();
+		
+		Database.currentUser = null;
+		
+		new UnityLoginScreen();
+		this.dispose();
 		
 	}
 	
