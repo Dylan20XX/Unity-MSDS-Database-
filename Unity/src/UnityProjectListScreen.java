@@ -24,7 +24,7 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 	JLabel titleLabel = new JLabel("Create or Edit Projects");
 	ArrayList<JButton> list = new ArrayList<JButton>();
 	ArrayList<JLabel> namelist = new ArrayList<JLabel>();
-
+	boolean clicked = false;
 	int numproj = 0;
 	JPanel scrollPanel = new JPanel();
 	JPanel labelScrollPanel = new JPanel();
@@ -121,12 +121,8 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		for(Project currentProject: Database.projectList) {
 			
 			if(e.getSource() == currentProject.getSelectButton()) {
-				removeActionListeners();
+				clicked = true;
 				Database.currentProject = currentProject;
-				FileInput.readMaterials();
-				setMaterialQuantities();
-				new UnityReportScreen();
-				this.dispose();
 			}
 			
 		}
@@ -164,8 +160,13 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() == editButton) {
+			if(clicked == true){
 			removeActionListeners();
 			FileInput.readMaterials();
+			setMaterialQuantities();
+			new UnityReportScreen();
+			this.dispose();
+			}
 		}
 		
 		
