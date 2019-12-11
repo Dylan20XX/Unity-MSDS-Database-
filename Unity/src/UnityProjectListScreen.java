@@ -12,12 +12,12 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 
 	JPanel projectListPanel = new JPanel();
 	JMenuBar menu = new JMenuBar();
-	JMenu file = new JMenu("file");
+	JMenu file = new JMenu("File");
 	JMenu edit = new JMenu("Edit");
 	JMenuItem deleteUser = new JMenuItem("Delete User");
-	JMenuItem SAVE = new JMenuItem("SAVE");
-	JMenuItem BACK = new JMenuItem("BACK");
-	JButton createButton = new JButton("CREATE NEW PROJECT");
+	JMenuItem SAVE = new JMenuItem("Save");
+	JMenuItem BACK = new JMenuItem("Back");
+	JButton createButton = new JButton("Create New Project");
 	JButton editButton = new JButton("Edit");
 	JButton deleteButton = new JButton("Delete");
 	JScrollPane projectsScrollPane = new JScrollPane();
@@ -183,7 +183,7 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 				Database.projectList.remove(Database.currentProject);
 				
 				//Delete the file
-				//deleteCurrentProject();
+				deleteCurrentProject();
 				
 				//Set the current project to null
 				Database.currentProject = null;
@@ -246,7 +246,10 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		File projectDataFilepath = new File(projectData);
 
 		if(projectDataFilepath.exists()) {
+			System.out.println(Database.currentProject.getName() + " was deleted");
 			projectDataFilepath.delete();
+		} else {
+			System.out.println("Couldn't delete project");
 		}
 		
 	}
