@@ -91,48 +91,13 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	public UnityNewUserScreen() {
 
 		frameSetup();
-		inputPanel();
-		loginPanel();
-		MenuBar();
-		// music("./sounds/game.wav");
-
-		Scanner input;
-		try {
-
-			// Reads in the csv file and sets the delimiter to commas
-			input = new Scanner(new File("LoginUP.csv"));
-			input.useDelimiter(",");
-			// input.nextLine(); //Get rid of header row
-			int i = 0; // Tracks the index
-
-			// Reads in data from the csv file.
-			while (input.hasNextLine()) {
-
-				// Creates a new user
-				userArray[i] = new User();
-
-				// smartphone information fields
-				userArray[i].setUser(input.next().replace("\"", "").replace("\n", ""));
-				userArray[i].setPass(input.next());
-
-				System.out.println(userArray[i]);
-				i++;
-
-				if (i == 2) {
-					break;
-				}
-			}
-
-			input.close();
-
-		} catch (FileNotFoundException error) {
-
-			System.out.println("Error! File not found.");
-		}
+		inputPanelSetup();
+		loginPanelSetup();
+		menuBarSetup();
 
 	}
 
-	private void inputPanel() {
+	private void inputPanelSetup() {
 
 		// This sets up the border color and boundaries
 		inputPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
@@ -144,7 +109,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		
 	}
 
-	private void loginPanel() {
+	private void loginPanelSetup() {
 
 		Font newFont = new Font("Serif", Font.BOLD, 22);
 		userText.setFont(newFont);
@@ -236,7 +201,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	}
 
 	// This contains the menu bar method where it states each MenuItem
-	private void MenuBar() {
+	private void menuBarSetup() {
 
 		// File menuitem
 		jmFile.addSeparator();
@@ -315,6 +280,9 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 			
 		}
 		if (e.getSource() == backButton) {
+			
+			new UnityLoginScreen();
+			this.dispose();
 			
 		}
 

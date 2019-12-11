@@ -161,18 +161,36 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		
 		if (e.getSource() == editButton) {
 			if(clicked == true){
-			removeActionListeners();
-			FileInput.readMaterials();
-			setMaterialQuantities();
-			new UnityReportScreen();
-			this.dispose();
+				removeActionListeners();
+				FileInput.readMaterials();
+				setMaterialQuantities();
+				new UnityReportScreen();
+				this.dispose();
 			}
 		}
 		if (e.getSource() == deleteButton){
 			if(clicked == true){
-			removeActionListeners();
-			
-			clicked = false;
+				
+				removeActionListeners();
+				
+				//Remove the button and label
+				buttonScrollPanel.remove(Database.currentProject.getSelectButton());
+				labelScrollPanel.remove(Database.currentProject.getNameLabel());
+				//Repaint and revalidate 
+				repaint();
+				revalidate();
+				//Remove the project from project list
+				Database.projectList.remove(Database.currentProject);
+				
+				//Delete the file
+				//deleteCurrentProject();
+				
+				//Set the current project to null
+				Database.currentProject = null;
+				
+				
+				clicked = false;
+				
 			}
 		}
 		
@@ -221,4 +239,16 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		}
 
 	}
+	
+	private void deleteCurrentProject() {
+		
+		String projectData = String.format("Users/%s/%s", Database.currentUser, Database.currentProject.getName());
+		File projectDataFilepath = new File(projectData);
+
+		if(projectDataFilepath.exists()) {
+			projectDataFilepath.delete();
+		}
+		
+	}
+	
 }
