@@ -168,9 +168,6 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 			this.dispose();
 			}
 		}
-		
-		
-		
 		if (e.getSource() == deleteButton){
 			if(clicked == true){
 			removeActionListeners();
