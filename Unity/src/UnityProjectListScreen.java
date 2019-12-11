@@ -172,12 +172,11 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		
 		
 		if (e.getSource() == deleteButton){
-			
+			if(clicked == true){
 			removeActionListeners();
-			//delete file
-			//remove components from buttonScrollPanel and labelScrollPanel
-			//setupProjectList
 			
+			clicked = false;
+			}
 		}
 		
 	}
