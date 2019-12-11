@@ -179,6 +179,24 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 			}
 		}
 		
+		if (e.getSource() == deleteUser) {
+			String confirm = null;
+			
+			for(User currentUser: Database.users) {
+				
+			System.out.println("Request to delete user");
+			
+			// OptionPane that pops up to enter the name of the user wanting to be deleted
+			deletename = JOptionPane.showInputDialog("Enter your passowrd:");
+			System.out.println(deletename);
+			System.out.println(Database.currentUser);
+			
+			if (deletename == currentUser.getPass())
+				confirm = JOptionPane.showInputDialog("Type Yes to confirm deleting:" + Database.currentUser);
+			}
+		}
+
+		
 	}
 
 	// This method removes the action listers from material buttons
