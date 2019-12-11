@@ -8,7 +8,6 @@ public class UnityApplication {
 	}
 	
 	//Exit without saving feature on report screen
-	//Create user screen
 	//Create folders each time a new user is created
 	//Ability to remove users
 	//Images of materials
