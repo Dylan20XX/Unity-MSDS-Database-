@@ -15,13 +15,14 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 	JMenu file = new JMenu("File");
 	JMenu edit = new JMenu("Edit");
 	JMenuItem deleteUser = new JMenuItem("Delete User");
+
 	JMenuItem SAVE = new JMenuItem("Save");
 	JMenuItem BACK = new JMenuItem("Back");
 	JButton createButton = new JButton("Create New Project");
 	JButton editButton = new JButton("Edit");
 	JButton deleteButton = new JButton("Delete");
 	JScrollPane projectsScrollPane = new JScrollPane();
-	JLabel titleLabel = new JLabel("Create or Edit Projects");
+	JLabel titleLabel = new JLabel("Create Or Edit Projects");
 	ArrayList<JButton> list = new ArrayList<JButton>();
 	ArrayList<JLabel> namelist = new ArrayList<JLabel>();
 	boolean clicked = false;
@@ -54,15 +55,15 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		projectListPanel.setBounds(0, 0, 1270, 710);
 		projectListPanel.setLayout(null);
 		projectListPanel.setBackground(new Color(191, 231, 247));
-		file.add(SAVE);
 		file.add(BACK);
+		BACK.addActionListener(this);
 		edit.add(deleteUser);
 		menu.add(file);
 		menu.add(edit);
 		deleteUser.addActionListener(this);
 
-		titleLabel.setBounds(450, 0, 750, 100);
-		titleLabel.setFont(new Font("Serif", Font.PLAIN, 48));
+		titleLabel.setBounds(350, 0, 750, 100);
+		titleLabel.setFont(new Font("Arial", Font.PLAIN, 64));
 		projectListPanel.add(titleLabel);
 
 		createButton.setBounds(235, 475, 200, 100);
@@ -126,7 +127,10 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 			}
 			
 		}
-		
+		if(e.getSource() == BACK){
+			this.dispose();
+			UnityApplication.main(null);
+		}
 		if(e.getSource() == createButton){
 			
 			removeActionListeners();
