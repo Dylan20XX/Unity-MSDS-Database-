@@ -8,6 +8,7 @@ import java.util.*;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 @SuppressWarnings({ "serial", "unused" })
 public class UnityProjectListScreen extends JFrame implements ActionListener {
@@ -53,16 +54,17 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 	private void panelSetup() {
 		projectListPanel.setBounds(0, 0, 1270, 710);
 		projectListPanel.setLayout(null);
-		projectListPanel.setBackground(new Color(191, 231, 247));
+		projectListPanel.setBackground(new Color(75,0,130));
 		file.add(BACK);
 		BACK.addActionListener(this);
 		edit.add(deleteUser);
 		menu.add(file);
 		menu.add(edit);
 		deleteUser.addActionListener(this);
-
-		titleLabel.setBounds(350, 0, 750, 100);
-		titleLabel.setFont(new Font("Arial", Font.PLAIN, 64));
+		
+		titleLabel.setBounds(260, 0, 1000, 200);
+		titleLabel.setFont(new Font("Grobold", Font.PLAIN, 80));
+		titleLabel.setForeground(new Color(255,0,255));
 		projectListPanel.add(titleLabel);
 
 		createButton.setBounds(235, 475, 200, 100);
@@ -86,7 +88,7 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		projectsScrollPane = new JScrollPane(scrollPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPanel.setLayout(new BoxLayout(scrollPanel, BoxLayout.X_AXIS));
-		projectsScrollPane.setBounds(280, 100, 750, 250);
+		projectsScrollPane.setBounds(280, 150, 750, 250);
 		scrollPanel.setBackground(Color.DARK_GRAY);
 		projectListPanel.add(projectsScrollPane);
 	}
@@ -322,5 +324,6 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		this.dispose();
 		
 	}
+	
 	
 }
