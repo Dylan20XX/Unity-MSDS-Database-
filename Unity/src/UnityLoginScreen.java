@@ -120,7 +120,6 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		newb.setText("New User");
 		newb.setBounds(1100, 575, 160, 45);
 		newb.addActionListener(this);
-		inputPanel.add(newb);
 		
 		// This sets up the border color and boundaries
 		inputPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
@@ -134,6 +133,7 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		titleLabel.setBounds(580, 30, 160, 50);
 		titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
 		inputPanel.add(titleLabel);
+		inputPanel.add(newb);
 
 	}
 
