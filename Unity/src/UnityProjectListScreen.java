@@ -62,8 +62,8 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		menu.add(edit);
 		deleteUser.addActionListener(this);
 		
-		titleLabel.setBounds(260, 0, 1000, 200);
-		titleLabel.setFont(new Font("Grobold", Font.PLAIN, 80));
+		titleLabel.setBounds(200, -25, 1000, 200);
+		titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 80));
 		titleLabel.setForeground(new Color(255,0,255));
 		projectListPanel.add(titleLabel);
 
@@ -79,6 +79,7 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		deleteButton.addActionListener(this);
 		projectListPanel.add(deleteButton);
 
+		scrollPanel.setBorder(BorderFactory.createLineBorder(Color.white, 4));
 		scrollPanel.setBounds(0, 0, 750, 250);
 		buttonScrollPanel.setLayout(new BoxLayout(buttonScrollPanel, BoxLayout.Y_AXIS));
 		scrollPanel.add(buttonScrollPanel);

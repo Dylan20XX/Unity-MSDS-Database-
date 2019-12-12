@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
@@ -120,7 +121,6 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		newb.setText("New User");
 		newb.setBounds(1100, 575, 160, 45);
 		newb.addActionListener(this);
-		inputPanel.add(newb);
 		
 		// This sets up the border color and boundaries
 		//inputPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
@@ -134,6 +134,8 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		//titleLabel.setBounds(580, 30, 160, 50);
 		//titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
 		//inputPanel.add(titleLabel);
+		inputPanel.add(newb);
+
 
 	}
 
@@ -305,7 +307,7 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		}
 		
 		System.out.println("Incorrect Username or password");
-		
+		  JOptionPane.showMessageDialog(null, "Invalid Username or Password!","INVALID", JOptionPane.WARNING_MESSAGE);		
 	}
 	
 }
