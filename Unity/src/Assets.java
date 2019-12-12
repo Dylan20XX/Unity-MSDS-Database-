@@ -16,6 +16,7 @@ public class Assets {
 	//public static ImageIcon instantPaperMache= buttonImageSetup("Images/Materials/Instant Paper Mache.jpg");
 	//public static ImageIcon oilPastel = buttonImageSetup("Images/Materials/Oil Pastel.jpg");
 	//public static ImageIcon pencilColourSticks = materialImageSetup("Images/Materials/Pencils _ Colour Sticks.jpg");	
+	//public static ImageIcon powderedMaterials = materialImageSetup("Images/Materials/Powdered Materials.jpg");	
 	
 	//This method returns a scaled image (200x100)
 	private static ImageIcon buttonImageSetup(String imagePath) {
