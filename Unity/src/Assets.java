@@ -7,7 +7,7 @@ public class Assets {
 	//Backgrounds
 	public static ImageIcon loginBackground = backgroundImageSetup("Images/GUI/Login screen.png");
 	
-	//Buttons
+	//Buttons 
 	public static ImageIcon createButton = buttonImageSetup("Images/GUI/Create Project Button.png");
 	public static ImageIcon deleteButton = buttonImageSetup("Images/GUI/Delete Button.png");
 	
