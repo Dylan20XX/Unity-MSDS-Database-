@@ -9,5 +9,7 @@ public class UnityApplication {
 	
 	//Ability to remove users
 	//Images of materials
+	//Logout Button
+	//Sort material list
 	
 }
