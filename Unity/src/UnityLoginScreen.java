@@ -130,7 +130,7 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		//inputPanel.setBackground(new Color(191,231,247));
 		inputPanel.setVisible(true);
 		
-		//Add title label
+		//Add title label 
 		//titleLabel.setBounds(580, 30, 160, 50);
 		//titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
 		//inputPanel.add(titleLabel);
