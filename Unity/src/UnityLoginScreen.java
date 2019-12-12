@@ -60,10 +60,10 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 	}
 	
 	//Title Label
-	JLabel titleLabel = new JLabel("Unity");
+	//JLabel titleLabel = new JLabel("Unity");
 	
 	// Game panel as well as the menu bar
-	JPanel inputPanel = new JPanel();
+	JLabel inputPanel = new JLabel(Assets.loginBackground);
 	JPanel loginPanel = new JPanel();
 	JMenuBar jmb = new JMenuBar();
 
@@ -123,17 +123,17 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		inputPanel.add(newb);
 		
 		// This sets up the border color and boundaries
-		inputPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
+		//inputPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
 		inputPanel.setBounds(0, 0, 1280, 720);
-		inputPanel.setLayout(null);
+		//inputPanel.setLayout(null);
 		// This is the background color of the panel
-		inputPanel.setBackground(new Color(191,231,247));
+		//inputPanel.setBackground(new Color(191,231,247));
 		inputPanel.setVisible(true);
 		
 		//Add title label
-		titleLabel.setBounds(580, 30, 160, 50);
-		titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
-		inputPanel.add(titleLabel);
+		//titleLabel.setBounds(580, 30, 160, 50);
+		//titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
+		//inputPanel.add(titleLabel);
 
 	}
 
@@ -141,18 +141,18 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		
 		Font serifFont = new Font("Serif", Font.BOLD, 24);
 		userText.setFont(serifFont);
-		userText.setBounds(375, 175, 250, 30);
+		userText.setBounds(250, 175, 250, 30);
 		userText.addActionListener(this);
 
 		passText.setFont(serifFont);
-		passText.setBounds(375, 225, 250, 30);
+		passText.setBounds(250, 225, 250, 30);
 		passText.addActionListener(this);
 		
 		userPrompt.setFont(serifFont);
-		userPrompt.setBounds(250, 175, 250, 30);
+		userPrompt.setBounds(125, 175, 250, 30);
 		
 		passPrompt.setFont(serifFont);
-		passPrompt.setBounds(250, 225, 250, 30);
+		passPrompt.setBounds(125, 225, 250, 30);
 		
 		loginPanel.add(userPrompt);
 		loginPanel.add(passPrompt);
@@ -161,7 +161,7 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		
 		// This sets up the border color and boundaries
 		loginPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
-		loginPanel.setBounds(200, 100, 850, 500);
+		loginPanel.setBounds(332, 277, 622, 365);
 		loginPanel.setLayout(null);
 		loginPanel.setVisible(true);
 		
