@@ -186,7 +186,9 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		setTitle("Unity");
 		setSize(1280, 720);
 		setLayout(null);
-		getContentPane().setBackground(new Color(191,231,247));
+		//getContentPane().setBackground(new Color(191,231,247)); //Blue
+		//getContentPane().setBackground(new Color(82,66,209)); //Dark purple
+		getContentPane().setBackground(new Color(140,100,209)); //Light purple
 		
 		//Prevent the program from running when the frame is closed, prevent the 
 		//frame from being resized, and make the frame visible

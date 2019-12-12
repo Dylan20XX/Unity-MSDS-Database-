@@ -21,9 +21,11 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 
 	JMenuItem SAVE = new JMenuItem("Save");
 	JMenuItem BACK = new JMenuItem("Back");
-	JButton createButton = new JButton("Create New Project");
+	//JButton createButton = new JButton("Create New Project");
+	JButton createButton = new JButton(Assets.createButton);
 	JButton editButton = new JButton("Edit");
-	JButton deleteButton = new JButton("Delete");
+	//JButton deleteButton = new JButton("Delete");
+	JButton deleteButton = new JButton(Assets.deleteButton);
 	JScrollPane projectsScrollPane = new JScrollPane();
 	JLabel titleLabel = new JLabel("Create Or Edit Projects");
 	ArrayList<JButton> list = new ArrayList<JButton>();
@@ -54,7 +56,9 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 	private void panelSetup() {
 		projectListPanel.setBounds(0, 0, 1270, 710);
 		projectListPanel.setLayout(null);
-		projectListPanel.setBackground(new Color(75,0,130));
+		//projectListPanel.setBackground(new Color(75,0,130));
+		projectListPanel.setBackground(new Color(82,66,209));
+		//projectListPanel.setBackground(new Color(140,100,209));
 		file.add(BACK);
 		BACK.addActionListener(this);
 		edit.add(deleteUser);
@@ -68,6 +72,7 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		projectListPanel.add(titleLabel);
 
 		createButton.setBounds(235, 475, 200, 100);
+		createButton.setBackground(Color.LIGHT_GRAY);
 		createButton.addActionListener(this);
 		projectListPanel.add(createButton);
 
@@ -76,6 +81,7 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		projectListPanel.add(editButton);
 
 		deleteButton.setBounds(857, 475, 200, 100);
+		deleteButton.setBackground(Color.LIGHT_GRAY);
 		deleteButton.addActionListener(this);
 		projectListPanel.add(deleteButton);
 

@@ -119,7 +119,8 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		//newb.setIcon(new ImageIcon("./M/images/new.png"));
 		newb.setFont(new Font("Arial", Font.BOLD, 24));
 		newb.setText("New User");
-		newb.setBounds(1100, 575, 160, 45);
+		newb.setBackground(Color.ORANGE);
+		newb.setBounds(1000, 575, 160, 45);
 		newb.addActionListener(this);
 		
 		// This sets up the border color and boundaries
@@ -143,18 +144,18 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		
 		Font serifFont = new Font("Serif", Font.BOLD, 24);
 		userText.setFont(serifFont);
-		userText.setBounds(250, 175, 250, 30);
+		userText.setBounds(250, 125, 250, 30);
 		userText.addActionListener(this);
 
 		passText.setFont(serifFont);
-		passText.setBounds(250, 225, 250, 30);
+		passText.setBounds(250, 175, 250, 30);
 		passText.addActionListener(this);
 		
 		userPrompt.setFont(serifFont);
-		userPrompt.setBounds(125, 175, 250, 30);
+		userPrompt.setBounds(125, 125, 250, 30);
 		
 		passPrompt.setFont(serifFont);
-		passPrompt.setBounds(125, 225, 250, 30);
+		passPrompt.setBounds(125, 175, 250, 30);
 		
 		loginPanel.add(userPrompt);
 		loginPanel.add(passPrompt);
@@ -162,7 +163,9 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		loginPanel.add(passText);
 		
 		// This sets up the border color and boundaries
-		loginPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
+		loginPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 5));
+		//loginPanel.setBackground(new Color(82,66,209));
+		loginPanel.setBackground(new Color(140,100,209));
 		loginPanel.setBounds(332, 277, 622, 365);
 		loginPanel.setLayout(null);
 		loginPanel.setVisible(true);

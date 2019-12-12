@@ -8,8 +8,8 @@ public class Assets {
 	public static ImageIcon loginBackground = backgroundImageSetup("Images/GUI/Login screen.png");
 	
 	//Buttons 
-	//public static ImageIcon createButton = buttonImageSetup("Images/GUI/Create Project Button.png");
-	//public static ImageIcon deleteButton = buttonImageSetup("Images/GUI/Delete Button.png");
+	public static ImageIcon createButton = buttonImageSetup("Images/GUI/Create Project Button.png");
+	public static ImageIcon deleteButton = buttonImageSetup("Images/GUI/Delete Button.png");
 	
 	//Material Images
 	//public static ImageIcon charcoalPencil = buttonImageSetup("Images/Materials/Charcoal pencil.jpg");
@@ -33,7 +33,7 @@ public class Assets {
 	//This method returns a scaled image 1280x720)	
 	private static ImageIcon backgroundImageSetup(String imagePath) {
 		return new ImageIcon(new ImageIcon(imagePath).
-				getImage().getScaledInstance(1280, 720, Image.SCALE_FAST));
+				getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH));
 	}
 	
 }

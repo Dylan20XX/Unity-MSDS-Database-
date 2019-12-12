@@ -104,7 +104,8 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		inputPanel.setBounds(0, 0, 1280, 720);
 		inputPanel.setLayout(null);
 		// This is the background color of the panel
-		inputPanel.setBackground(new Color(191,231,247));
+		//inputPanel.setBackground(new Color(191,231,247));
+		inputPanel.setBackground(new Color(82,66,209));
 		inputPanel.setVisible(true);
 		
 	}
@@ -153,9 +154,11 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 
 		// This sets the location and image of the create user and back buttons
 		backButton.setBounds(100, 550, 120, 35);
+		backButton.setBackground(Color.orange);
 		backButton.addActionListener(this);
 		loginPanel.add(backButton);
 		createUserButton.setBounds(990, 550, 120, 35);
+		createUserButton.setBackground(Color.orange);
 		createUserButton.addActionListener(this);
 		loginPanel.add(createUserButton);
 
@@ -172,6 +175,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		
 		// This sets up the border color and boundaries
 		loginPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
+		loginPanel.setBackground(new Color(140,100,209));
 		loginPanel.setBounds(25, 25, 1210, 600);
 		loginPanel.setLayout(null);
 		loginPanel.setVisible(true);

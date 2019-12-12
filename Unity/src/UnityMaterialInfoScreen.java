@@ -86,7 +86,9 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		//Setup the panel
 		materialPanel.setBounds(0,0,1280,720);
 		materialPanel.setLayout(null);
-		materialPanel.setBackground(new Color(191,231,247));
+		//materialPanel.setBackground(new Color(191,231,247));
+		//materialPanel.setBackground(new Color(82,66,209));
+		materialPanel.setBackground(new Color(140,100,209));
 		materialPanel.setVisible(true); //Initially hide the highscore panel 
 		
 		//Setup the title label
