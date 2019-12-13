@@ -76,30 +76,38 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		materialPanel.add(searchBar);
 		
 		//Setup the combo box
-		sortComboBoxLabel.setBounds(940, 140, 100, 30);
+		sortComboBoxLabel.setBounds(740, 140, 100, 30);
 		sortComboBoxLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		materialPanel.add(sortComboBoxLabel);
 		
-		sortComboBox.setBounds(1040, 140, 100, 30);
+		sortComboBox.setBounds(840, 140, 300, 30);
 		sortComboBox.setFont(new Font("Arial", Font.PLAIN, 24));
 		materialPanel.add(sortComboBox);
 		
 		//Setup the submit and back buttons
 		submitButton.setBounds(940, 620, 200, 50);
 		submitButton.setFont(new Font("Arial", Font.BOLD, 24));
+		submitButton.setBackground(Color.ORANGE);
 		submitButton.addActionListener(this);
 		materialPanel.add(submitButton);
 		
 		backButton.setBounds(140, 620, 200, 50);
 		backButton.setFont(new Font("Arial", Font.BOLD, 24));
+		backButton.setBackground(Color.ORANGE);
 		backButton.addActionListener(this);
 		materialPanel.add(backButton);
 		
 		//Setup button to view full material list after a search
 		viewAllButton.setBounds(500, 620, 280, 50);
 		viewAllButton.setFont(new Font("Arial", Font.BOLD, 24));
+		viewAllButton.setBackground(Color.ORANGE);
 		viewAllButton.addActionListener(this);
 		materialPanel.add(viewAllButton);
+		
+		//Setup sorting combo box
+		sortComboBox.addItem("Alphabetical");
+		sortComboBox.addItem("Environmental Impact");
+		sortComboBox.addActionListener(this);
 		
 	}
 	
@@ -265,6 +273,17 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			
 			repaint();
 			revalidate();
+			
+		} else if(e.getSource() == sortComboBox) {
+			
+			//System.out.println(sortComboBox.getSelectedItem());
+			
+			if(sortComboBox.getSelectedItem().equals("Alphabetical")) {
+				
+			} else if(sortComboBox.getSelectedItem().equals("Environmental Impact")) {
+				
+			}
+			
 			
 		}
 		
