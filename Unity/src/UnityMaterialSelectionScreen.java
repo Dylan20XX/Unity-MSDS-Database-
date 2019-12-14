@@ -44,6 +44,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	public UnityMaterialSelectionScreen() {
 		panelSetup();
 		//addScreenTestButtons();
+		Database.sortAlpha();
 		addMaterialButtons();
 		scrollPaneSetup();
 		frameSetup();
@@ -279,6 +280,9 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			//System.out.println(sortComboBox.getSelectedItem());
 			
 			if(sortComboBox.getSelectedItem().equals("Alphabetical")) {
+				
+				Database.sortAlpha();
+				addMaterialButtons();
 				
 			} else if(sortComboBox.getSelectedItem().equals("Environmental Impact")) {
 				
