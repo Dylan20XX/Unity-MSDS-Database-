@@ -1,16 +1,3 @@
-
-/*
- * Name: Momin Naeem
- * Date: Dec 2, 2019
- * Course: ICS4U1
- * Topic: Unity Project
- * Title: NewUserScreen
- * Description: This class controls the new user screen, where a user who doesn't have a 
- * 				"USERNAME" and "PASSWORD" will have to make valid credentials. This screen 
- * 				write their new information in a file to save for next time the user opens 
- * 				the program.
- */
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -32,14 +19,31 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
+/** * @author Momin Naeem
+ * Date: Dec 2, 2019
+ * Course: ICS4U1
+ * Topic: Unity Project
+ * Title: NewUserScreen
+ * Description: This class controls the new user screen, where a user who doesn't have a 
+ * 				"USERNAME" and "PASSWORD" will have to make valid credentials. This screen 
+ * 				write their new information in a file to save for next time the user opens 
+ * 				the program.
+ */
 public class UnityNewUserScreen extends JFrame implements ActionListener {
-	
+	/**
+	 * this class creates the new user GUI
+	 * @param null;
+	 */
+
+	/**
+	 * Main Method
+	 * @param args
+	 */
 	public static void main(String [] args) {
 		FileInput.readUsers();
 		new UnityNewUserScreen();
 	}
-	
+
 	// Game panel as well as the menu bar
 	JPanel inputPanel = new JPanel();
 	JPanel loginPanel = new JPanel();
@@ -64,22 +68,22 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 
 	// Panel + Button of the Game 1 Image
 	JButton backButton = new JButton("Back");
-	
+
 	// Prompts
 	JLabel userPrompt = new JLabel("Type NEW Username here:");
 	JLabel passPrompt = new JLabel("Type NEW Password here:");
 	JLabel userPrompt2 = new JLabel("Retype NEW Username here:");
 	JLabel passPrompt2 = new JLabel("Retype NEW Password here:");
-	
+
 	// The text area
 	JTextField userText = new JTextField();
 	JPasswordField passText = new JPasswordField();
 	JTextField userText2 = new JTextField();
 	JPasswordField passText2 = new JPasswordField();
-	
+
 	JLabel titleLabel = new JLabel("<html><center>Create A New User</centre></html>");
 	JLabel errorLabel = new JLabel("error label");
-	
+
 	User[] userArray = new User[2];
 	int access = 0;
 
@@ -87,6 +91,10 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	 * A constructor method that reads in the different methods as well as
 	 * playing the startup music
 	 * 
+	 */
+	/**
+	 * This is the constructor method
+	 * @param null
 	 */
 	public UnityNewUserScreen() {
 
@@ -96,7 +104,10 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		menuBarSetup();
 
 	}
-
+	/**
+	 * This method sets up the input panel
+	 * @param null
+	 */
 	private void inputPanelSetup() {
 
 		// This sets up the border color and boundaries
@@ -107,9 +118,12 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		//inputPanel.setBackground(new Color(191,231,247));
 		inputPanel.setBackground(new Color(82,66,209));
 		inputPanel.setVisible(true);
-		
-	}
 
+	}
+	/**
+	 * This method sets up the login panel
+	 * @param null
+	 */
 	private void loginPanelSetup() {
 
 		Font newFont = new Font("Serif", Font.BOLD, 22);
@@ -132,12 +146,12 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		passText.setBounds(600, 400, 300, 30);
 		passText.setEditable(true);
 		//passText.setText("Retype NEW Password here:");
-		
+
 		loginPanel.add(userText);
 		loginPanel.add(passText);
 		loginPanel.add(userText2);
 		loginPanel.add(passText2);
-		
+
 		userPrompt.setFont(newFont);
 		userPrompt.setBounds(300, 200, 300, 30);
 		userPrompt2.setFont(newFont);
@@ -146,7 +160,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		passPrompt.setBounds(300, 350, 300, 30);
 		passPrompt2.setFont(newFont);
 		passPrompt2.setBounds(300, 400, 300, 30);
-		
+
 		loginPanel.add(userPrompt);
 		loginPanel.add(userPrompt2);
 		loginPanel.add(passPrompt);
@@ -166,13 +180,13 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
 		titleLabel.setBounds(455, 25, 300, 50);
 		loginPanel.add(titleLabel);
-		
+
 		//errorLabel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
 		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		errorLabel.setFont(newFont);
 		errorLabel.setBounds(405, 450, 400, 70);
 		loginPanel.add(errorLabel);
-		
+
 		// This sets up the border color and boundaries
 		loginPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
 		loginPanel.setBackground(new Color(140,100,209));
@@ -182,6 +196,10 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	}
 
 	// The frame setup method where it sets up the frame
+	/**
+	 * This method sets up the JFrame
+	 * @param null
+	 */
 	private void frameSetup() {
 
 		// This sets up the size of the frame
@@ -205,6 +223,10 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	}
 
 	// This contains the menu bar method where it states each MenuItem
+	/**
+	 * This method sets up the menubar
+	 * @param null
+	 */
 	private void menuBarSetup() {
 
 		// File menuitem
@@ -238,6 +260,10 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	}
 
 	@Override
+	/**
+	 * This method checks for user input and preforms tasks 
+	 * @param User Input
+	 */
 	public void actionPerformed(ActionEvent e) {
 
 		// Actions when back button clicked
@@ -270,7 +296,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		}
 
 		if (e.getSource() == createUserButton) {
-			
+
 			if(checkUserInfo()) {
 				rewriteLoginFile();
 				createUser();
@@ -278,30 +304,33 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 				new UnityProjectListScreen();
 				this.dispose();
 			}
-			
+
 			repaint();
 			revalidate();
-			
+
 		}
 		if (e.getSource() == backButton) {
-			
+
 			new UnityLoginScreen();
 			this.dispose();
-			
+
 		}
 
 	}
-	
+	/**
+	 * This method checks for user information
+	 * @param null
+	 */
 	private boolean checkUserInfo() {
-		
+
 		//If any check is failed, give error message in a label and return from the method
-		
+
 		//Check if usernames in both text fields match
 		if(!userText.getText().equals(userText2.getText())) {
 			errorLabel.setText("<html><center>Make sure that usernames match</centre></html>");
 			return false;
 		}
-		
+
 		//Check if username is taken
 		for(User currentUser: Database.users) {
 			if(userText.getText().equals(currentUser.getUser())) {
@@ -309,120 +338,131 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 				return false;
 			}
 		}
-		
+
 		//Check if passwords match
 		if(!readPassword(passText).equals(readPassword(passText2))) {
 			errorLabel.setText("<html><center>Make sure that passwords match</centre></html>");
 			return false;
 		}
-		
+
 		//Check if username or password contains commas
 		if(readPassword(passText).contains(",") || userText.getText().contains(",")) {
 			errorLabel.setText("<html><center>Usernames or passwords can't contain commas</centre></html>");
 			return false;
 		}
-		
+
 		//Check if username or password contains spaces
 		if(readPassword(passText).contains(" ") || userText.getText().contains(" ")) {
 			errorLabel.setText("<html><center>Usernames or passwords can't contain spaces</centre></html>");
 			return false;
 		}
-		
+
 		//Check if a username has been entered
 		if(userText.getText().isEmpty()) {
 			errorLabel.setText("<html><center>Enter a username</centre></html>");
 			return false;
 		}
-		
+
 		//Check if a password has been entered
 		if(readPassword(passText).equals("")) {
 			errorLabel.setText("<html><center>Enter a password</centre></html>");
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+	/**
+	 * This method reads the users password
+	 * @param passText
+	 * @return password
+	 */
 	private String readPassword(JPasswordField passText) {
-		
+
 		char[] passArray = passText.getPassword();
 		String password;
-		
+
 		if(passArray.length >= 1)
 			password = Arrays.toString(passArray).substring(1, 3* passArray.length - 1).replace(", ", "");
 		else
 			password = "";
-		
+
 		return password;
-		
+
 	}
-	
+	/**
+	 * This method copies file contents
+	 * @return fileContents
+	 */
 	private String copyFileContents() {
-		
+
 		String fileContents = "";
-		
+
 		try {
-			
+
 			Scanner input = new Scanner(new File("Login.csv"));
-			
+
 			fileContents = input.nextLine();
-			
+
 			while(input.hasNextLine()) {
 				fileContents += "\n" + input.nextLine();
 			}
-			
+
 			input.close();
-			
+
 		} catch(FileNotFoundException error) {
 			//Display a message if the file is not found
 			System.out.println("Wrong file");
 		}
-		
+
 		return fileContents;
-		
+
 	}
-	
+	/**
+	 * This method rewrites login files
+	 */
 	private void rewriteLoginFile() {
-		
+
 		String fileContents = copyFileContents();
-		
+
 		String file = String.format("Login.csv");
 		File filepath = new File(file);
 
 		//if(!filepath.exists() && !filepath.isDirectory()) {
 		if(!filepath.isDirectory()) {
-			
+
 			try {
 
 				//Write data to a file
 				PrintWriter pr = new PrintWriter(file);
-				
+
 				pr.print(fileContents + "\n");
 				pr.print(userText.getText() + "," + readPassword(passText) + ",");
-				
+
 				pr.close();
 
 			} catch (FileNotFoundException e) {
 				System.out.println("Save Failed");
 			}
-			
+
 		}
-		
+
+	}
+	/**
+	 * This method creats a new user
+	 */
+	private void createUser() {
+
+		File file = new File(String.format("Users/%s", userText.getText()));
+		boolean directoryCreated = file.mkdir();
+
+		if(directoryCreated) {
+			System.out.println("User folder created");
+		} else {
+			System.out.println("User folder was not created");
+		}
+
 	}
 
-	private void createUser() {
-		
-		File file = new File(String.format("Users/%s", userText.getText()));
-	    boolean directoryCreated = file.mkdir();
-	    
-	    if(directoryCreated) {
-	    	System.out.println("User folder created");
-	    } else {
-	    	System.out.println("User folder was not created");
-	    }
-	    
-	}
-	
 }
 
 
