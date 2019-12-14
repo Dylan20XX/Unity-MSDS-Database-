@@ -17,9 +17,21 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-public class UnityReportScreen extends JFrame implements ActionListener {
+/**
+ * 
+ * @author Humza Belmo
+ *
+ */
+public class UnityReportScreen extends JFrame implements ActionListener {\
+	/**
+	 * this class controls the Report Screen GUI
+	 * @param null
+	 */
 	
+	/**
+	 * Main Method
+	 * @param args
+	 */
 	public static void main (String[] args) {
 		FileInput.readMaterials();
 		new UnityReportScreen();
@@ -56,6 +68,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	private JButton exitButton = new JButton("<html><center>Exit Without<br>Saving</center></html>");
 	private JButton materialSelectButton = new JButton("<html><center>Return to<br>Material Selection</center></html>");
 	
+	/**
+	 * This is the constructor method
+	 * @param null
+	 */
 	public UnityReportScreen() {
 		menuBarSetup();
 		labelSetup();
@@ -66,6 +82,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		frameSetup();
 	}
 	
+	/**
+	 * This method sets up the menu bar
+	 * @param null
+	 */
 	private void menuBarSetup() {
 		
         //construct preComponents
@@ -93,14 +113,20 @@ public class UnityReportScreen extends JFrame implements ActionListener {
         
         add(menubar);
 	}
-	
+	/**
+	 * This method sets up the JLabels
+	 * @param null
+	 */
 	private void labelSetup() {
         titleLabel.setFont(new Font( "Serif", Font.PLAIN, 36));
 		titleLabel.setForeground(Color.BLACK);
 		titleLabel.setBounds (600, 15, 480, 80);
 		add(titleLabel);
 	}
-	
+	/**
+	 * This method sets up the TextAreas
+	 * @param null
+	 */
 	private void textAreaSetup() {
 		
 		projectNameLabel.setBounds (35, 100, 400, 20);
@@ -132,7 +158,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		add(sourcesScrollPane);
 		
 	}
-	
+	/**
+	 * This method sets up the Material Panel
+	 * @param null
+	 */
 	private void materialPanelSetup() {
 		
 		materialPanel.setLayout(new BoxLayout(materialPanel, BoxLayout.X_AXIS));
@@ -160,6 +189,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	}
 	
 	//This method sets up the save and back buttons
+	/**
+	 * This method sets up the JButtons
+	 * @param null
+	 */
 	private void buttonSetup() {
 		
 		materialSelectButton.addActionListener(this);
@@ -180,6 +213,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	}
 	
 	//This method sets up the frame
+	/**
+	 * This method sets up the JFrame
+	 * @param null
+	 */
 	private void frameSetup() {
 		
 		//Set the title and frame size
@@ -197,7 +234,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		setVisible(true);
 		
 	}
-	
+	/**
+	 * This method adds new material buttons
+	 * @param null
+	 */
 	private void addMaterialButtons() {
 		
 		quantityButtonPanel.removeAll();
@@ -245,6 +285,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	}
 
 	@Override
+	/**
+	 * This method checks for user inputs in order to perform tasks
+	 * @param userinput
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		for(Material currentMaterial: Database.currentProject.getMaterialList()) {
@@ -281,6 +325,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	}
 	
 	//This method removes the action listers from material buttons
+	/**
+	 * This method removes action listeners from material buttons
+	 * @param null
+	 */
 	private void removeActionListeners() {
 		
 //		for(Material currentMaterial: Database.currentProjectMaterials) {
@@ -294,7 +342,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		}
 		
 	}
-	
+	/**
+	 * This method Checks if the user uses a valid project name
+	 * @param null
+	 */
 	private boolean checkValidProjectName() {
 		//A filename can't contain any of the following characters
 		//\/:*?"<>|
@@ -312,7 +363,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		}
 		
 	}
-	
+	/**
+	 * This method saves users projects to our database
+	 * @param null
+	 */
 	private void saveProject() {
 		
 		String file = String.format("Users/%s/%s", Database.currentUser, projectName);
