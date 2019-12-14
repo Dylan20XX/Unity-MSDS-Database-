@@ -1,6 +1,10 @@
 
 public class UnityApplication {
-	
+	/**
+	 * @return test
+	 * @author null
+	 * @param args
+	 */
 	public static void main(String [] args){
 		FileInput.readUsers();
 		FileInput.readMaterials();
