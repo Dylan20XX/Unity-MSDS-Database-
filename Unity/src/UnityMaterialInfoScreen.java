@@ -12,8 +12,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-
+/**
+ * 
+ * @author Dylan
+ *
+ */
 public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
+/**
+ * This class creates the Material Info GUI
+ * @param Material info
+ */
 	
 	private Material material; //Material that is having its info viewed
 	private int previousScreen;
@@ -60,19 +68,27 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	private JButton msdsButton = new JButton("View MSDS");
 	
 	//Main method for testing GUI
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new UnityMaterialInfoScreen();
 	}
 	
-	//Constructor method
+	/**
+	 * This is the constructor method
+	 * @param null
+	 */
 	public UnityMaterialInfoScreen() {
 		panelSetup();
 		infoSetupTest();
 		frameSetup();
 	}
 	
-	//Constructor method
-	public UnityMaterialInfoScreen(Material material, int previousScreen) {
+	/**
+	 * This is the constructor method
+	 * @param null
+	 */	public UnityMaterialInfoScreen(Material material, int previousScreen) {
 		this.material = material;
 		this.previousScreen = previousScreen;
 		panelSetup();
@@ -80,7 +96,10 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		frameSetup();
 	}
 	
-	//This method sets up the panel with the scroll pane
+	 /**
+		 *This method sets up the panel with a scroll pane
+		 * @param null
+		 */
 	private void panelSetup() {
 
 		//Setup the panel
@@ -110,7 +129,10 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		
 	}
 	
-	//This method sets up the scroll pane used 
+	/**
+	 * This method sets up the scroll pane used
+	 * @param null
+	 */
 	private void infoSetup() {
 		
 		//titleLabel.setText(material.getName());
@@ -197,7 +219,10 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		
 	}
 	
-	//This method sets up the scroll pane used 
+	/**
+	 * This method sets up the scroll pane used
+	 * @param null
+	 */ 
 	private void infoSetupTest() {
 		
 		//titleLabel.setText(material.getName());
@@ -263,7 +288,10 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		
 	}
 	
-	//This method sets up the frame
+	/**
+	 * This method sets up the JFrame
+	 * @param null
+	 */
 	private void frameSetup() {
 		
 		//Set the title and frame size
@@ -281,8 +309,10 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		setVisible(true);
 		
 	}
-	
-	//This method opens the links a web browser
+	/**
+	 * This method opens the hyperlink
+	 * @param hyperlink
+	 */
 	private void openWebBrowser(String hyperlink) {
 		
 		if(hyperlink.equals(""))
@@ -301,6 +331,10 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	}
 
 	@Override
+	/**
+	 * This method checks for user inputs in order to perform tasks
+	 * @param userinput
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == hyperlinkButton) {
