@@ -4,10 +4,18 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 //import javax.swing.event.*;
-
+/**
+ * 
+ * @author everyone
+ *
+ */
 
 @SuppressWarnings("serial")
 public class Report extends JPanel {
+	/**
+	 * This class is used to create the final report object.
+	 * @param all general project information
+	 */
     private JTextArea textbox1;
     private JTextArea textbox2;
     private JMenuBar menubar;
@@ -32,7 +40,10 @@ public class Report extends JPanel {
     private JLabel cbox3;
     private JLabel cbox4;
     private JLabel cbox5;
-
+    /**
+	 * This is the constructor method
+	 * @param null
+	 */
     public Report() {
         //construct preComponents
         JMenu fileMenu = new JMenu ("File");
@@ -158,7 +169,10 @@ public class Report extends JPanel {
        
     }
 
-
+/**
+ * Main Method
+ * @param args
+ */
     public static void main (String[] args) {
         JFrame frame = new JFrame ("REPORT SCREEN");
         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
