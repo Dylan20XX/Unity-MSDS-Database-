@@ -13,9 +13,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-
+/**
+ * 
+ * @author Dylan
+ *
+ */
 public class UnityMaterialSelectionScreen extends JFrame implements ActionListener{
-	
+	/**
+	 * This class is used to create the Material Selection GUI
+	 */
 	private JPanel materialPanel = new JPanel();
 	
 	private JLabel titleLabel = new JLabel("Select Materials");
@@ -35,12 +41,19 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	private JScrollPane materialButtonScrollPane = new JScrollPane();
 	
 	//Main method for testing GUI
+	/**
+	 * Main Method
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		FileInput.readMaterials();
 		new UnityMaterialSelectionScreen();
 	}
 	
-	//Constructor method
+	/**
+	 * This is the constructor method
+	 * @param null
+	 */
 	public UnityMaterialSelectionScreen() {
 		panelSetup();
 		//addScreenTestButtons();
@@ -50,7 +63,10 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		frameSetup();
 	}
 
-	//This method sets up the panel with the scroll pane
+	/**
+	 * This method sets up the panel with the scrollpane
+	 * @param null
+	 */
 	private void panelSetup() {
 
 		//Setup the panel
@@ -112,7 +128,10 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		
 	}
 	
-	//This method sets up the scroll pane used 
+	/**
+	 * This method sets up the scrollpane used
+	 * @param null
+	 */
 	private void scrollPaneSetup() {
 		
 		//materialPanel <- materialButtonScrollPane <- materialButtonPanel
@@ -148,7 +167,10 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		materialPanel.add(materialButtonScrollPane);
 		
 	}
-	
+	/**
+	 * This method adds material buttons
+	 * @param null
+	 */
 	private void addMaterialButtons() {
 		
 		quantityButtonPanel.removeAll();
@@ -179,8 +201,10 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		
 	}
 	
-	//This method sets up the frame
-	private void frameSetup() {
+	/**
+	 * This method sets up the frame
+	 * @param null
+	 */	private void frameSetup() {
 		
 		//Set the title and frame size
 		setTitle("Unity");
@@ -199,6 +223,10 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	}
 
 	@Override
+	/**
+	 * This method checks for user input and preforms tasks 
+	 * @param User Input
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		for(Material currentMaterial: Database.materials) {
@@ -293,8 +321,10 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		
 	}
 	
-	//This method removes the action listers from material buttons
-	//Use this method before changing screens
+	/**
+	 * This method removes action listeners from material buttons
+	 * @param null
+	 */
 	private void removeActionListeners() {
 		
 		for(Material currentMaterial: Database.materials) {
