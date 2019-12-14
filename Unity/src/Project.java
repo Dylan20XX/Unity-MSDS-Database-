@@ -80,6 +80,7 @@ public class Project {
 		selectButton.setMaximumSize(selectButton.getSize());
 		selectButton.setMinimumSize(selectButton.getSize());
 		selectButton.setPreferredSize(selectButton.getSize());
+		selectButton.setBackground(null);
 		
 		//Set up the label
 		nameLabel.setSize(650, 70);

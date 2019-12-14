@@ -132,6 +132,11 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 			if(e.getSource() == currentProject.getSelectButton()) {
 				clicked = true;
 				Database.currentProject = currentProject;
+				for(Project unselectedProject: Database.projectList) 
+					if(!unselectedProject.getName().equals(currentProject.getName()))
+						unselectedProject.getSelectButton().setBackground(null);
+				currentProject.getSelectButton().setBackground(Color.YELLOW);
+				
 			}
 			
 		}
