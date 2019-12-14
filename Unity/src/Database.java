@@ -1,11 +1,16 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
+/**
+ * @author everyone
+ */
 public class Database {
-	
+	/**
+	 * This class sorts Materials. 
+	 * @param MDSD Database, Login, Users
+	 */
 	public static String currentUser;
-	public static Project currentProject;
+	public static Project currentProject;//
 	public static ArrayList<Material> currentProjectMaterials = new ArrayList<Material>();
 	
 	public static ArrayList<Project> projectList = new ArrayList<Project>();
@@ -15,6 +20,9 @@ public class Database {
 	public static ArrayList<Material> materials = new ArrayList<Material>();
 	
 	//Sorts materials in alphabetical order
+	/**
+	 * @return Sorted Materials in Alpha order
+	 */
 	public static Comparator<Material> alphaSorter = new Comparator<Material>(){
 		public int compare(Material mat1, Material mat2) {
 			return mat1.getName().compareTo(mat2.getName());
