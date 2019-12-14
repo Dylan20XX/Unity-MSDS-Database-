@@ -3,9 +3,16 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * 
+ * @author everyone
+ *
+ */
 public class FileInput {
-	
+	/**
+	 * This class is used to pull information from our CSVs and turns them into information that Java can understand
+	 * @param MDSD Database, Login, Users
+	 */
 	public static void readMaterials() {
 		
 		try {
