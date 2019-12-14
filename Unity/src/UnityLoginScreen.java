@@ -40,8 +40,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-/*
- * Name: Momin Naeem
+/**
+ * 
+ * @author Momin Naeem
  * Date: Dec 2, 2019
  * Course: ICS4U1
  * Topic: Unity Project
@@ -52,7 +53,9 @@ import javax.swing.JTextField;
  */
 
 public class UnityLoginScreen extends JFrame implements ActionListener {
-	
+	/**
+	 * @param args
+	 */
 	//Main method for testing GUI
 	public static void main(String[] args) {
 		FileInput.readUsers();
@@ -104,6 +107,10 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 	 * playing the startup music
 	 * 
 	 */
+	/**
+	 * This is the constructor method
+	 * @param null
+	 */
 	public UnityLoginScreen() {
 
 		frameSetup();
@@ -112,7 +119,10 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		MenuBar();
 
 	}
-
+/**
+ * creates input panel
+ * @param null;
+ */
 	private void inputPanel() {
 
 		// This sets the location and image of the new button
@@ -139,7 +149,10 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 
 
 	}
-
+	/**
+	 * Creates Login panel
+	 * @param null
+	 */
 	private void loginPanel() {
 		
 		Font serifFont = new Font("Serif", Font.BOLD, 24);
@@ -174,6 +187,10 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 	}
 
 	// The frame setup method where it sets up the frame
+	/**
+	 * Sets up the frame
+	 * @param null
+	 */
 	private void frameSetup() {
 
 		// This sets up the size of the frame
@@ -197,6 +214,10 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 	}
 
 	// This contains the menu bar method where it states each MenuItem
+	/**
+	 * Sets up the Menubar
+	 * @param null
+	 */
 	private void MenuBar() {
 
 		// File menuitem
@@ -230,6 +251,9 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 	}
 
 	@Override
+	/** Tests for userinput then preforms a task
+	 * @param userinput
+	 */
 	public void actionPerformed(ActionEvent e) {
 
 		// Actions when back button clicked
@@ -275,7 +299,9 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		}
 		
 	}
-	
+	/**
+	 * @return password
+	 */
 	private String readPassword() {
 		
 		char[] passArray = passText.getPassword();
@@ -289,7 +315,9 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		return password;
 		
 	}
-	
+	/**
+	 * @return login
+	 */
 	private void login() {
 		
 		for(User currentUser: Database.users) {
