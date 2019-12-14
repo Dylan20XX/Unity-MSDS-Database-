@@ -9,7 +9,17 @@ import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-
+	/** * @author Kavish Urethireswaran
+	 * Date: December 15, 2019
+	 * Course: ICS4U1
+	 * Topic: Unity Project
+	 * Title: ProjectListScreen
+	 * Description: This class controls the ProjectList Screen where a user can choose to 
+	 * 				create a project, delete a project, and/or edit a project. They can also delete
+	 * 				themselves from our database using the "Delete User" option in the menubar.
+	 * 				The user will be sent here after loggin in and whenever they choose to edit a project 
+	 * 				while using the program
+	 */
 @SuppressWarnings({ "serial", "unused" })
 public class UnityProjectListScreen extends JFrame implements ActionListener {
 
@@ -65,7 +75,7 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		menu.add(file);
 		menu.add(edit);
 		deleteUser.addActionListener(this);
-		
+
 		titleLabel.setBounds(200, -25, 1000, 200);
 		titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 80));
 		titleLabel.setForeground(new Color(255,0,255));
@@ -126,9 +136,9 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		for(Project currentProject: Database.projectList) {
-			
+
 			if(e.getSource() == currentProject.getSelectButton()) {
 				clicked = true;
 				Database.currentProject = currentProject;
@@ -136,46 +146,46 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 					if(!unselectedProject.getName().equals(currentProject.getName()))
 						unselectedProject.getSelectButton().setBackground(null);
 				currentProject.getSelectButton().setBackground(Color.YELLOW);
-				
+
 			}
-			
+
 		}
 		if(e.getSource() == BACK){
 			this.dispose();
 			UnityApplication.main(null);
 		}
 		if(e.getSource() == createButton){
-			
+
 			removeActionListeners();
 			FileInput.readMaterials();
 			Database.currentProject = new Project("New Project");
 			new UnityMaterialSelectionScreen();
 			this.dispose();
-			
-//			list.add(new JButton());
-//			list.get(numproj).setSize(100, 70);
-//			list.get(numproj).setMaximumSize(list.get(numproj).getSize());
-//			list.get(numproj).setMinimumSize(list.get(numproj).getSize());
-//			list.get(numproj).setPreferredSize(list.get(numproj).getSize());
-//			list.get(numproj).setText("edit");
-//			list.get(numproj).setBounds(0, 0, 200, 100);
-//			buttonScrollPanel.add(list.get(numproj));	
-//
-//			namelist.add(new JLabel());
-//			namelist.get(numproj).setSize(650, 70);
-//			namelist.get(numproj).setMaximumSize(namelist.get(numproj).getSize());
-//			namelist.get(numproj).setMinimumSize(namelist.get(numproj).getSize());
-//			namelist.get(numproj).setPreferredSize(namelist.get(numproj).getSize());
-//			namelist.get(numproj).setText("Project #" + (numproj+1));
-//			namelist.get(numproj).setBounds(200, 0, 200, 100);
-//			labelScrollPanel.add(namelist.get(numproj));
+
+			//			list.add(new JButton());
+			//			list.get(numproj).setSize(100, 70);
+			//			list.get(numproj).setMaximumSize(list.get(numproj).getSize());
+			//			list.get(numproj).setMinimumSize(list.get(numproj).getSize());
+			//			list.get(numproj).setPreferredSize(list.get(numproj).getSize());
+			//			list.get(numproj).setText("edit");
+			//			list.get(numproj).setBounds(0, 0, 200, 100);
+			//			buttonScrollPanel.add(list.get(numproj));	
+			//
+			//			namelist.add(new JLabel());
+			//			namelist.get(numproj).setSize(650, 70);
+			//			namelist.get(numproj).setMaximumSize(namelist.get(numproj).getSize());
+			//			namelist.get(numproj).setMinimumSize(namelist.get(numproj).getSize());
+			//			namelist.get(numproj).setPreferredSize(namelist.get(numproj).getSize());
+			//			namelist.get(numproj).setText("Project #" + (numproj+1));
+			//			namelist.get(numproj).setBounds(200, 0, 200, 100);
+			//			labelScrollPanel.add(namelist.get(numproj));
 
 			scrollPanel.revalidate();
 			scrollPanel.repaint();
 
 			numproj++;
 		}
-		
+
 		if (e.getSource() == editButton) {
 			if(clicked == true){
 				removeActionListeners();
@@ -187,9 +197,9 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == deleteButton){
 			if(clicked == true){
-				
+
 				removeActionListeners();
-				
+
 				//Remove the button and label
 				buttonScrollPanel.remove(Database.currentProject.getSelectButton());
 				labelScrollPanel.remove(Database.currentProject.getNameLabel());
@@ -198,32 +208,32 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 				revalidate();
 				//Remove the project from project list
 				Database.projectList.remove(Database.currentProject);
-				
+
 				//Delete the file
 				deleteCurrentProject();
-				
+
 				//Set the current project to null
 				Database.currentProject = null;
-				
-				
+
+
 				clicked = false;
-				
+
 			}
 		}
-		
+
 		if (e.getSource() == deleteUser) {
-			
+
 			String confirm = null;
 			User currentUser = new User();
-			
+
 			for(User user: Database.users) {
-				
+
 				if(user.getUser().equals(Database.currentUser)) {
 					currentUser = user;
 				}
-				
+
 			}
-			
+
 			System.out.println("Request to delete user");
 
 			// OptionPane that pops up to enter the name of the user wanting to be deleted
@@ -235,10 +245,10 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 				System.out.println("deleting");
 				deleteCurrentUser();
 			}
-			
-			
+
+
 		}
-		
+
 	}
 
 	// This method removes the action listers from material buttons
@@ -266,9 +276,9 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		}
 
 	}
-	
+
 	private void deleteCurrentProject() {
-		
+
 		String projectData = String.format("Users/%s/%s", Database.currentUser, Database.currentProject.getName());
 		File projectDataFilepath = new File(projectData);
 
@@ -278,25 +288,25 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		} else {
 			System.out.println("Couldn't delete project");
 		}
-		
+
 	}
-	
+
 	private void deleteCurrentUser() {
-		
+
 		//Remove the deleted user from the user list
 		for(int i = 0; i < Database.users.size(); i++) {
-			
+
 			if(Database.users.get(i).getUser().equals(Database.currentUser)) {
 				Database.users.remove(i);
 				break;
 			}
-			
+
 		}
-		
+
 		//Re-write the login file
 		String file = "Login.csv";
 		File filepath = new File(file);
-			
+
 		try {
 
 			//Write data to a file
@@ -314,28 +324,28 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		} catch (FileNotFoundException e) {
 			System.out.println("Save Failed");
 		}
-		
+
 		//Delete the user's folder
 		String userFolder = String.format("Users/%s", Database.currentUser);
 		File userFolderFilepath = new File(userFolder);
-		
+
 		String[] fileList = userFolderFilepath.list();
-		
+
 		for(String projectFile: fileList){
-			
-		    File currentFile = new File(userFolderFilepath.getPath(), projectFile);
-		    currentFile.delete();
-		    
+
+			File currentFile = new File(userFolderFilepath.getPath(), projectFile);
+			currentFile.delete();
+
 		}
-		
+
 		userFolderFilepath.delete();
-		
+
 		Database.currentUser = null;
-		
+
 		new UnityLoginScreen();
 		this.dispose();
-		
+
 	}
-	
-	
+
+
 }
