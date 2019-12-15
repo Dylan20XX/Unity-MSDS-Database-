@@ -117,7 +117,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	 */
 	private void loginPanelSetup() {
 
-		Font newFont = new Font("Serif", Font.BOLD, 22);
+		Font newFont = new Font("Arial", Font.BOLD, 22);
 		userText.setFont(newFont);
 		userText.setBounds(600, 200, 300, 30);
 		userText.setEditable(true);
@@ -168,8 +168,8 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		loginPanel.add(createUserButton);
 
 		// This sets up the title and error labels
-		titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
-		titleLabel.setBounds(455, 25, 300, 50);
+		titleLabel.setFont(new Font("Arial", Font.BOLD, 48));
+		titleLabel.setBounds(375, 65, 500, 50);
 		loginPanel.add(titleLabel);
 
 		//errorLabel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
@@ -197,8 +197,6 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 		setSize(1280, 720);
 		setTitle("Unity");
 		setLayout(null);
-		// setBackground(Color.CYAN);
-		// setForeground(Color.CYAN);
 
 		// Adds in the MenuBar
 		setJMenuBar(jmb);
@@ -252,6 +250,8 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 			
 		} else if (e.getSource() == jmiHelp) {
 			
+			new UnityHelpScreen();
+			this.dispose();
 			
 			
 		} else if (e.getSource() == createUserButton) {

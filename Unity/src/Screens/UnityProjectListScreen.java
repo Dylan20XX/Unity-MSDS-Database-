@@ -83,8 +83,8 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		menu.add(accountMenu);
 		deleteUserMenuItem.addActionListener(this);
 
-		titleLabel.setBounds(200, -25, 1000, 200);
-		titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 80));
+		titleLabel.setBounds(210, -25, 1000, 200);
+		titleLabel.setFont(new Font("Arial", Font.BOLD, 80));
 		titleLabel.setForeground(new Color(255,0,255));
 		projectListPanel.add(titleLabel);
 
@@ -124,6 +124,8 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 
 		// reset the array lists
 		Database.projectList.clear();
+		buttonScrollPanel.removeAll();
+		labelScrollPanel.removeAll();
 
 		// setup the world select buttons
 		System.out.println(Database.currentUser);
@@ -170,24 +172,6 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 			Database.currentProject = new Project("New Project");
 			new UnityMaterialSelectionScreen();
 			this.dispose();
-
-			//			list.add(new JButton());
-			//			list.get(numproj).setSize(100, 70);
-			//			list.get(numproj).setMaximumSize(list.get(numproj).getSize());
-			//			list.get(numproj).setMinimumSize(list.get(numproj).getSize());
-			//			list.get(numproj).setPreferredSize(list.get(numproj).getSize());
-			//			list.get(numproj).setText("edit");
-			//			list.get(numproj).setBounds(0, 0, 200, 100);
-			//			buttonScrollPanel.add(list.get(numproj));	
-			//
-			//			namelist.add(new JLabel());
-			//			namelist.get(numproj).setSize(650, 70);
-			//			namelist.get(numproj).setMaximumSize(namelist.get(numproj).getSize());
-			//			namelist.get(numproj).setMinimumSize(namelist.get(numproj).getSize());
-			//			namelist.get(numproj).setPreferredSize(namelist.get(numproj).getSize());
-			//			namelist.get(numproj).setText("Project #" + (numproj+1));
-			//			namelist.get(numproj).setBounds(200, 0, 200, 100);
-			//			labelScrollPanel.add(namelist.get(numproj));
 
 			scrollPanel.revalidate();
 			scrollPanel.repaint();
@@ -237,9 +221,11 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 
 				//Set the current project to null
 				Database.currentProject = null;
-
-
 				clicked = false;
+				
+				setupProjectList();
+				revalidate();
+				repaint();
 
 			}
 		}

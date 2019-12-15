@@ -14,21 +14,28 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
+
+import Utility.Assets;
 
 //Suppress serial warnings
 @SuppressWarnings("serial")
 public class UnityHelpScreen extends JFrame implements ActionListener {
 
-	JButton backButton = new JButton();
+	JButton backButton = new JButton("Back");
 
 	// The constructor method of this class
 	public UnityHelpScreen() {
-
 		frameSetup();
-
+		buttonSetup();
 	}
-
+	
+	private void buttonSetup() {
+		backButton.setBounds(45, 20, 100, 30);
+		backButton.setBackground(Color.ORANGE);
+		backButton.addActionListener(this);
+		add(backButton);
+	}
+	
 
 	//This method sets up the frame
 	private void frameSetup() {
@@ -37,8 +44,9 @@ public class UnityHelpScreen extends JFrame implements ActionListener {
 		setTitle("Unity");
 		setSize(1280, 720);
 		setLayout(null);
+		setContentPane(new JLabel(Assets.helpBackground));
 		//getContentPane().setBackground(new Color(191,231,247)); //Blue
-		getContentPane().setBackground(new Color(82,66,209)); //Dark purple
+		//getContentPane().setBackground(new Color(82,66,209)); //Dark purple
 		//getContentPane().setBackground(new Color(140,100,209)); //Light purple
 		
 		//Prevent the program from running when the frame is closed, prevent the 
@@ -53,7 +61,12 @@ public class UnityHelpScreen extends JFrame implements ActionListener {
 	// this screen.
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		
+		if(e.getSource() == backButton) {
+			new UnityLoginScreen();
+			this.dispose();
+		}
+		
 	}
 	
 }

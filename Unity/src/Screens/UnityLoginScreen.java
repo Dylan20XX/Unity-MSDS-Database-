@@ -193,7 +193,6 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		setResizable(false);
 
 		// This adds in the gamePanel
-		//add(loginPanel);
 		add(inputPanel);
 		setVisible(true);
 		
@@ -234,7 +233,8 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		if (e.getSource() == jmiExit) {
 			System.exit(0);
 		} else if (e.getSource() == jmiHelp) {
-			
+			new UnityHelpScreen();
+			this.dispose();
 		} else if (e.getSource() == newUserButton) {
 			new UnityNewUserScreen();
 			this.dispose();

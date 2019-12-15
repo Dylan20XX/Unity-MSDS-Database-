@@ -20,6 +20,7 @@ public class Assets {
 	public static ImageIcon loginBackground = backgroundImageSetup("Images/GUI/Login Screen.png");
 	public static ImageIcon projectListBackground = backgroundImageSetup("Images/GUI/Project List Screen.png");
 	public static ImageIcon reportBackground = backgroundImageSetup("Images/GUI/Report Screen.png");
+	public static ImageIcon helpBackground = backgroundImageSetup("Images/GUI/Unity Help Screen.png");
 	
 	//Buttons 
 	public static ImageIcon createButton = buttonImageSetup("Images/GUI/Create Project Button.png");

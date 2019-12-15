@@ -352,6 +352,69 @@ public class Material {
 		environmentLabel.setOpaque(true);
 		
 	}
+	
+	public void setupComponentsReport() {
+		
+		//Test Buttons
+		quantityButton.setSize(100, 50);
+		quantityButton.setIcon(Assets.setAmountButton);
+		quantityButton.setBackground(Color.ORANGE);
+		quantityButton.setMaximumSize(quantityButton.getSize());
+		quantityButton.setMinimumSize(quantityButton.getSize());
+		quantityButton.setPreferredSize(quantityButton.getSize());
+		//quantityButton.setFont(new Font("Arial", Font.BOLD, 24));
+		
+		infoButton.setSize(100, 50);
+		infoButton.setIcon(Assets.infoButton);
+		infoButton.setBackground(Color.YELLOW);
+		infoButton.setMaximumSize(infoButton.getSize());
+		infoButton.setMinimumSize(infoButton.getSize());
+		infoButton.setPreferredSize(infoButton.getSize());
+		//infoButton.setFont(new Font("Arial", Font.BOLD, 24));
+		
+		nameLabel.setText(name);
+		nameLabel.setSize(450, 50);
+		nameLabel.setMaximumSize(nameLabel.getSize());
+		nameLabel.setMinimumSize(nameLabel.getSize());
+		nameLabel.setPreferredSize(nameLabel.getSize());
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 36));
+		
+		quantityField.setText(Integer.toString(quantity));
+		
+		if(quantity == 0)
+			quantityField.setBackground(Color.GRAY);
+		else
+			quantityField.setBackground(Color.WHITE);
+		
+		quantityField.setHorizontalAlignment(SwingConstants.CENTER);
+		quantityField.setSize(50, 50);
+		quantityField.setMaximumSize(quantityField.getSize());
+		quantityField.setMinimumSize(quantityField.getSize());
+		quantityField.setPreferredSize(quantityField.getSize());
+		quantityField.setFont(new Font("Arial", Font.BOLD, 24));
+		
+		//Environment Label
+		environmentLabel.setText(Integer.toString(environmentImpact));
+		environmentLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		environmentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		environmentLabel.setSize(100, 50);
+		environmentLabel.setMaximumSize(environmentLabel.getSize());
+		environmentLabel.setMinimumSize(environmentLabel.getSize());
+		environmentLabel.setPreferredSize(environmentLabel.getSize());
+		environmentLabel.setFont(new Font("Arial", Font.BOLD, 36));
+		
+		if(environmentImpact <= 30) {
+			environmentLabel.setBackground(Color.GREEN);
+		} else if(environmentImpact <= 70) {
+			environmentLabel.setBackground(Color.YELLOW);
+		} else {
+			environmentLabel.setBackground(Color.RED);
+		}
+		
+		environmentLabel.setOpaque(true);
+		
+	}
+	
 	/**
 	 * 
 	 * @param materialToCopy

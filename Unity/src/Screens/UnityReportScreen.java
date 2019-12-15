@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -52,10 +53,11 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	private JPanel materialQuantityPanel = new JPanel();
 	private JPanel infoButtonPanel = new JPanel();
 	private JPanel materialNamePanel = new JPanel();
+	private JPanel environmentPanel = new JPanel();
 	
 	private JButton saveButton = new JButton(Assets.saveButton);
-	private JButton exitButton = new JButton("<html><center>Exit Without<br>Saving</center></html>");
-	private JButton materialSelectButton = new JButton("<html><center>Return to<br>Material Selection</center></html>");
+	private JButton exitButton = new JButton("<html><center><font color='black'>Exit Without<br>Saving</font></center></html>");
+	private JButton materialSelectButton = new JButton("<html><center><font color='black'>Return to<br>Material Selection</font></center></html>");
 	
 	//Menu bar
 	private JMenu fileMenu = new JMenu ("File");
@@ -161,6 +163,9 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		materialNamePanel.setLayout(new BoxLayout(materialNamePanel, BoxLayout.Y_AXIS));
 		materialNamePanel.setBackground(Color.WHITE);
 		materialPanel.add(materialNamePanel);
+		environmentPanel.setLayout(new BoxLayout(environmentPanel, BoxLayout.Y_AXIS));
+		environmentPanel.setBackground(Color.WHITE);
+		materialPanel.add(environmentPanel);
 		
 		//Add the scroll pane 
 		materialScrollPane = new JScrollPane(materialPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -175,18 +180,24 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		materialSelectButton.addActionListener(this);
 		materialSelectButton.setFont(new Font( "Arial", Font.PLAIN, 24));
 		materialSelectButton.setBackground(Color.ORANGE);
+		materialSelectButton.setBackground(new Color(140,100,209));
+		materialSelectButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		materialSelectButton.setBounds (450, 550, 200, 105);
 		add(materialSelectButton);
 		
 		exitButton.addActionListener(this);
 		exitButton.setFont(new Font( "Arial", Font.PLAIN, 24));
 		exitButton.setBackground(Color.ORANGE);
+		exitButton.setBackground(new Color(140,100,209));
+		exitButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		exitButton.setBounds (670, 550, 200, 105);
 		add(exitButton);
 		
 		saveButton.addActionListener(this);
 		saveButton.setFont(new Font( "Arial", Font.PLAIN, 24));
 		saveButton.setBackground(Color.ORANGE);
+		saveButton.setBackground(new Color(140,100,209));
+		saveButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		saveButton.setBounds (1050, 550, 200, 105);
 		add(saveButton);
 		
@@ -217,12 +228,13 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		infoButtonPanel.removeAll();
 		materialNamePanel.removeAll();
 		materialQuantityPanel.removeAll();
+		environmentPanel.removeAll();
 		
 		removeActionListeners();
 		
 		for(Material currentMaterial: Database.currentProject.getMaterialList()) {
 			
-			currentMaterial.setupComponents();
+			currentMaterial.setupComponentsReport();
 			
 			currentMaterial.getQuantityButton().addActionListener(this);
 			quantityButtonPanel.add(currentMaterial.getQuantityButton());
@@ -233,6 +245,8 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 			materialNamePanel.add(currentMaterial.getNameLabel());
 			
 			materialQuantityPanel.add(currentMaterial.getQuantityField());
+			
+			environmentPanel.add(currentMaterial.getEnvironmentLabel());
 			
 		}
 		
