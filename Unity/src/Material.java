@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -328,6 +329,8 @@ public class Material {
 		
 		//Environment Label
 		environmentLabel.setText(Integer.toString(environmentImpact));
+		environmentLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		environmentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		environmentLabel.setSize(100, 50);
 		environmentLabel.setMaximumSize(environmentLabel.getSize());
 		environmentLabel.setMinimumSize(environmentLabel.getSize());
@@ -342,7 +345,7 @@ public class Material {
 			environmentLabel.setBackground(Color.RED);
 		}
 		
-		
+		environmentLabel.setOpaque(true);
 		
 	}
 	/**

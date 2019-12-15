@@ -20,11 +20,6 @@ import javax.swing.JTextField;
 
 public class UnityReportScreen extends JFrame implements ActionListener {
 	
-	public static void main (String[] args) {
-		FileInput.readMaterials();
-		new UnityReportScreen();
-	}
-	
 	private String projectName;
 	private String projectDescription;
 	private String projectSources;
@@ -52,11 +47,12 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	private JPanel infoButtonPanel = new JPanel();
 	private JPanel materialNamePanel = new JPanel();
 	
-	private JButton saveButton = new JButton("Save Project");
+	private JButton saveButton = new JButton(Assets.saveButton);
 	private JButton exitButton = new JButton("<html><center>Exit Without<br>Saving</center></html>");
 	private JButton materialSelectButton = new JButton("<html><center>Return to<br>Material Selection</center></html>");
 	
 	public UnityReportScreen() {
+		//setContentPane(new JLabel(Assets.reportBackground));
 		menuBarSetup();
 		labelSetup();
 		textAreaSetup();
@@ -164,17 +160,20 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		
 		materialSelectButton.addActionListener(this);
 		materialSelectButton.setFont(new Font( "Arial", Font.PLAIN, 24));
+		materialSelectButton.setBackground(Color.ORANGE);
 		materialSelectButton.setBounds (450, 550, 200, 105);
 		add(materialSelectButton);
 		
 		exitButton.addActionListener(this);
 		exitButton.setFont(new Font( "Arial", Font.PLAIN, 24));
+		exitButton.setBackground(Color.ORANGE);
 		exitButton.setBounds (670, 550, 200, 105);
 		add(exitButton);
 		
 		saveButton.addActionListener(this);
 		saveButton.setFont(new Font( "Arial", Font.PLAIN, 24));
-		saveButton.setBounds (950, 550, 300, 105);
+		saveButton.setBackground(Color.ORANGE);
+		saveButton.setBounds (1050, 550, 200, 105);
 		add(saveButton);
 		
 	}
@@ -188,7 +187,7 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		setLayout(null);
 		//getContentPane().setBackground(new Color(191,231,247)); //Blue
 		//getContentPane().setBackground(new Color(82,66,209)); //Dark purple
-		getContentPane().setBackground(new Color(140,100,209)); //Light purple
+		//getContentPane().setBackground(new Color(140,100,209)); //Light purple
 		
 		//Prevent the program from running when the frame is closed, prevent the 
 		//frame from being resized, and make the frame visible

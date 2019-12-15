@@ -38,7 +38,7 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	private JTextArea brandTextArea = new JTextArea();
 	
 	//Hyperlink
-	private JButton hyperlinkButton = new JButton("Purchase Material");
+	private JButton hyperlinkButton = new JButton("<html><center>Purchase<br>Material</center></html>");
 	
 	//StorageArea
 	private JLabel storageAreaLabel = new JLabel("Storage Area");
@@ -74,24 +74,6 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	//Material Image Label
 	private JLabel imageLabel = new JLabel();
 	
-	//Main method for testing GUI
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		new UnityMaterialInfoScreen();
-	}
-	
-	/**
-	 * This is the constructor method
-	 * @param null
-	 */
-	public UnityMaterialInfoScreen() {
-		panelSetup();
-		infoSetupTest();
-		frameSetup();
-	}
-	
 	/**
 	 * This is the constructor method
 	 * @param null
@@ -126,11 +108,13 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		//Setup the add material and back buttons
 		addButton.setBounds(940, 620, 200, 50);
 		addButton.setFont(new Font("Arial", Font.BOLD, 24));
+		addButton.setBackground(Color.ORANGE);
 		addButton.addActionListener(this);
 		materialPanel.add(addButton);
 		
 		backButton.setBounds(140, 620, 200, 50);
 		backButton.setFont(new Font("Arial", Font.BOLD, 24));
+		backButton.setBackground(Color.ORANGE);
 		backButton.addActionListener(this);
 		materialPanel.add(backButton);
 		
@@ -161,6 +145,8 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		
 		//Hyperlink
 		hyperlinkButton.setBounds(140, 300, 200, 100);
+		hyperlinkButton.setFont(new Font("Arial", Font.BOLD, 24));
+		hyperlinkButton.setBackground(Color.ORANGE);
 		hyperlinkButton.addActionListener(this);
 		materialPanel.add(hyperlinkButton);
 		
@@ -236,75 +222,8 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		
 		//Link to MSDS
 		msdsButton.setBounds(140, 450, 200, 100);
-		msdsButton.addActionListener(this);
-		materialPanel.add(msdsButton);
-		
-	}
-	
-	/**
-	 * This method sets up the scroll pane used
-	 * @param null
-	 */ 
-	private void infoSetupTest() {
-		
-		//titleLabel.setText(material.getName());
-		
-		//Brand
-		brandLabel.setBounds(400, 150, 400, 50);
-		materialPanel.add(brandLabel);
-		brandTextArea.setBounds(400, 200, 400, 50);
-		//brandTextArea.setText(material.getBrand());
-		materialPanel.add(brandTextArea);
-		
-		//Hyperlink
-		hyperlinkButton.setBounds(140, 300, 200, 100);
-		hyperlinkButton.addActionListener(this);
-		materialPanel.add(hyperlinkButton);
-		
-		//StorageArea
-		storageAreaLabel.setBounds(400, 250, 400, 50);
-		materialPanel.add(storageAreaLabel);
-		storageAreaTextArea.setBounds(400, 300, 400, 50);
-		//storageAreaTextArea.setText(material.getStorageArea());
-		materialPanel.add(storageAreaTextArea);
-		
-		//Precautions
-		precautionsLabel.setBounds(400, 350, 400, 50);
-		materialPanel.add(precautionsLabel);
-		precautionsTextArea.setBounds(400, 400, 400, 50);
-		//precautionsTextArea.setText(material.getPrecautions());
-		materialPanel.add(precautionsTextArea);
-		
-		//Toxic
-		toxicLabel.setBounds(400, 450, 400, 50);
-		materialPanel.add(toxicLabel);
-		toxicTextArea.setBounds(400, 500, 400, 50);
-		//toxicTextArea.setText(material.getToxic());
-		materialPanel.add(toxicTextArea);
-		
-		//Stability and Reactivity
-		stabilityLabel.setBounds(820, 150, 400, 50);
-		materialPanel.add(stabilityLabel);
-		stabilityTextArea.setBounds(820, 200, 400, 50);
-		//stabilityTextArea.setText(material.getStability());
-		materialPanel.add(stabilityTextArea);
-		
-		//First aid measures
-		firstAidLabel.setBounds(820, 250, 400, 50);
-		materialPanel.add(firstAidLabel);
-		firstAidTextArea.setBounds(820, 300, 400, 50);
-		//firstAidTextArea.setText(material.getFirstAid());
-		materialPanel.add(firstAidTextArea);
-		
-		//Dangers
-		dangersLabel.setBounds(820, 350, 400, 50);
-		materialPanel.add(dangersLabel);
-		dangersTextArea.setBounds(820, 400, 400, 50);
-		//dangersTextArea.setText(material.getDangers());
-		materialPanel.add(dangersTextArea);
-		
-		//Link to MSDS
-		msdsButton.setBounds(140, 450, 200, 100);
+		msdsButton.setFont(new Font("Arial", Font.BOLD, 24));
+		msdsButton.setBackground(Color.ORANGE);
 		msdsButton.addActionListener(this);
 		materialPanel.add(msdsButton);
 		
