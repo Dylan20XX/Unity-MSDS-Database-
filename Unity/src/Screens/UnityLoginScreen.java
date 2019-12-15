@@ -1,3 +1,4 @@
+package Screens;
 import java.awt.Color;
 
 import java.awt.event.ActionEvent;
@@ -40,6 +41,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import Objects.Database;
+import Objects.User;
+import Utility.Assets;
+import Utility.FileInput;
 /**
  * 
  * @author Momin Naeem

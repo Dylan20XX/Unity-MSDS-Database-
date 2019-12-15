@@ -1,3 +1,5 @@
+package Objects;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -8,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import Utility.Assets;
 /**
  * 
  * @author Dylan

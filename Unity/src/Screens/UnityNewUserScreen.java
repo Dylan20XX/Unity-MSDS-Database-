@@ -1,3 +1,4 @@
+package Screens;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -19,6 +20,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import Objects.Database;
+import Objects.User;
+import Utility.FileInput;
 /** * @author Momin Naeem
  * Date: Dec 2, 2019
  * Course: ICS4U1

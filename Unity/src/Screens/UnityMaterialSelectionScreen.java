@@ -1,3 +1,4 @@
+package Screens;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
+import Objects.Database;
+import Objects.Material;
+import Utility.FileInput;
 /**
  * 
  * @author Dylan
