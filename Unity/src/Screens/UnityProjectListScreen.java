@@ -34,12 +34,9 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 
 	JPanel projectListPanel = new JPanel();
 	JMenuBar menu = new JMenuBar();
-	JMenu file = new JMenu("File");
-	JMenu edit = new JMenu("Edit");
-	JMenuItem deleteUser = new JMenuItem("Delete User");
-
-	JMenuItem SAVE = new JMenuItem("Save");
-	JMenuItem BACK = new JMenuItem("Back");
+	JMenu accountMenu = new JMenu("Account");
+	JMenuItem deleteUserMenuItem = new JMenuItem("Delete User");
+	JMenuItem logoutMenuItem = new JMenuItem("Logout");
 	//JButton createButton = new JButton("Create New Project");
 	JButton createButton = new JButton(Assets.createButton);
 	JButton editButton = new JButton("Edit");
@@ -78,12 +75,12 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		//projectListPanel.setBackground(new Color(75,0,130));
 		projectListPanel.setBackground(new Color(82,66,209));
 		//projectListPanel.setBackground(new Color(140,100,209));
-		file.add(BACK);
-		BACK.addActionListener(this);
-		edit.add(deleteUser);
-		menu.add(file);
-		menu.add(edit);
-		deleteUser.addActionListener(this);
+		accountMenu.add(logoutMenuItem);
+		logoutMenuItem.addActionListener(this);
+		accountMenu.add(deleteUserMenuItem);
+		menu.add(accountMenu);
+		menu.add(accountMenu);
+		deleteUserMenuItem.addActionListener(this);
 
 		titleLabel.setBounds(200, -25, 1000, 200);
 		titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 80));
@@ -161,7 +158,7 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 			}
 
 		}
-		if(e.getSource() == BACK){
+		if(e.getSource() == logoutMenuItem){
 			this.dispose();
 			UnityApplication.main(null);
 		}
@@ -246,7 +243,7 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 			}
 		}
 
-		if (e.getSource() == deleteUser) {
+		if (e.getSource() == deleteUserMenuItem) {
 
 			String confirm = null;
 			User currentUser = new User();
@@ -265,8 +262,8 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 			String pass = JOptionPane.showInputDialog("Deleting your account will delete all of your projects\nEnter your passowrd to confirm:");
 			System.out.println(pass + " " + currentUser.getPass());
 			System.out.println(Database.currentUser);
-
-			if (pass.equals(currentUser.getPass())) {
+			
+			if (pass != null && pass.equals(currentUser.getPass())) {
 				System.out.println("deleting");
 				deleteCurrentUser();
 			}

@@ -40,30 +40,16 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	 * @param null;
 	 */
 
-	/**
-	 * Main Method
-	 * @param args
-	 */
-	public static void main(String [] args) {
-		FileInput.readUsers();
-		new UnityNewUserScreen();
-	}
-
 	// Game panel as well as the menu bar
 	JPanel inputPanel = new JPanel();
 	JPanel loginPanel = new JPanel();
 	JMenuBar jmb = new JMenuBar();
 
 	// The menu bar variables/MenuItems
-	JMenu jmFile = new JMenu("File");
+	JMenu jmExit = new JMenu("Exit");
 	JMenuItem jmiExit = new JMenuItem("Exit");
-	JMenu jmOptions = new JMenu("Options");
-	JMenu a = new JMenu("Change Style");
-	JMenuItem b = new JMenuItem("Background");
-	JMenuItem c = new JMenuItem("Theme");
-	JMenuItem d = new JMenuItem("Set to Default");
-	JMenu jmHelp = new JMenu("More");
-	JMenuItem jmiHelp = new JMenuItem("Help");
+	JMenu jmHelp = new JMenu("Help");
+	JMenuItem jmiHelp = new JMenuItem("Instructions");
 
 	// JLabels for the images in the menu screen
 	// JLabel title, background
@@ -87,7 +73,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	JPasswordField passText2 = new JPasswordField();
 
 	JLabel titleLabel = new JLabel("<html><center>Create A New User</centre></html>");
-	JLabel errorLabel = new JLabel("error label");
+	JLabel errorLabel = new JLabel();
 
 	User[] userArray = new User[2];
 	int access = 0;
@@ -235,30 +221,17 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	private void menuBarSetup() {
 
 		// File menuitem
-		jmFile.addSeparator();
-		jmFile.add(jmiExit);
-		jmb.add(jmFile);
-
-		// Options menu items
-		a.add(b);
-		a.add(c);
-		a.add(d);
-		jmOptions.add(a);
-
-		// Adds in the options menuitem to the menu bar
-		jmb.add(jmOptions);
-
+		jmExit.addSeparator();
+		jmExit.add(jmiExit);
+		jmb.add(jmExit);
+		
 		// New menuitem to the menu bar, which is the help portion
 		jmHelp.add(jmiHelp);
 		jmb.add(jmHelp);
 
 		// Adds an action listener to the require menu item and makes the
-		// menubar
-		// visible
+		// menubar visible
 		jmiExit.addActionListener(this);
-		b.addActionListener(this);
-		c.addActionListener(this);
-		d.addActionListener(this);
 		jmiHelp.addActionListener(this);
 		setVisible(true);
 
@@ -273,34 +246,14 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 
 		// Actions when back button clicked
 		if (e.getSource() == jmiExit) {
-			// Play sound effect
-			// music("./sounds/exit.wav");
+			
 			System.exit(0);
-
-		}
-
-		if (e.getSource() == jmiHelp) {
-			// Play sound effect
-			// music("./sounds/exit.wav");
-
-			// new Help();
-		}
-
-		if (e.getSource() == b) {
-			// Play sound effect
-			// music("./sounds/exit.wav");
-
-			// new Background
-		}
-
-		if (e.getSource() == c) {
-			// Play sound effect
-			// music("./sounds/exit.wav");
-
-			// new Theme
-		}
-
-		if (e.getSource() == createUserButton) {
+			
+		} else if (e.getSource() == jmiHelp) {
+			
+			
+			
+		} else if (e.getSource() == createUserButton) {
 
 			if(checkUserInfo()) {
 				rewriteLoginFile();

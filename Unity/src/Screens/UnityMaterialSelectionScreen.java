@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -46,6 +49,11 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	private JPanel environmentPanel = new JPanel();
 	private JScrollPane materialButtonScrollPane = new JScrollPane();
 	
+	//Menu bar components
+	private JMenuBar menubar = new JMenuBar();
+	private JMenu exitMenu = new JMenu ("Exit");
+	private JMenuItem exitProgram = new JMenuItem ("Exit Program");
+	
 	//Main method for testing GUI
 	/**
 	 * Main Method
@@ -62,13 +70,24 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	 */
 	public UnityMaterialSelectionScreen() {
 		panelSetup();
-		//addScreenTestButtons();
+		menuBarSetup();
 		Database.sortAlpha();
 		addMaterialButtons();
 		scrollPaneSetup();
 		frameSetup();
 	}
-
+	
+	private void menuBarSetup() {
+        
+        exitProgram.addActionListener(this);
+        exitMenu.add (exitProgram);
+        menubar.add (exitMenu);
+        
+        menubar.setBounds (0, 0, 1280, 25);
+        add(menubar);
+        
+	}
+	
 	/**
 	 * This method sets up the panel with the scrollpane
 	 * @param null
@@ -244,6 +263,8 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		for(Material currentMaterial: Database.materials) {
 			
 			if(e.getSource() == currentMaterial.getQuantityButton()) {
+				if(!currentMaterial.getQuantityField().getText().matches("-?\\d+"))
+					return;
 				currentMaterial.setQuantity(Integer.parseInt(currentMaterial.getQuantityField().getText()));
 				return;
 			} else if (e.getSource() == currentMaterial.getInfoButton()) {
@@ -336,6 +357,8 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			}
 			
 			
+		} else if(e.getSource() == exitProgram) {
+			System.exit(0);
 		}
 		
 	}

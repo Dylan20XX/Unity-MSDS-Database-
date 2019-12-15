@@ -1,6 +1,8 @@
 package Screens;
 import java.awt.Color;
+import java.awt.FileDialog;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -32,8 +34,6 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	
 	private JMenuBar menubar = new JMenuBar();
 	
-	//private JLabel titleLabel = new JLabel("UNITY");
-	
 	private JLabel projectNameLabel = new JLabel("<html><font color='black'>Project Name</font></html>");
 	private JLabel userInputLabel = new JLabel("<html><font color='black'>Project Description</font></html>");
 	private JLabel sourcesLabel = new JLabel("<html><font color='black'>Information Sources</font></html>");	
@@ -57,10 +57,19 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	private JButton exitButton = new JButton("<html><center>Exit Without<br>Saving</center></html>");
 	private JButton materialSelectButton = new JButton("<html><center>Return to<br>Material Selection</center></html>");
 	
+	//Menu bar
+	private JMenu fileMenu = new JMenu ("File");
+	private JMenuItem fileSave = new JMenuItem ("Save");
+	private JMenuItem fileExport = new JMenuItem ("Export as .txt file");
+    
+	private JMenu exitMenu = new JMenu ("Exit");
+	private JMenuItem exitProgram = new JMenuItem ("Exit Program");
+	private JMenuItem exitSave = new JMenuItem ("Exit & Save");
+
+	
 	public UnityReportScreen() {
 		setContentPane(new JLabel(Assets.reportBackground));
 		menuBarSetup();
-		labelSetup();
 		textAreaSetup();
 		materialPanelSetup();
 		addMaterialButtons();
@@ -68,39 +77,26 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		frameSetup();
 	}
 	
+	//This method sets up the menu bar
 	private void menuBarSetup() {
 		
         //construct preComponents
-        JMenu fileMenu = new JMenu ("File");
-        JMenuItem file_option_1Item = new JMenuItem ("File Option 1");
-        fileMenu.add (file_option_1Item);
-        JMenuItem file_option_2Item = new JMenuItem ("File Option 2");
-        fileMenu.add (file_option_2Item);
-        JMenu editMenu = new JMenu ("Edit");
-        JMenuItem project_1Item = new JMenuItem ("Project 1");
-        editMenu.add (project_1Item);
-        JMenuItem project_2Item = new JMenuItem ("Project 2");
-        editMenu.add (project_2Item);
-        JMenu exitMenu = new JMenu ("Exit");
-        JMenuItem exit_programItem = new JMenuItem ("Exit Program");
-        exitMenu.add (exit_programItem);
-        JMenuItem exit___saveItem = new JMenuItem ("Exit & Save");
-        exitMenu.add (exit___saveItem);
+        fileSave.addActionListener(this);
+        fileMenu.add (fileSave);
+        fileExport.addActionListener(this);
+        fileMenu.add (fileExport);
+        
+        exitProgram.addActionListener(this);
+        exitMenu.add (exitProgram);
+        exitSave.addActionListener(this);
+        exitMenu.add (exitSave);
         
         menubar.add (fileMenu);
-        menubar.add (editMenu);
         menubar.add (exitMenu);
         
         menubar.setBounds (0, 0, 1280, 25);
         
         add(menubar);
-	}
-	
-	private void labelSetup() {
-//      titleLabel.setFont(new Font( "Serif", Font.PLAIN, 36));
-//		titleLabel.setForeground(Color.BLACK);
-//		titleLabel.setBounds (600, 15, 480, 80);
-//		add(titleLabel);
 	}
 	
 	private void textAreaSetup() {
@@ -243,22 +239,6 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		repaint();
 		revalidate();
 		
-//		for(Material currentMaterial: Database.materials) {
-//			
-//			currentMaterial.setupComponents();
-//			
-//			currentMaterial.getQuantityButton().addActionListener(this);
-//			quantityButtonPanel.add(currentMaterial.getQuantityButton());
-//			
-//			currentMaterial.getInfoButton().addActionListener(this);
-//			infoButtonPanel.add(currentMaterial.getInfoButton());
-//			
-//			materialNamePanel.add(currentMaterial.getNameLabel());
-//			
-//			materialQuantityPanel.add(currentMaterial.getQuantityField());
-//			
-//		}
-		
 	}
 
 	@Override
@@ -267,6 +247,8 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		for(Material currentMaterial: Database.currentProject.getMaterialList()) {
 			
 			if(e.getSource() == currentMaterial.getQuantityButton()) {
+				if(!currentMaterial.getQuantityField().getText().matches("-?\\d+"))
+					return;
 				currentMaterial.setQuantity(Integer.parseInt(currentMaterial.getQuantityField().getText()));
 				return;
 			} else if (e.getSource() == currentMaterial.getInfoButton()) {
@@ -278,7 +260,7 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 			
 		}
 		
-		if(e.getSource() == saveButton) {
+		if(e.getSource() == saveButton || e.getSource() == exitSave) {
 			removeActionListeners();
 			if(!checkValidProjectName())
 				return;
@@ -296,22 +278,22 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 			removeActionListeners();
 			new UnityProjectListScreen();
 			this.dispose();
-		}
+		} else if(e.getSource() == fileSave) {
+			if(!checkValidProjectName())
+				return;
+			saveProject();
+		} else if(e.getSource() == exitProgram) {
+			System.exit(0);
+		} else if(e.getSource() == fileExport) {
+			if(!checkValidProjectName())
+				return;
+			exportProject();
+		} 
 		
 	}
 	
 	//This method removes the action listers from material buttons
 	private void removeActionListeners() {
-		
-//		for(Material currentMaterial: Database.currentProjectMaterials) {
-//			currentMaterial.getQuantityButton().removeActionListener(this);
-//			currentMaterial.getInfoButton().removeActionListener(this);
-//		}
-		
-//		for(Material currentMaterial: Database.materials) {
-//			currentMaterial.getQuantityButton().removeActionListener(this);
-//			currentMaterial.getInfoButton().removeActionListener(this);
-//		}
 		
 		for(Material currentMaterial: Database.currentProject.getMaterialList()) {
 			currentMaterial.getQuantityButton().removeActionListener(this);
@@ -374,6 +356,68 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 
 		}
 		
+	}
+	
+	//This allows the user to export the project as a text file
+	private void exportProject() {
+		
+		//Open a file dialog
+	    FileDialog fileDialog = new FileDialog((Frame) null, "Select Where to Save the File");
+	    fileDialog.setMode(FileDialog.SAVE);
+	    fileDialog.setVisible(true);
+	    //String file = fileDialog.getFile();
+	    String file = fileDialog.getDirectory() + fileDialog.getFile() + ".txt";
+	    System.out.println(file + ".txt");
+	    File filepath = new File(file);
+	    
+		if(!filepath.isDirectory()) {
+			
+			try {
+
+				//Write data to a file
+				PrintWriter pr = new PrintWriter(file);
+				
+				pr.println("Project Name: " + projectName+ "\n");
+				
+				pr.println("Project Description: ");
+				pr.print(projectDescription);
+				pr.println("\n");
+				
+				pr.println("Sources: ");
+				pr.print(projectSources);
+				pr.println("\n");
+				
+				pr.println("Number of Materials: " + Database.currentProject.getMaterialList().size());
+				pr.println();
+				
+				for(Material currentMaterial: Database.currentProject.getMaterialList()) {
+					
+					pr.println(currentMaterial.getName()); 
+					pr.println("Quantity: " + currentMaterial.getQuantity());
+					pr.println("Brand: " + currentMaterial.getBrand());
+					pr.println("Purchased From: " + currentMaterial.getHyperlink());
+					pr.println("Storage Area: " + currentMaterial.getStorageArea());
+					pr.println("Precautions: " + currentMaterial.getPrecautions());
+					pr.println("Toxic: " + currentMaterial.getToxic());
+					pr.println("Stability: " + currentMaterial.getStability());
+					pr.println("First Aid Measures: " + currentMaterial.getFirstAid());
+					pr.println("Dangers: " + currentMaterial.getDangers());
+					pr.println("MSDS Link: " + currentMaterial.getMsdsLink());
+					pr.println("Environmental Impact Rating: " + currentMaterial.getEnvironmentImpact());
+					pr.println();
+					
+				}
+				
+				pr.close();
+
+			} catch (FileNotFoundException e) {
+				System.out.println("Save Failed");
+			}
+
+		} else {
+			System.out.println("Invalid Filepath");
+		}
+	    
 	}
 	
 }

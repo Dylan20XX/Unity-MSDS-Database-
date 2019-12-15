@@ -11,6 +11,9 @@ import java.net.URISyntaxException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -86,6 +89,11 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	//Material Image Label
 	private JLabel imageLabel = new JLabel();
 	
+	//Menu bar components
+	private JMenuBar menubar = new JMenuBar();
+	private JMenu exitMenu = new JMenu ("Exit");
+	private JMenuItem exitProgram = new JMenuItem ("Exit Program");
+	
 	/**
 	 * This is the constructor method
 	 * @param null
@@ -93,9 +101,21 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	public UnityMaterialInfoScreen(Material material, int previousScreen) {
 		this.material = material;
 		this.previousScreen = previousScreen;
+		menuBarSetup();
 		panelSetup();
 		infoSetup();
 		frameSetup();
+	}
+	
+	private void menuBarSetup() {
+        
+        exitProgram.addActionListener(this);
+        exitMenu.add (exitProgram);
+        menubar.add (exitMenu);
+        
+        menubar.setBounds (0, 0, 1280, 25);
+        add(menubar);
+        
 	}
 	
 	 /**
@@ -342,6 +362,8 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 			
 		} else if(e.getSource() == addButton) {
 			material.setQuantity(Integer.parseInt(material.getQuantityField().getText()));
+		} else if(e.getSource() == exitProgram) {
+			System.exit(0);
 		}
 		
 	}

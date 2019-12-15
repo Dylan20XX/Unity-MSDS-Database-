@@ -59,15 +59,6 @@ import Utility.FileInput;
  */
 
 public class UnityLoginScreen extends JFrame implements ActionListener {
-	/**
-	 * @param args
-	 */
-	//Main method for testing GUI
-	public static void main(String[] args) {
-		FileInput.readUsers();
-		FileInput.readMaterials();
-		new UnityLoginScreen();
-	}
 	
 	//Title Label
 	//JLabel titleLabel = new JLabel("Unity");
@@ -78,15 +69,10 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 	JMenuBar jmb = new JMenuBar();
 
 	// The menu bar variables/MenuItems
-	JMenu jmFile = new JMenu("File");
+	JMenu jmExit = new JMenu("Exit");
 	JMenuItem jmiExit = new JMenuItem("Exit");
-	JMenu jmOptions = new JMenu("Options");
-	JMenu a = new JMenu("Change Style");
-	JMenuItem b = new JMenuItem("Background");
-	JMenuItem c = new JMenuItem("Theme");
-	JMenuItem d = new JMenuItem("Set to Default");
-	JMenu jmHelp = new JMenu("More");
-	JMenuItem jmiHelp = new JMenuItem("Help");
+	JMenu jmHelp = new JMenu("Help");
+	JMenuItem jmiHelp = new JMenuItem("Instructions");
 
 	// JLabels for the images in the menu screen
 	// JLabel title, background
@@ -96,10 +82,9 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 	JLabel passPrompt = new JLabel("Password:");
 	JTextField userText = new JTextField();
 	JPasswordField passText = new JPasswordField(8);
-
 	
 	// New USER BUTTON
-	JButton newb = new JButton();
+	JButton newUserButton = new JButton();
 		
 		
 	// Clip variable for the music method
@@ -133,11 +118,12 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 
 		// This sets the location and image of the new button
 		//newb.setIcon(new ImageIcon("./M/images/new.png"));
-		newb.setFont(new Font("Arial", Font.BOLD, 24));
-		newb.setText("New User");
-		newb.setBackground(Color.ORANGE);
-		newb.setBounds(1000, 575, 160, 45);
-		newb.addActionListener(this);
+		newUserButton.setFont(new Font("Arial", Font.BOLD, 24));
+		newUserButton.setText("New User");
+		newUserButton.setBackground(Color.ORANGE);
+		newUserButton.setBounds(1000, 575, 160, 45);
+		newUserButton.addActionListener(this);
+		inputPanel.add(newUserButton);
 		
 		// This sets up the border color and boundaries
 		//inputPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
@@ -146,13 +132,6 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		// This is the background color of the panel
 		//inputPanel.setBackground(new Color(191,231,247));
 		inputPanel.setVisible(true);
-		
-		//Add title label 
-		//titleLabel.setBounds(580, 30, 160, 50);
-		//titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
-		//inputPanel.add(titleLabel);
-		inputPanel.add(newb);
-
 
 	}
 	/**
@@ -226,21 +205,12 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 	 */
 	private void MenuBar() {
 
-		// File menuitem
-		jmFile.addSeparator();
-		jmFile.add(jmiExit);
-		jmb.add(jmFile);
+		// File menu item
+		jmExit.addSeparator();
+		jmExit.add(jmiExit);
+		jmb.add(jmExit);
 
-		// Options menu items
-		a.add(b);
-		a.add(c);
-		a.add(d);
-		jmOptions.add(a);
-
-		// Adds in the options menuitem to the menu bar
-		jmb.add(jmOptions);
-
-		// New menuitem to the menu bar, which is the help portion
+		// New menu item to the menu bar, which is the help portion
 		jmHelp.add(jmiHelp);
 		jmb.add(jmHelp);
 
@@ -248,9 +218,6 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		// menubar
 		// visible
 		jmiExit.addActionListener(this);
-		b.addActionListener(this);
-		c.addActionListener(this);
-		d.addActionListener(this);
 		jmiHelp.addActionListener(this);
 		setVisible(true);
 
@@ -264,43 +231,13 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 
 		// Actions when back button clicked
 		if (e.getSource() == jmiExit) {
-			// Play sound effect
-			// music("./sounds/exit.wav");
 			System.exit(0);
-
-		}
-
-		if (e.getSource() == jmiHelp) {
-			// Play sound effect
-			// music("./sounds/exit.wav");
-
-			// new Help();
-		}
-
-		if (e.getSource() == b) {
-			// Play sound effect
-			// music("./sounds/exit.wav");
-
-			// new Background
-		}
-
-		if (e.getSource() == c) {
-			// Play sound effect
-			// music("./sounds/exit.wav");
-
-			// new Theme
-		}
-		
-		if (e.getSource() == newb) {
+		} else if (e.getSource() == jmiHelp) {
 			
-			// Play sound effect
-			// music("./sounds/exit.wav");
-
+		} else if (e.getSource() == newUserButton) {
 			new UnityNewUserScreen();
 			this.dispose();
-		}
-		
-		if(e.getSource() == userText || e.getSource() == passText) {
+		} else if(e.getSource() == userText || e.getSource() == passText) {
 			login();
 		}
 		

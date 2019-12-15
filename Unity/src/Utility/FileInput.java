@@ -47,6 +47,7 @@ public class FileInput {
 				//First aid measures
 				//Dangers
 				//Link to MSDS
+				//Environment Impact
 				
 				//since commas can't be used in .csv file values, use ] and input.next().replace("]", ",");
 				
@@ -100,22 +101,6 @@ public class FileInput {
 			while(input.hasNextLine()) {
 				
 				User user = new User();
-				
-				//Material type
-				//MaterialName
-				//Brand
-				//Hyperlink
-				//StorageArea
-				//Precautions
-				//Toxic
-				//Stability and Reactivity
-				//First aid measures
-				//Dangers
-				//Link to MSDS
-				
-				//since commas can't be used in .csv file values, use ] and input.next().replace("]", ",");
-				
-				//input.next(); //Material type
 				
 				user.setUser(input.next());
 				user.setPass(input.next());
