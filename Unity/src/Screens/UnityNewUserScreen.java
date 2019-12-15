@@ -195,6 +195,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 
 		// This sets up the size of the frame
 		setSize(1280, 720);
+		setTitle("Unity");
 		setLayout(null);
 		// setBackground(Color.CYAN);
 		// setForeground(Color.CYAN);
@@ -204,7 +205,7 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 
 		// This makes the whole application close and makes the GUI visible
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setResizable(true);
+		setResizable(false);
 
 		// This adds in the gamePanel
 		add(loginPanel);

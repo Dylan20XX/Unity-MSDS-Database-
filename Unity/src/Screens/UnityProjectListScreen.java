@@ -65,7 +65,8 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		setVisible(true);
 		getContentPane().setBackground(Color.blue);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("PROJECT LIST");
+		setTitle("Unity");
+		setResizable(true);
 		setJMenuBar(menu);
 	}
 
