@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 /**
  * 
@@ -30,12 +31,13 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	
 	private JLabel titleLabel = new JLabel("Material Info"); 
 	private JButton backButton = new JButton("Back");
-	private JButton addButton = new JButton("Add");
+	private JButton addButton = new JButton("Set Amount");
 	
 	//MaterialName - put in title label
 	//Brand
 	private JLabel brandLabel = new JLabel("Material Brand");
 	private JTextArea brandTextArea = new JTextArea();
+	private JScrollPane brandScrollPane = new JScrollPane(brandTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	//Hyperlink
 	private JButton hyperlinkButton = new JButton("<html><center>Purchase<br>Material</center></html>");
@@ -43,30 +45,37 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	//StorageArea
 	private JLabel storageAreaLabel = new JLabel("Storage Area");
 	private JTextArea storageAreaTextArea = new JTextArea();
+	private JScrollPane storageAreaScrollPane = new JScrollPane(storageAreaTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	//Precautions
 	private JLabel precautionsLabel = new JLabel("Precautions");
 	private JTextArea precautionsTextArea = new JTextArea();
+	private JScrollPane precautionsScrollPane = new JScrollPane(precautionsTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	//Toxic
 	private JLabel toxicLabel = new JLabel("Toxic?");
 	private JTextArea toxicTextArea = new JTextArea();
+	private JScrollPane toxicScrollPane = new JScrollPane(toxicTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	//Stability and Reactivity
 	private JLabel stabilityLabel = new JLabel("Stability & Reactivity");
 	private JTextArea stabilityTextArea = new JTextArea();
+	private JScrollPane stabilityScrollPane = new JScrollPane(stabilityTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	//First aid measures
 	private JLabel firstAidLabel = new JLabel("First Aid Measures");
 	private JTextArea firstAidTextArea = new JTextArea();
+	private JScrollPane firstAidScrollPane = new JScrollPane(firstAidTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	//Dangers
 	private JLabel dangersLabel = new JLabel("Dangers");
 	private JTextArea dangersTextArea = new JTextArea();
+	private JScrollPane dangersScrollPane = new JScrollPane(dangersTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	//Dangers
 	private JLabel environmentLabel = new JLabel("Environmental Impact");
 	private JTextArea environmentTextArea = new JTextArea();
+	private JScrollPane environmentScrollPane = new JScrollPane(environmentTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	//Link to MSDS
 	private JButton msdsButton = new JButton("View MSDS");
@@ -77,7 +86,8 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	/**
 	 * This is the constructor method
 	 * @param null
-	 */	public UnityMaterialInfoScreen(Material material, int previousScreen) {
+	 */	
+	public UnityMaterialInfoScreen(Material material, int previousScreen) {
 		this.material = material;
 		this.previousScreen = previousScreen;
 		panelSetup();
@@ -106,7 +116,7 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		materialPanel.add(titleLabel);
 		
 		//Setup the add material and back buttons
-		addButton.setBounds(940, 620, 200, 50);
+		addButton.setBounds(1020, 620, 200, 50);
 		addButton.setFont(new Font("Arial", Font.BOLD, 24));
 		addButton.setBackground(Color.ORANGE);
 		addButton.addActionListener(this);
@@ -117,6 +127,10 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		backButton.setBackground(Color.ORANGE);
 		backButton.addActionListener(this);
 		materialPanel.add(backButton);
+		
+		//Set up the quantity field
+		material.getQuantityField().setLocation(950, 620);
+		materialPanel.add(material.getQuantityField());
 		
 	}
 	
@@ -135,13 +149,17 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		
 		//Brand
 		brandLabel.setBounds(400, 100, 400, 50);
+		brandLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		materialPanel.add(brandLabel);
-		brandTextArea.setBounds(400, 150, 400, 75);
+		brandScrollPane.setBounds(400, 150, 400, 75);
+		brandTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
 		brandTextArea.setText(material.getBrand());
 		brandTextArea.setEditable(false);
 		brandTextArea.setLineWrap(true);
 		brandTextArea.setWrapStyleWord(true);
-		materialPanel.add(brandTextArea);
+		brandTextArea.setSelectionStart(0);
+		brandTextArea.setSelectionEnd(0); 
+		materialPanel.add(brandScrollPane);
 		
 		//Hyperlink
 		hyperlinkButton.setBounds(140, 300, 200, 100);
@@ -152,73 +170,101 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		
 		//StorageArea
 		storageAreaLabel.setBounds(400, 225, 400, 50);
+		storageAreaLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		materialPanel.add(storageAreaLabel);
-		storageAreaTextArea.setBounds(400, 275, 400, 75);
+		storageAreaScrollPane.setBounds(400, 275, 400, 75);
+		storageAreaTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
 		storageAreaTextArea.setText(material.getStorageArea());
 		storageAreaTextArea.setEditable(false);
 		storageAreaTextArea.setLineWrap(true);
 		storageAreaTextArea.setWrapStyleWord(true);
-		materialPanel.add(storageAreaTextArea);
+		storageAreaTextArea.setSelectionStart(0);
+		storageAreaTextArea.setSelectionEnd(0); 
+		materialPanel.add(storageAreaScrollPane);
 		
 		//Precautions
 		precautionsLabel.setBounds(400, 350, 400, 50);
+		precautionsLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		materialPanel.add(precautionsLabel);
-		precautionsTextArea.setBounds(400, 400, 400, 75);
+		precautionsScrollPane.setBounds(400, 400, 400, 75);
+		precautionsTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
 		precautionsTextArea.setText(material.getPrecautions());
 		precautionsTextArea.setEditable(false);
 		precautionsTextArea.setLineWrap(true);
 		precautionsTextArea.setWrapStyleWord(true);
-		materialPanel.add(precautionsTextArea);
+		precautionsTextArea.setSelectionStart(0);
+		precautionsTextArea.setSelectionEnd(0);
+		materialPanel.add(precautionsScrollPane);
 		
 		//Toxic
 		toxicLabel.setBounds(400, 475, 400, 50);
+		toxicLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		materialPanel.add(toxicLabel);
-		toxicTextArea.setBounds(400, 525, 400, 75);
+		toxicScrollPane.setBounds(400, 525, 400, 75);
+		toxicTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
 		toxicTextArea.setText(material.getToxic());
 		toxicTextArea.setEditable(false);
 		toxicTextArea.setLineWrap(true);
 		toxicTextArea.setWrapStyleWord(true);
-		materialPanel.add(toxicTextArea);
+		toxicTextArea.setSelectionStart(0);
+		toxicTextArea.setSelectionEnd(0);
+		materialPanel.add(toxicScrollPane);
 		
 		//Stability and Reactivity
 		stabilityLabel.setBounds(820, 100, 400, 50);
+		stabilityLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		materialPanel.add(stabilityLabel);
-		stabilityTextArea.setBounds(820, 150, 400, 75);
+		stabilityScrollPane.setBounds(820, 150, 400, 75);
+		stabilityTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
 		stabilityTextArea.setText(material.getStability());
 		stabilityTextArea.setEditable(false);
 		stabilityTextArea.setLineWrap(true);
 		stabilityTextArea.setWrapStyleWord(true);
-		materialPanel.add(stabilityTextArea);
+		stabilityTextArea.setSelectionStart(0);
+		stabilityTextArea.setSelectionEnd(0); 
+		materialPanel.add(stabilityScrollPane);
 		
 		//First aid measures
 		firstAidLabel.setBounds(820, 225, 400, 50);
+		firstAidLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		materialPanel.add(firstAidLabel);
-		firstAidTextArea.setBounds(820, 275, 400, 75);
+		firstAidScrollPane.setBounds(820, 275, 400, 75);
+		firstAidTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
 		firstAidTextArea.setText(material.getFirstAid());
 		firstAidTextArea.setEditable(false);
 		firstAidTextArea.setLineWrap(true);
 		firstAidTextArea.setWrapStyleWord(true);
-		materialPanel.add(firstAidTextArea);
+		firstAidTextArea.setSelectionStart(0);
+		firstAidTextArea.setSelectionEnd(0);
+		materialPanel.add(firstAidScrollPane);
 		
 		//Dangers
 		dangersLabel.setBounds(820, 350, 400, 50);
+		dangersLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		materialPanel.add(dangersLabel);
-		dangersTextArea.setBounds(820, 400, 400, 75);
+		dangersScrollPane.setBounds(820, 400, 400, 75);
+		dangersTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
 		dangersTextArea.setText(material.getDangers());
 		dangersTextArea.setEditable(false);
 		dangersTextArea.setLineWrap(true);
 		dangersTextArea.setWrapStyleWord(true);
-		materialPanel.add(dangersTextArea);
+		dangersTextArea.setSelectionStart(0);
+		dangersTextArea.setSelectionEnd(0);
+		materialPanel.add(dangersScrollPane);
 		
 		//Environment
 		environmentLabel.setBounds(820, 475, 400, 50);
+		environmentLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		materialPanel.add(environmentLabel);
-		environmentTextArea.setBounds(820, 525, 400, 75);
+		environmentScrollPane.setBounds(820, 525, 400, 75);
+		environmentTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
 		environmentTextArea.setText(Integer.toString(material.getEnvironmentImpact()));
 		environmentTextArea.setEditable(false);
 		environmentTextArea.setLineWrap(true);
 		environmentTextArea.setWrapStyleWord(true);
-		materialPanel.add(environmentTextArea);
+		environmentTextArea.setSelectionStart(0);
+		environmentTextArea.setSelectionEnd(0);
+		materialPanel.add(environmentScrollPane);
 		
 		//Link to MSDS
 		msdsButton.setBounds(140, 450, 200, 100);
@@ -292,7 +338,7 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 			this.dispose();
 			
 		} else if(e.getSource() == addButton) {
-			
+			material.setQuantity(Integer.parseInt(material.getQuantityField().getText()));
 		}
 		
 	}

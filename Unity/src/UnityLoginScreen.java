@@ -338,7 +338,7 @@ public class UnityLoginScreen extends JFrame implements ActionListener {
 		}
 		
 		System.out.println("Incorrect Username or password");
-		  JOptionPane.showMessageDialog(null, "Invalid Username or Password!","INVALID", JOptionPane.WARNING_MESSAGE);		
+		JOptionPane.showMessageDialog(null, "Invalid Username or Password!","INVALID", JOptionPane.WARNING_MESSAGE);		
 	}
 	
 }

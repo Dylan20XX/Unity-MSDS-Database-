@@ -193,6 +193,20 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 				removeActionListeners();
 				FileInput.readMaterials();
 				setMaterialQuantities();
+				
+				Database.currentProject.getMaterialList().clear();
+				
+				//Add materials to the current project
+				for(Material currentMaterial: Database.materials) {
+					if(currentMaterial.getQuantity() != 0) {
+						
+						Material m = new Material();
+						m.copyMaterial(currentMaterial);
+						Database.currentProject.getMaterialList().add(currentMaterial);
+						
+					}
+				}
+				
 				new UnityReportScreen();
 				this.dispose();
 			}

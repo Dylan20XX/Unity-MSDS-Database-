@@ -256,6 +256,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			
 			Database.currentProject.getMaterialList().clear();
 			
+			//Add materials to the current project
 			for(Material currentMaterial: Database.materials) {
 				if(currentMaterial.getQuantity() != 0) {
 					

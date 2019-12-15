@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -26,11 +27,11 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	
 	private JMenuBar menubar = new JMenuBar();
 	
-	private JLabel titleLabel = new JLabel("UNITY");
+	//private JLabel titleLabel = new JLabel("UNITY");
 	
-	private JLabel projectNameLabel = new JLabel("Project Name");
-	private JLabel userInputLabel = new JLabel("Project Description");
-	private JLabel sourcesLabel = new JLabel("Information Sources");	
+	private JLabel projectNameLabel = new JLabel("<html><font color='black'>Project Name</font></html>");
+	private JLabel userInputLabel = new JLabel("<html><font color='black'>Project Description</font></html>");
+	private JLabel sourcesLabel = new JLabel("<html><font color='black'>Information Sources</font></html>");	
 	
 	private JTextField projectNameTextArea = new JTextField();
 	private JTextArea descriptionTextArea = new JTextArea();
@@ -52,7 +53,7 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	private JButton materialSelectButton = new JButton("<html><center>Return to<br>Material Selection</center></html>");
 	
 	public UnityReportScreen() {
-		//setContentPane(new JLabel(Assets.reportBackground));
+		setContentPane(new JLabel(Assets.reportBackground));
 		menuBarSetup();
 		labelSetup();
 		textAreaSetup();
@@ -91,17 +92,29 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	}
 	
 	private void labelSetup() {
-        titleLabel.setFont(new Font( "Serif", Font.PLAIN, 36));
-		titleLabel.setForeground(Color.BLACK);
-		titleLabel.setBounds (600, 15, 480, 80);
-		add(titleLabel);
+//      titleLabel.setFont(new Font( "Serif", Font.PLAIN, 36));
+//		titleLabel.setForeground(Color.BLACK);
+//		titleLabel.setBounds (600, 15, 480, 80);
+//		add(titleLabel);
 	}
 	
 	private void textAreaSetup() {
 		
 		projectNameLabel.setBounds (35, 100, 400, 20);
+		//projectNameLabel.setBackground(Color.ORANGE);
+		projectNameLabel.setBackground(new Color(140,100,209));
+		projectNameLabel.setOpaque(true);
+		projectNameLabel.setFont(new Font( "Arial", Font.BOLD, 20));
 		userInputLabel.setBounds (35, 150, 400, 20);
+		//userInputLabel.setBackground(Color.ORANGE);
+		userInputLabel.setBackground(new Color(140,100,209));
+		userInputLabel.setOpaque(true);
+		userInputLabel.setFont(new Font( "Arial", Font.BOLD, 20));
 		sourcesLabel.setBounds (35, 530, 400, 20);
+		//sourcesLabel.setBackground(Color.ORANGE);
+		sourcesLabel.setBackground(new Color(140,100,209));
+		sourcesLabel.setOpaque(true);
+		sourcesLabel.setFont(new Font( "Arial", Font.BOLD, 20));
 		
 		add(projectNameLabel);
 		add(userInputLabel);
@@ -261,18 +274,21 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		}
 		
 		if(e.getSource() == saveButton) {
+			removeActionListeners();
 			if(!checkValidProjectName())
 				return;
 			saveProject();
 			new UnityProjectListScreen();
 			this.dispose();
 		} else if(e.getSource() == materialSelectButton) {
+			removeActionListeners();
 			Database.currentProject.setName(projectNameTextArea.getText());
 			Database.currentProject.setProjectDescription(descriptionTextArea.getText());
 			Database.currentProject.setSources(sourcesTextArea.getText());
 			new UnityMaterialSelectionScreen();
 			this.dispose();
 		} else if (e.getSource() == exitButton) {
+			removeActionListeners();
 			new UnityProjectListScreen();
 			this.dispose();
 		}
@@ -287,7 +303,12 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 //			currentMaterial.getInfoButton().removeActionListener(this);
 //		}
 		
-		for(Material currentMaterial: Database.materials) {
+//		for(Material currentMaterial: Database.materials) {
+//			currentMaterial.getQuantityButton().removeActionListener(this);
+//			currentMaterial.getInfoButton().removeActionListener(this);
+//		}
+		
+		for(Material currentMaterial: Database.currentProject.getMaterialList()) {
 			currentMaterial.getQuantityButton().removeActionListener(this);
 			currentMaterial.getInfoButton().removeActionListener(this);
 		}
@@ -302,6 +323,7 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 				projectNameTextArea.getText().contains("?") || projectNameTextArea.getText().contains("\"") || 
 				projectNameTextArea.getText().contains("<") || projectNameTextArea.getText().contains(">") || 
 				projectNameTextArea.getText().contains("|") || projectNameTextArea.getText().isEmpty() || projectNameTextArea.getText().matches("[ ]+")) {
+			JOptionPane.showMessageDialog(null, "A filename can't contain any of the following characters:\n\\/:*?\"<>|","INVALID", JOptionPane.WARNING_MESSAGE);
 			return false;
 		} else {
 			projectName = projectNameTextArea.getText();
