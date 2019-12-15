@@ -30,18 +30,18 @@ public class Database {
 	};
 	
 	//Sorts materials in order of their environmental impact
-//	public static Comparator<Material> environmentSorter =new Comparator<Material>(){
-//		public int compare(Material mat1, Material mat2) {
-//			return Integer.compare(mat1.getEvironmentImpact(), mat2.getEvironmentImpact());
-//		}
-//	};
+	public static Comparator<Material> environmentSorter =new Comparator<Material>(){
+		public int compare(Material mat1, Material mat2) {
+			return Integer.compare(mat1.getEnvironmentImpact(), mat2.getEnvironmentImpact());
+		}
+	};
 	
 	public static void sortAlpha() {
 		Collections.sort(materials, alphaSorter);
 	}
 	
-//	public static void sortEnvironment() {
-//		Collections.sort(materials, environmentSorter);
-//	}
+	public static void sortEnvironment() {
+		Collections.sort(materials, environmentSorter);
+	}
 	
 }

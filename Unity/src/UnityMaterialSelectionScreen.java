@@ -38,6 +38,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	private JPanel infoButtonPanel = new JPanel();
 	private JPanel materialNamePanel = new JPanel();
 	private JPanel materialQuantityPanel = new JPanel();
+	private JPanel environmentPanel = new JPanel();
 	private JScrollPane materialButtonScrollPane = new JScrollPane();
 	
 	//Main method for testing GUI
@@ -160,6 +161,9 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		materialNamePanel.setLayout(new BoxLayout(materialNamePanel, BoxLayout.Y_AXIS));
 		materialNamePanel.setBackground(Color.WHITE);
 		materialButtonPanel.add(materialNamePanel);
+		environmentPanel.setLayout(new BoxLayout(environmentPanel, BoxLayout.Y_AXIS));
+		environmentPanel.setBackground(Color.WHITE);
+		materialButtonPanel.add(environmentPanel);
 				
 		//Add the scroll pane 
 		materialButtonScrollPane = new JScrollPane(materialButtonPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -177,6 +181,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		infoButtonPanel.removeAll();
 		materialNamePanel.removeAll();
 		materialQuantityPanel.removeAll();
+		environmentPanel.removeAll();
 		
 		removeActionListeners();
 		
@@ -193,6 +198,8 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			materialNamePanel.add(currentMaterial.getNameLabel());
 			
 			materialQuantityPanel.add(currentMaterial.getQuantityField());
+			
+			environmentPanel.add(currentMaterial.getEnvironmentLabel());
 			
 		}
 		
@@ -275,6 +282,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			infoButtonPanel.removeAll();
 			materialNamePanel.removeAll();
 			materialQuantityPanel.removeAll();
+			environmentPanel.removeAll();
 			
 			removeActionListeners();
 			
@@ -296,6 +304,8 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 					
 					materialQuantityPanel.add(currentMaterial.getQuantityField());
 					
+					environmentPanel.add(currentMaterial.getEnvironmentLabel());
+					
 				}
 				
 			}
@@ -313,6 +323,9 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 				addMaterialButtons();
 				
 			} else if(sortComboBox.getSelectedItem().equals("Environmental Impact")) {
+				
+				Database.sortEnvironment();
+				addMaterialButtons();
 				
 			}
 			

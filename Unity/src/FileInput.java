@@ -55,7 +55,10 @@ public class FileInput {
 				material.setFirstAid(input.next().replace("]", ","));
 				material.setDangers(input.next().replace("]", ","));
 				material.setMsdsLink(input.next().replace("]", ","));
+				material.setEnvironmentImpact(input.nextInt());
 				input.nextLine();
+				
+				material.setupImage(); //Set up the material image
 				
 				System.out.println(material);
 				

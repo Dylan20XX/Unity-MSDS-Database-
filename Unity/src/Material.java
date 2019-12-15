@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -39,12 +41,16 @@ public class Material {
 	private String msdsLink;
 	
 	private int quantity = 0;
+	private int environmentImpact;
 	
 	//Components to be used in material selection screen
-	private JButton quantityButton = new JButton("Set Amount");
+	private JButton quantityButton = new JButton();
 	private JTextField quantityField = new JTextField();
-	private JButton infoButton = new JButton("Info");
+	private JButton infoButton = new JButton();
 	private JLabel nameLabel = new JLabel();
+	private JLabel environmentLabel = new JLabel();
+	
+	private ImageIcon image;
 	
 	//Constructors
 	/**
@@ -214,6 +220,14 @@ public class Material {
 		this.quantity = quantity;
 		
 	}
+	
+	public int getEnvironmentImpact() {
+		return environmentImpact;
+	}
+	
+	public void setEnvironmentImpact(int environmentImpact) {
+		this.environmentImpact = environmentImpact;
+	}
 /**
  * @return quantityButton
  */
@@ -254,23 +268,42 @@ public class Material {
 	public void setNameLabel(JLabel nameLabel) {
 		this.nameLabel = nameLabel;
 	}
+	
+	public ImageIcon getImage() {
+		return image;
+	}
+	
+	public void setImage(ImageIcon image) {
+		this.image = image;
+	}
+	
+	public JLabel getEnvironmentLabel() {
+		return environmentLabel;
+	}
+	public void setEnvironmentLabel(JLabel environmentLabel) {
+		this.environmentLabel = environmentLabel;
+	}
 	/**
 	 * Creates JObjects for each material
 	 */
 	public void setupComponents() {
 		
 		//Test Buttons
-		quantityButton.setSize(200, 50);
+		quantityButton.setSize(100, 50);
+		quantityButton.setIcon(Assets.setAmountButton);
+		quantityButton.setBackground(Color.ORANGE);
 		quantityButton.setMaximumSize(quantityButton.getSize());
 		quantityButton.setMinimumSize(quantityButton.getSize());
 		quantityButton.setPreferredSize(quantityButton.getSize());
-		quantityButton.setFont(new Font("Arial", Font.BOLD, 24));
+		//quantityButton.setFont(new Font("Arial", Font.BOLD, 24));
 		
 		infoButton.setSize(100, 50);
+		infoButton.setIcon(Assets.infoButton);
+		infoButton.setBackground(Color.YELLOW);
 		infoButton.setMaximumSize(infoButton.getSize());
 		infoButton.setMinimumSize(infoButton.getSize());
 		infoButton.setPreferredSize(infoButton.getSize());
-		infoButton.setFont(new Font("Arial", Font.BOLD, 24));
+		//infoButton.setFont(new Font("Arial", Font.BOLD, 24));
 		
 		nameLabel.setText(name);
 		nameLabel.setSize(650, 50);
@@ -293,6 +326,24 @@ public class Material {
 		quantityField.setPreferredSize(quantityField.getSize());
 		quantityField.setFont(new Font("Arial", Font.BOLD, 24));
 		
+		//Environment Label
+		environmentLabel.setText(Integer.toString(environmentImpact));
+		environmentLabel.setSize(100, 50);
+		environmentLabel.setMaximumSize(environmentLabel.getSize());
+		environmentLabel.setMinimumSize(environmentLabel.getSize());
+		environmentLabel.setPreferredSize(environmentLabel.getSize());
+		environmentLabel.setFont(new Font("Arial", Font.BOLD, 36));
+		
+		if(environmentImpact <= 30) {
+			environmentLabel.setBackground(Color.GREEN);
+		} else if(environmentImpact <= 70) {
+			environmentLabel.setBackground(Color.YELLOW);
+		} else {
+			environmentLabel.setBackground(Color.RED);
+		}
+		
+		
+		
 	}
 	/**
 	 * 
@@ -312,7 +363,13 @@ public class Material {
 		setMsdsLink(materialToCopy.getMsdsLink());
 		
 		setQuantity(materialToCopy.getQuantity());
+		setEnvironmentImpact(materialToCopy.getEnvironmentImpact());
 		
+	}
+	
+	public void setupImage() {
+		image = new ImageIcon(new ImageIcon(String.format("Images/Materials/%s.jpg", name)).
+			getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 	}
 
 	//toString method
@@ -323,7 +380,8 @@ public class Material {
 	public String toString() {
 		return "Material [name=" + name + ", brand=" + brand + ", hyperlink=" + hyperlink + ", storageArea="
 				+ storageArea + ", precautions=" + precautions + ", toxic=" + toxic + ", stability=" + stability
-				+ ", firstAid=" + firstAid + ", dangers=" + dangers + ", msdsLink=" + msdsLink + "]";
+				+ ", firstAid=" + firstAid + ", dangers=" + dangers + ", msdsLink=" + msdsLink + ", quantity="
+				+ quantity + ", environmentImpact=" + environmentImpact + "]";
 	}
 	
 }

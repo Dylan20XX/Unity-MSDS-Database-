@@ -87,6 +87,8 @@ public class UnityProjectListScreen extends JFrame implements ActionListener {
 		projectListPanel.add(createButton);
 
 		editButton.setBounds(546, 475, 200, 100);
+		editButton.setFont(new Font("Arial", Font.BOLD, 46));
+		editButton.setBackground(Color.LIGHT_GRAY);
 		editButton.addActionListener(this);
 		projectListPanel.add(editButton);
 

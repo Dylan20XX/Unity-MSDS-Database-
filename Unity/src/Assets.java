@@ -13,11 +13,17 @@ public class Assets {
 	 * @see UnityProjectListScreen
 	 */
 	//Backgrounds
-	public static ImageIcon loginBackground = backgroundImageSetup("Images/GUI/Login screen.png");
+	public static ImageIcon loginBackground = backgroundImageSetup("Images/GUI/Login Screen.png");
+	public static ImageIcon projectListBackground = backgroundImageSetup("Images/GUI/Project List Screen.png");
+	public static ImageIcon reportBackground = backgroundImageSetup("Images/GUI/Report Screen.png");
 	
 	//Buttons 
 	public static ImageIcon createButton = buttonImageSetup("Images/GUI/Create Project Button.png");
 	public static ImageIcon deleteButton = buttonImageSetup("Images/GUI/Delete Button.png");
+	
+	public static ImageIcon setAmountButton = smallButtonImageSetup("Images/GUI/Set Amount Button.png");
+	public static ImageIcon infoButton  = smallButtonImageSetup("Images/GUI/Info Button.png");
+	public static ImageIcon saveButton = buttonImageSetup("Images/GUI/Save Button.png");
 	
 	//Material Images
 	//public static ImageIcon charcoalPencil = buttonImageSetup("Images/Materials/Charcoal pencil.jpg");
@@ -40,9 +46,9 @@ public class Assets {
 	 * @return ScaledImage
 	 */
 	//This method returns a scaled image (200x200)
-	private static ImageIcon materialImageSetup(String imagePath) {
+	private static ImageIcon smallButtonImageSetup(String imagePath) {
 		return new ImageIcon(new ImageIcon(imagePath).
-				getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+				getImage().getScaledInstance(100, 50, Image.SCALE_SMOOTH));
 	}
 	/**
 	 * @param imagePath

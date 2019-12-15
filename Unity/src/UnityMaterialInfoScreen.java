@@ -64,8 +64,15 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	private JLabel dangersLabel = new JLabel("Dangers");
 	private JTextArea dangersTextArea = new JTextArea();
 	
+	//Dangers
+	private JLabel environmentLabel = new JLabel("Environmental Impact");
+	private JTextArea environmentTextArea = new JTextArea();
+	
 	//Link to MSDS
 	private JButton msdsButton = new JButton("View MSDS");
+	
+	//Material Image Label
+	private JLabel imageLabel = new JLabel();
 	
 	//Main method for testing GUI
 	/**
@@ -136,6 +143,11 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	private void infoSetup() {
 		
 		//titleLabel.setText(material.getName());
+		
+		//Image Label
+		imageLabel.setBounds(140, 80, 200, 200);
+		imageLabel.setIcon(material.getImage());
+		materialPanel.add(imageLabel);
 		
 		//Brand
 		brandLabel.setBounds(400, 100, 400, 50);
@@ -211,6 +223,16 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		dangersTextArea.setLineWrap(true);
 		dangersTextArea.setWrapStyleWord(true);
 		materialPanel.add(dangersTextArea);
+		
+		//Environment
+		environmentLabel.setBounds(820, 475, 400, 50);
+		materialPanel.add(environmentLabel);
+		environmentTextArea.setBounds(820, 525, 400, 75);
+		environmentTextArea.setText(Integer.toString(material.getEnvironmentImpact()));
+		environmentTextArea.setEditable(false);
+		environmentTextArea.setLineWrap(true);
+		environmentTextArea.setWrapStyleWord(true);
+		materialPanel.add(environmentTextArea);
 		
 		//Link to MSDS
 		msdsButton.setBounds(140, 450, 200, 100);

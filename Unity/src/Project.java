@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -116,17 +117,19 @@ public class Project {
 	public void componentSetup() {
 		
 		//Set up the button
-		selectButton.setSize(100, 70);
+		selectButton.setSize(150, 70);
 		selectButton.setMaximumSize(selectButton.getSize());
 		selectButton.setMinimumSize(selectButton.getSize());
 		selectButton.setPreferredSize(selectButton.getSize());
+		selectButton.setFont(new Font("Arial", Font.BOLD, 24));
 		selectButton.setBackground(null);
 		
 		//Set up the label
-		nameLabel.setSize(650, 70);
+		nameLabel.setSize(600, 70);
 		nameLabel.setMaximumSize(nameLabel.getSize());
 		nameLabel.setMinimumSize(nameLabel.getSize());
 		nameLabel.setPreferredSize(nameLabel.getSize());
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 36));
 		nameLabel.setText(name);
 		
 	}
