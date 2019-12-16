@@ -54,16 +54,6 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	private JMenu exitMenu = new JMenu ("Exit");
 	private JMenuItem exitProgram = new JMenuItem ("Exit Program");
 	
-	//Main method for testing GUI
-	/**
-	 * Main Method
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		FileInput.readMaterials();
-		new UnityMaterialSelectionScreen();
-	}
-	
 	/**
 	 * This is the constructor method
 	 * @param null
@@ -77,6 +67,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		frameSetup();
 	}
 	
+	//This method sets up the menu bar
 	private void menuBarSetup() {
         
         exitProgram.addActionListener(this);
@@ -159,16 +150,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	 */
 	private void scrollPaneSetup() {
 		
-		//materialPanel <- materialButtonScrollPane <- materialButtonPanel
-		
-		//materialButtonPanel 
-		//	<- addButtonPanel
-		//	<- infoButtonPanel
-		//	<- materialNamePanel
-		//	<- materialQuantityPanel
-		
 		//Setup the button panel
-		//materialButtonPanel.setLayout(new BoxLayout(materialButtonPanel, BoxLayout.Y_AXIS));
 		materialButtonPanel.setLayout(new BoxLayout(materialButtonPanel, BoxLayout.X_AXIS));
 		materialButtonPanel.setBackground(Color.DARK_GRAY);
 		
@@ -201,14 +183,17 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	 */
 	private void addMaterialButtons() {
 		
+		//Clear the panels
 		quantityButtonPanel.removeAll();
 		infoButtonPanel.removeAll();
 		materialNamePanel.removeAll();
 		materialQuantityPanel.removeAll();
 		environmentPanel.removeAll();
 		
+		//Remove action listeners
 		removeActionListeners();
 		
+		//Add all of the material components to their respective panels
 		for(Material currentMaterial: Database.materials) {
 			
 			currentMaterial.setupComponents();
@@ -241,7 +226,6 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 		setTitle("Unity");
 		setSize(1280, 720);
 		setLayout(null);
-		//getContentPane().setBackground(new Color(191,231,247));
 		
 		add(materialPanel);
 		
@@ -260,6 +244,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
+		//Check if the material quantity or info button is pressed
 		for(Material currentMaterial: Database.materials) {
 			
 			if(e.getSource() == currentMaterial.getQuantityButton()) {
@@ -276,6 +261,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			
 		}
 		
+		//Go to report screen if submit button is pressed
 		if(e.getSource() == submitButton) {
 			
 			removeActionListeners();
@@ -296,15 +282,15 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			new UnityReportScreen();
 			this.dispose();
 			
-		} else if(e.getSource() == backButton) {
+		} else if(e.getSource() == backButton) { //Return to project list screen
 			removeActionListeners();
 			new UnityProjectListScreen();
 			this.dispose();
-		} else if(e.getSource() == viewAllButton) {
+		} else if(e.getSource() == viewAllButton) { //Returns all materials to view
 			addMaterialButtons();
-		}else if(e.getSource() == searchBar) {
-			System.out.println("search");
+		}else if(e.getSource() == searchBar) { //Search for a material
 			
+			//Clear the panels
 			quantityButtonPanel.removeAll();
 			infoButtonPanel.removeAll();
 			materialNamePanel.removeAll();
@@ -313,6 +299,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			
 			removeActionListeners();
 			
+			//Only show materials that contain the search characters
 			for(Material currentMaterial: Database.materials) {
 				
 				if(currentMaterial.getName().toLowerCase().contains(searchBar.getText().toLowerCase())) {
@@ -340,9 +327,7 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			repaint();
 			revalidate();
 			
-		} else if(e.getSource() == sortComboBox) {
-			
-			//System.out.println(sortComboBox.getSelectedItem());
+		} else if(e.getSource() == sortComboBox) { //Sort materials in alphabetical order or by environmental rating
 			
 			if(sortComboBox.getSelectedItem().equals("Alphabetical")) {
 				
@@ -357,14 +342,16 @@ public class UnityMaterialSelectionScreen extends JFrame implements ActionListen
 			}
 			
 			
-		} else if(e.getSource() == exitProgram) {
+		} else if(e.getSource() == exitProgram) { //Exit the program
 			System.exit(0);
 		}
 		
 	}
 	
 	/**
-	 * This method removes action listeners from material buttons
+	 * This method removes action listeners from material buttons and 
+	 * should be called before removing the material buttons or 
+	 * switching screens
 	 * @param null
 	 */
 	private void removeActionListeners() {

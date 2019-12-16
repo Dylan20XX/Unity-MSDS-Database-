@@ -11,14 +11,14 @@ public class Database {
 	 * This class sorts Materials. 
 	 * @param MDSD Database, Login, Users
 	 */
+	//Current user and project variables
 	public static String currentUser;
-	public static Project currentProject;//
+	public static Project currentProject;
 	public static ArrayList<Material> currentProjectMaterials = new ArrayList<Material>();
 	
+	//Store the users, projects, and all materials from the .csv file
 	public static ArrayList<Project> projectList = new ArrayList<Project>();
-	
 	public static ArrayList<User> users = new ArrayList<User>();
-	
 	public static ArrayList<Material> materials = new ArrayList<Material>();
 	
 	//Sorts materials in alphabetical order
@@ -38,6 +38,7 @@ public class Database {
 		}
 	};
 	
+	//Sorting methods
 	public static void sortAlpha() {
 		Collections.sort(materials, alphaSorter);
 	}

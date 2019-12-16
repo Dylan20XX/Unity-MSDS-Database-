@@ -101,20 +101,21 @@ public class UnityReportScreen extends JFrame implements ActionListener {
         add(menubar);
 	}
 	
+	//This method sets up the three text areas for project information
 	private void textAreaSetup() {
 		
+		//Set up the labels
 		projectNameLabel.setBounds (35, 100, 400, 20);
-		//projectNameLabel.setBackground(Color.ORANGE);
 		projectNameLabel.setBackground(new Color(140,100,209));
 		projectNameLabel.setOpaque(true);
 		projectNameLabel.setFont(new Font( "Arial", Font.BOLD, 20));
+		
 		userInputLabel.setBounds (35, 150, 400, 20);
-		//userInputLabel.setBackground(Color.ORANGE);
 		userInputLabel.setBackground(new Color(140,100,209));
 		userInputLabel.setOpaque(true);
 		userInputLabel.setFont(new Font( "Arial", Font.BOLD, 20));
+		
 		sourcesLabel.setBounds (35, 530, 400, 20);
-		//sourcesLabel.setBackground(Color.ORANGE);
 		sourcesLabel.setBackground(new Color(140,100,209));
 		sourcesLabel.setOpaque(true);
 		sourcesLabel.setFont(new Font( "Arial", Font.BOLD, 20));
@@ -123,6 +124,7 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		add(userInputLabel);
 		add(sourcesLabel);
 		
+		//Set up the text area
 		projectNameTextArea.setBounds (35, 120, 400, 20);
 		descriptionTextArea.setLineWrap(true);
 		descriptionTextArea.setWrapStyleWord(true);
@@ -145,8 +147,10 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		
 	}
 	
+	//This method sets up the material panel, which displays all of the materials used in a project
 	private void materialPanelSetup() {
 		
+		//Set up the material panel which holds several other panels
 		materialPanel.setLayout(new BoxLayout(materialPanel, BoxLayout.X_AXIS));
 		materialPanel.setBackground(Color.DARK_GRAY);
 		
@@ -177,6 +181,7 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	//This method sets up the save and back buttons
 	private void buttonSetup() {
 		
+		//Button to return to material selection
 		materialSelectButton.addActionListener(this);
 		materialSelectButton.setFont(new Font( "Arial", Font.PLAIN, 24));
 		materialSelectButton.setBackground(Color.ORANGE);
@@ -185,6 +190,7 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		materialSelectButton.setBounds (450, 550, 200, 105);
 		add(materialSelectButton);
 		
+		//Button to return to project list screen
 		exitButton.addActionListener(this);
 		exitButton.setFont(new Font( "Arial", Font.PLAIN, 24));
 		exitButton.setBackground(Color.ORANGE);
@@ -193,6 +199,7 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		exitButton.setBounds (670, 550, 200, 105);
 		add(exitButton);
 		
+		//Button to save project and return to project list screen
 		saveButton.addActionListener(this);
 		saveButton.setFont(new Font( "Arial", Font.PLAIN, 24));
 		saveButton.setBackground(Color.ORANGE);
@@ -210,9 +217,6 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		setTitle("Unity");
 		setSize(1280, 720);
 		setLayout(null);
-		//getContentPane().setBackground(new Color(191,231,247)); //Blue
-		//getContentPane().setBackground(new Color(82,66,209)); //Dark purple
-		//getContentPane().setBackground(new Color(140,100,209)); //Light purple
 		
 		//Prevent the program from running when the frame is closed, prevent the 
 		//frame from being resized, and make the frame visible
@@ -222,16 +226,20 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		
 	}
 	
+	//This method adds the material buttons
 	private void addMaterialButtons() {
 		
+		//Clear the panels
 		quantityButtonPanel.removeAll();
 		infoButtonPanel.removeAll();
 		materialNamePanel.removeAll();
 		materialQuantityPanel.removeAll();
 		environmentPanel.removeAll();
 		
+		//Remove the action listeners
 		removeActionListeners();
 		
+		//Add the components for each material
 		for(Material currentMaterial: Database.currentProject.getMaterialList()) {
 			
 			currentMaterial.setupComponentsReport();
@@ -254,10 +262,12 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		revalidate();
 		
 	}
-
+	
+	//This method detects when a button or menu bar object is clicked
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		//Check if the material quantity or info button is pressed
 		for(Material currentMaterial: Database.currentProject.getMaterialList()) {
 			
 			if(e.getSource() == currentMaterial.getQuantityButton()) {
@@ -274,34 +284,46 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 			
 		}
 		
-		if(e.getSource() == saveButton || e.getSource() == exitSave) {
+		if(e.getSource() == saveButton || e.getSource() == exitSave) { //Save and return to project list screen
+			
 			removeActionListeners();
 			if(!checkValidProjectName())
 				return;
 			saveProject();
 			new UnityProjectListScreen();
 			this.dispose();
-		} else if(e.getSource() == materialSelectButton) {
+			
+		} else if(e.getSource() == materialSelectButton) { //Return to material selection
+			
 			removeActionListeners();
 			Database.currentProject.setName(projectNameTextArea.getText());
 			Database.currentProject.setProjectDescription(descriptionTextArea.getText());
 			Database.currentProject.setSources(sourcesTextArea.getText());
 			new UnityMaterialSelectionScreen();
 			this.dispose();
-		} else if (e.getSource() == exitButton) {
+			
+		} else if (e.getSource() == exitButton) { //Return to the project list screen without saving
+			
 			removeActionListeners();
 			new UnityProjectListScreen();
 			this.dispose();
-		} else if(e.getSource() == fileSave) {
+			
+		} else if(e.getSource() == fileSave) { //Save the project
+			
 			if(!checkValidProjectName())
 				return;
 			saveProject();
-		} else if(e.getSource() == exitProgram) {
+			
+		} else if(e.getSource() == exitProgram) { //Exit the program
+			
 			System.exit(0);
-		} else if(e.getSource() == fileExport) {
+			
+		} else if(e.getSource() == fileExport) { //Export the project as a text file
+			
 			if(!checkValidProjectName())
 				return;
 			exportProject();
+			
 		} 
 		
 	}
@@ -316,6 +338,7 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		
 	}
 	
+	//This method checks if the project name is valid
 	private boolean checkValidProjectName() {
 		//A filename can't contain any of the following characters
 		//\/:*?"<>|
@@ -335,12 +358,13 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 		
 	}
 	
+	//This method saves a project
 	private void saveProject() {
 		
 		String file = String.format("Users/%s/%s", Database.currentUser, projectName);
 		File filepath = new File(file);
 
-		//if(!filepath.exists() && !filepath.isDirectory()) {
+		//Make sure that the file path is not a directory
 		if(!filepath.isDirectory()) {
 			
 			try {
@@ -375,15 +399,15 @@ public class UnityReportScreen extends JFrame implements ActionListener {
 	//This allows the user to export the project as a text file
 	private void exportProject() {
 		
-		//Open a file dialog
+		//Open a file dialog and use it to decide where to save the file to
 	    FileDialog fileDialog = new FileDialog((Frame) null, "Select Where to Save the File");
 	    fileDialog.setMode(FileDialog.SAVE);
 	    fileDialog.setVisible(true);
-	    //String file = fileDialog.getFile();
 	    String file = fileDialog.getDirectory() + fileDialog.getFile() + ".txt";
 	    System.out.println(file + ".txt");
 	    File filepath = new File(file);
 	    
+	  //Make sure that the file path is not a directory
 		if(!filepath.isDirectory()) {
 			
 			try {

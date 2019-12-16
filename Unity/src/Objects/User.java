@@ -3,7 +3,7 @@ package Objects;
 import javax.swing.JTextArea;
 /**
  * 
- * @author everyone
+ * @author Momin
  *
  */
 public class User {

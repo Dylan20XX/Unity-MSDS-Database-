@@ -22,7 +22,6 @@ public class Material {
  * This class is used to make material objects and sign information to them accordingly
  * @param file input information
  */
-	//Material type - may not be necessary
 	//MaterialName
 	//Brand
 	//Hyperlink
@@ -63,33 +62,6 @@ public class Material {
 	 * @param null
 	 */
 	public Material() {
-	}
-	/**
-	 * Assigns info
-	 * @param name
-	 * @param brand
-	 * @param hyperlink
-	 * @param storageArea
-	 * @param precautions
-	 * @param toxic
-	 * @param stability
-	 * @param firstAid
-	 * @param dangers
-	 * @param msdsLink
-	 */
-	public Material(String name, String brand, String hyperlink, String storageArea, String precautions, String toxic,
-			String stability, String firstAid, String dangers, String msdsLink) {
-		super();
-		this.name = name;
-		this.brand = brand;
-		this.hyperlink = hyperlink;
-		this.storageArea = storageArea;
-		this.precautions = precautions;
-		this.toxic = toxic;
-		this.stability = stability;
-		this.firstAid = firstAid;
-		this.dangers = dangers;
-		this.msdsLink = msdsLink;
 	}
 
 	//Getters and setters
@@ -289,27 +261,27 @@ public class Material {
 		this.environmentLabel = environmentLabel;
 	}
 	/**
-	 * Creates JObjects for each material
+	 * Sets up JObjects for each material
 	 */
 	public void setupComponents() {
 		
-		//Test Buttons
+		//Quantity Button
 		quantityButton.setSize(100, 50);
 		quantityButton.setIcon(Assets.setAmountButton);
 		quantityButton.setBackground(Color.ORANGE);
 		quantityButton.setMaximumSize(quantityButton.getSize());
 		quantityButton.setMinimumSize(quantityButton.getSize());
 		quantityButton.setPreferredSize(quantityButton.getSize());
-		//quantityButton.setFont(new Font("Arial", Font.BOLD, 24));
 		
+		//Info Button
 		infoButton.setSize(100, 50);
 		infoButton.setIcon(Assets.infoButton);
 		infoButton.setBackground(Color.YELLOW);
 		infoButton.setMaximumSize(infoButton.getSize());
 		infoButton.setMinimumSize(infoButton.getSize());
 		infoButton.setPreferredSize(infoButton.getSize());
-		//infoButton.setFont(new Font("Arial", Font.BOLD, 24));
 		
+		//Name Label
 		nameLabel.setText(name);
 		nameLabel.setSize(650, 50);
 		nameLabel.setMaximumSize(nameLabel.getSize());
@@ -317,6 +289,7 @@ public class Material {
 		nameLabel.setPreferredSize(nameLabel.getSize());
 		nameLabel.setFont(new Font("Arial", Font.BOLD, 36));
 		
+		//Quantity Text Field
 		quantityField.setText(Integer.toString(quantity));
 		
 		if(quantity == 0)
@@ -353,25 +326,26 @@ public class Material {
 		
 	}
 	
+	//Sets up components for the report screen
 	public void setupComponentsReport() {
 		
-		//Test Buttons
+		//Quantity Button
 		quantityButton.setSize(100, 50);
 		quantityButton.setIcon(Assets.setAmountButton);
 		quantityButton.setBackground(Color.ORANGE);
 		quantityButton.setMaximumSize(quantityButton.getSize());
 		quantityButton.setMinimumSize(quantityButton.getSize());
 		quantityButton.setPreferredSize(quantityButton.getSize());
-		//quantityButton.setFont(new Font("Arial", Font.BOLD, 24));
 		
+		//Info Button
 		infoButton.setSize(100, 50);
 		infoButton.setIcon(Assets.infoButton);
 		infoButton.setBackground(Color.YELLOW);
 		infoButton.setMaximumSize(infoButton.getSize());
 		infoButton.setMinimumSize(infoButton.getSize());
 		infoButton.setPreferredSize(infoButton.getSize());
-		//infoButton.setFont(new Font("Arial", Font.BOLD, 24));
 		
+		//Name Label
 		nameLabel.setText(name);
 		nameLabel.setSize(450, 50);
 		nameLabel.setMaximumSize(nameLabel.getSize());
@@ -379,6 +353,7 @@ public class Material {
 		nameLabel.setPreferredSize(nameLabel.getSize());
 		nameLabel.setFont(new Font("Arial", Font.BOLD, 36));
 		
+		//Quantity Text Field
 		quantityField.setText(Integer.toString(quantity));
 		
 		if(quantity == 0)
@@ -416,7 +391,7 @@ public class Material {
 	}
 	
 	/**
-	 * 
+	 * This method allows materials to be copied
 	 * @param materialToCopy
 	 */
 	public void copyMaterial(Material materialToCopy) {
@@ -437,6 +412,7 @@ public class Material {
 		
 	}
 	
+	//This method sets up the ImageIcon variable of a material
 	public void setupImage() {
 		image = new ImageIcon(new ImageIcon(String.format("Images/Materials/%s.jpg", name)).
 			getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH));

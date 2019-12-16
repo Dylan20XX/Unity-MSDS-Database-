@@ -37,7 +37,7 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	
 	private JLabel titleLabel = new JLabel("Material Info"); 
 	private JButton backButton = new JButton("Back");
-	private JButton addButton = new JButton("Set Amount");
+	private JButton setQuantityButton = new JButton("Set Amount");
 	
 	//MaterialName - put in title label
 	//Brand
@@ -107,6 +107,7 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		frameSetup();
 	}
 	
+	//This method sets up the menu bar
 	private void menuBarSetup() {
         
         exitProgram.addActionListener(this);
@@ -127,24 +128,23 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		//Setup the panel
 		materialPanel.setBounds(0,0,1280,720);
 		materialPanel.setLayout(null);
-		//materialPanel.setBackground(new Color(191,231,247));
-		//materialPanel.setBackground(new Color(82,66,209));
 		materialPanel.setBackground(new Color(140,100,209));
-		materialPanel.setVisible(true); //Initially hide the highscore panel 
+		materialPanel.setVisible(true); 
 		
-		//Setup the title label
+		//Set up the title label
 		titleLabel.setBounds(480, 30, 400, 50);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
 		titleLabel.setText(material.getName());
 		materialPanel.add(titleLabel);
 		
-		//Setup the add material and back buttons
-		addButton.setBounds(1020, 620, 200, 50);
-		addButton.setFont(new Font("Arial", Font.BOLD, 24));
-		addButton.setBackground(Color.ORANGE);
-		addButton.addActionListener(this);
-		materialPanel.add(addButton);
+		//Set up the set quantity button
+		setQuantityButton.setBounds(1020, 620, 200, 50);
+		setQuantityButton.setFont(new Font("Arial", Font.BOLD, 24));
+		setQuantityButton.setBackground(Color.ORANGE);
+		setQuantityButton.addActionListener(this);
+		materialPanel.add(setQuantityButton);
 		
+		//Set up the back button
 		backButton.setBounds(140, 620, 200, 50);
 		backButton.setFont(new Font("Arial", Font.BOLD, 24));
 		backButton.setBackground(Color.ORANGE);
@@ -162,8 +162,6 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	 * @param null
 	 */
 	private void infoSetup() {
-		
-		//titleLabel.setText(material.getName());
 		
 		//Image Label
 		imageLabel.setBounds(140, 80, 200, 200);
@@ -308,7 +306,6 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		setTitle("Unity");
 		setSize(1280, 720);
 		setLayout(null);
-		//getContentPane().setBackground(new Color(191,231,247));
 		
 		add(materialPanel);
 		
@@ -320,7 +317,7 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 		
 	}
 	/**
-	 * This method opens the hyperlink
+	 * This method opens a hyperlink
 	 * @param hyperlink
 	 */
 	private void openWebBrowser(String hyperlink) {
@@ -347,11 +344,11 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource() == hyperlinkButton) {
+		if(e.getSource() == hyperlinkButton) { //Open a link to purchase the material
 			openWebBrowser(material.getHyperlink());
-		} else if(e.getSource() == msdsButton) {
+		} else if(e.getSource() == msdsButton) { //Open a link to the material's MSDS
 			openWebBrowser(material.getMsdsLink());
-		} else if(e.getSource() == backButton) {
+		} else if(e.getSource() == backButton) { //Return to the previous screen
 			
 			if(previousScreen == 0)
 				new UnityMaterialSelectionScreen();
@@ -360,9 +357,9 @@ public class UnityMaterialInfoScreen extends JFrame implements ActionListener {
 			
 			this.dispose();
 			
-		} else if(e.getSource() == addButton) {
+		} else if(e.getSource() == setQuantityButton) { //Set the quantity of the material to be used in the project
 			material.setQuantity(Integer.parseInt(material.getQuantityField().getText()));
-		} else if(e.getSource() == exitProgram) {
+		} else if(e.getSource() == exitProgram) { //Exit the program
 			System.exit(0);
 		}
 		
