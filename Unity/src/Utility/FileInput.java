@@ -51,8 +51,6 @@ public class FileInput {
 				
 				//since commas can't be used in .csv file values, use ] and input.next().replace("]", ",");
 				
-				//input.next(); //Material type
-				
 				material.setName(input.next().replace("]", ","));
 				material.setBrand(input.next().replace("]", ","));
 				material.setHyperlink(input.next().replace("]", ","));
@@ -121,6 +119,7 @@ public class FileInput {
 		
 	}
 	
+	//This method reads a the data from a project file and creates a project object
 	public static void readProject(String filename) {
 		
 		if(!Database.currentUser.equals(null)) {
@@ -131,12 +130,14 @@ public class FileInput {
 				
 				Scanner input = new Scanner(new File(String.format("Users/%s/%s", Database.currentUser, filename)));
 				
+				//Read the project name, description, and sources
 				p.setName(input.nextLine());
 				p.setProjectDescription(input.nextLine().replace("@", "\n"));
 				System.out.println(p.getName());
 				p.setSources(input.nextLine().replace("@", "\n"));
 				System.out.println(p.getSources());
 				
+				//Read the materis
 				int numMaterials = input.nextInt();
 				System.out.println(numMaterials);
 				input.nextLine();
