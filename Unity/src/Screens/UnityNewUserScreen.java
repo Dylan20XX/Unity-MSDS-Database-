@@ -278,7 +278,6 @@ public class UnityNewUserScreen extends JFrame implements ActionListener {
 	}
 	/**
 	 * This method checks for user information
-	 * @param null
 	 */
 	private boolean checkUserInfo() {
 
